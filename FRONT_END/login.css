@@ -1,0 +1,145 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    height: 100vh;
+    background-color: #f4f6f8;
+}
+
+.container {
+    border-radius: 1rem;
+    height: 320px;
+    width: 280px;
+    text-align: center;
+    border: 1px solid #ccc;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+    margin: 80px auto;
+}
+
+#head {
+    margin-top: 10px;
+    font-size: 25px;
+    font-weight: 200;
+    text-align: center;
+}
+
+#loginhead {
+    margin: 10px;
+    font-size: 30px;
+}
+
+#loginarea input {
+    width: 90%;
+    height: 20px;
+    padding: 5px 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    font-size: 14px;
+}
+
+#loginarea button {
+    width: 50%;
+    height: 40px;
+    padding: 10px 10px;
+    margin: 10px 0;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    border: 1px solid #aaa;
+    font-size: 14px;
+    background-color: #0d6efd;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#loginarea button:hover {
+    background-color: #0b5ed7;
+}
+
+.container p {
+    margin-top: 25px;
+}
+
+/*Register page*/
+/* ===== REGISTER PAGE (LOGIN-LIKE) ===== */
+.registercontainer {
+    border-radius: 1rem;
+    width: 320px;
+    text-align: center;
+    border: 1px solid #ccc;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    margin: 80px auto;
+}
+
+/* Heading */
+.registercontainer h2 {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Form spacing */
+.registercontainer form {
+    margin-top: 10px;
+}
+
+/* Inputs, select, textarea */
+.registercontainer input,
+.registercontainer select,
+.registercontainer textarea {
+    width: 90%;
+    height: 25px;
+    padding: 5px 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    font-size: 14px;
+}
+
+/* Textarea size */
+#projecttxt {
+    height: 70px;
+    resize: none;
+}
+
+/* Button styling (same as login) */
+.registercontainer button {
+    width: 50%;
+    height: 40px;
+    padding: 10px 10px;
+    margin: 10px 0;
+    border-radius: 0.5rem;
+    border: 1px solid #aaa;
+    font-size: 14px;
+    background-color: #0d6efd;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover */
+.registercontainer button:hover {
+    background-color: #0b5ed7;
+}
+
+/* Footer text */
+.registercontainer p {
+    margin-top: 25px;
+}
+
+.registercontainer p a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.registercontainer p a:hover {
+    text-decoration: underline;
+}
