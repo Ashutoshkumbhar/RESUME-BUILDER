@@ -1,7 +1,6 @@
 // Select login form
 const loginForm = document.getElementById("loginarea");
 
-// Listen for form submit
 /* ================= LOGIN LOGIC ================= */
 
 if (loginForm) {
@@ -12,6 +11,10 @@ if (loginForm) {
         const enteredUsername = inputs[0].value;
         const enteredPassword = inputs[1].value;
 
+        if (!enteredUsername || !enteredPassword) {
+            alert("Please fill all fields");
+            return;
+        }
         const storedUser = JSON.parse(localStorage.getItem("user"));
 
         if (!storedUser) {
@@ -22,7 +25,7 @@ if (loginForm) {
         if (
             enteredUsername === storedUser.username &&
             enteredPassword === storedUser.password
-        ){
+        ) {
             localStorage.setItem("loggedIn", "true");
             window.location.href = "dashboard.html";
         } else {
@@ -31,11 +34,10 @@ if (loginForm) {
     });
 }
 
-
-
 /* ================= REGISTER LOGIC ================= */
 
 const registerForm = document.querySelector(".registercontainer form");
+
 
 if (registerForm) {
     registerForm.addEventListener("submit", function (e) {
@@ -49,15 +51,22 @@ if (registerForm) {
             fullname: inputs[0].value,
             username: inputs[1].value,
             password: inputs[2].value,
+            emailid: inputs[3].value,
+            collegename: inputs[4].value,
             role: roleSelect.value,
-            phonenumber: inputs[3].value
+            phonenumber: inputs[5].value
         };
 
         if (!userData.role) {
-            alert("Please select role");
+            alert("Please select Year");
             return;
         }
-
+        for (let key in userData) {
+            if (!userData[key]) {
+                alert("Please fill all fields");
+                return;
+            }
+        }
         localStorage.setItem("user", JSON.stringify(userData));
 
         alert("Registration successful!");
