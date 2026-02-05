@@ -1,5 +1,6 @@
 // Select login form
 const loginForm = document.getElementById("loginarea");
+const notfound = document.getElementById("notfound");
 
 /* ================= LOGIN LOGIC ================= */
 
@@ -18,7 +19,9 @@ if (loginForm) {
         const storedUser = JSON.parse(localStorage.getItem("user"));
 
         if (!storedUser) {
-            alert("No user found. Please register first.");
+            notfound.innerText="User Not Found!";
+            notfound.style.color = "red";
+            notfound.style.display = "block";
             return;
         }
 
@@ -29,7 +32,9 @@ if (loginForm) {
             localStorage.setItem("loggedIn", "true");
             window.location.href = "dashboard.html";
         } else {
-            alert("Invalid username or password");
+            notfound.innerText="Incorrect Username or password";
+            notfound.style.color = "red";
+            notfound.style.display = "block";
         }
     });
 }
