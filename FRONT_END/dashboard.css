@@ -3,6 +3,13 @@
     padding: 0px;
     font-family: cursive;
 }
+body{
+    min-height: 100vh;
+    background-image: url("");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 .navbar{
     width: 100%;
     height: 70px;
@@ -46,8 +53,8 @@
 #navbarprofilebtn{
     margin: 10px;
     margin-left: 40px;
-    height:40px;
-    width:40px;
+    height:30px;
+    width:30px;
     border-radius: 50%;
     border: 1px solid white;
     background-image: url("profile-icon.png");
@@ -83,7 +90,7 @@
 }
 
 .featuresstatus{
-    margin-left:30vb;
+    margin-left:40vb;
     padding: 30px;
     justify-content: center;
     justify-content: space-evenly;
@@ -93,13 +100,25 @@
     display: flex;
 }
 #innerstatusbox{
-    text-align: centre;
-    height: 80px;
-    width: 35vb;
+    padding-top:5px ;
+    height: 140px;
+    width: 140px;
     border: 2px solid black;
-    border-radius: 1rem;
+    border-radius:2rem;
     align-items: center;
     justify-content: space-evenly;
+    text-align:center;
+    font-size: 20px;
+    font-weight: 600;
+}
+#innerstatusbox:hover{
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    letter-spacing: 1px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+    transition: transform 0.3s ease, box-shadow 0.4s ease;
+
 }
 .dashitems{
     /* background-color: #f4f6f8; */
@@ -118,10 +137,10 @@
     cursor: pointer;
 
     display: flex;
-    align-items: center;
+    padding-top: 40px;
     justify-content: center;
 
-    color: black;
+    color:white;
     text-align: centre;
     font-size: 26px;
     font-weight: 600;
@@ -143,18 +162,18 @@
 }
 
 #companybtn{
-    background-image: url("");
+    background-image: url("company_image.webp");
 }
 
 #eligibilitybtn{
-    background-image: url("");
+    background-image: url("eligible_image.png");
 }
 
 #builderbtn{
-    background-image: url("");
+    background-image: url("resume_image.png");
 }
 #roadmapbtn{
-    background-image: url("");
+    background-image: url("roadmap_image.jpg");
 }
 
 /* Hover effect */
@@ -166,11 +185,26 @@
     transform: translateY(-8px) scale(1.03);
     box-shadow: 0 18px 40px rgba(0,0,0,0.35);
 }
-
-body{
-    min-height: 100vh;
-    background-image: url("");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+/* Footer section */
+#footsection{
+    height: 350px;
+    width:100%;
+    background-color: #1b2531;
+}
+.footcontent{
+    display: flex;
+}
+#footboxes{
+    color: white;
+    padding: 50px;
+    margin-left: 180px;
+}
+#innerAbout{
+    margin-top: 40px;
+    gap: 1.5;
+}
+#copyright{
+    text-align: center;
+    color: white;
+    padding-top: 80px;
 }
