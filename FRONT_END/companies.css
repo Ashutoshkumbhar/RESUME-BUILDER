@@ -1,0 +1,90 @@
+h2{
+    font-size: 40px;
+    text-align: center;
+}
+/* Page background */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: cursive;
+    background: #f5f7fb;
+}
+/* Companies container */
+#companies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    padding: 40px 60px;
+}
+
+/* Company card */
+.company-card {
+    height: 280px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover effect */
+.company-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Company logo */
+.company-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;      /* keeps logo aspect ratio */
+    border-radius: 50%;      
+    background: #ffffff;      /* fallback background */
+    padding: 8px;             /* space for SVG logos */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom: 12px;
+}
+
+
+/* Company name */
+.company-card h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #1f2933;
+}
+
+/* Text inside card */
+.company-card p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+/* Apply button */
+.apply-btn {
+    margin-top: 15px;
+    padding: 10px 0;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+
+/* Button hover */
+.apply-btn:hover {
+    background: linear-gradient(135deg, #1e40af, #1e3a8a);
+    transform: scale(1.03);
+}
+
+/* Responsive spacing */
+@media (max-width: 768px) {
+    #companies {
+        padding: 25px 20px;
+    }
+}
