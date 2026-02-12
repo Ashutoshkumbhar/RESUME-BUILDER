@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 800px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+#logo{
+  width: 50px;
+  margin: 5px;
+  border-radius: 50%;
+}
+.personal{
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  width: 40%;
+}
+.academic{
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  width: 40%;
+}
+.button{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  row-gap: 10px;
+}
