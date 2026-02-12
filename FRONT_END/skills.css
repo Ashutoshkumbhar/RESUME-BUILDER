@@ -1,19 +1,20 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: #f4f7fc;
+    background: #061c3f; /* Deep navy blue */
+    color: #e6edf7;
 }
 
 /* HEADER */
 header {
-    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    background: linear-gradient(135deg, #07357c, #132f5b);
     color: white;
     padding: 30px;
     text-align: center;
 }
 
 header p {
-    opacity: 0.9;
+    opacity: 0.85;
 }
 
 /* PROGRESS BAR */
@@ -26,7 +27,7 @@ header p {
 
 .progress-bar {
     height: 12px;
-    background: rgba(255,255,255,0.3);
+    background: #075de6b5;
     border-radius: 10px;
     max-width: 600px;
     margin: auto;
@@ -50,14 +51,15 @@ header p {
 
 /* CARD STYLE */
 .card {
-    background: white;
+    background: #0c3571; /* Navy card */
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 .card h2 {
     margin-bottom: 15px;
+    color: #f1f6ff;
 }
 
 /* INPUTS */
@@ -66,13 +68,20 @@ input, select {
     padding: 10px;
     margin-bottom: 15px;
     border-radius: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid #123d93;
+    background: #0c254d;
+    color: #e6edf7;
+}
+
+input::placeholder {
+    color: #9fb3d9;
 }
 
 .radio-group label {
     margin-right: 15px;
 }
 
+/* BUTTONS */
 button {
     padding: 10px 15px;
     border: none;
@@ -83,12 +92,12 @@ button {
 
 /* PRIMARY BUTTON */
 #addSkillBtn {
-    background: #4f46e5;
+    background: #2563eb; /* Bright blue */
     color: white;
 }
 
 #addSkillBtn:hover {
-    background: #4338ca;
+    background: #1d4ed8;
 }
 
 /* SKILL CARD */
@@ -96,14 +105,15 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #eef2ff;
+    background: #132f5b;
     padding: 10px 15px;
     border-radius: 10px;
     margin-bottom: 10px;
+    color: #dbeafe;
 }
 
 .delete-btn {
-    background: #ef4444;
+    background: #dc2626;
     color: white;
     font-size: 12px;
 }
@@ -115,16 +125,17 @@ button {
 
 .recommend-item {
     display: inline-block;
-    background: #e0f2fe;
+    background: #1e3a8a;
     padding: 8px 12px;
     margin: 5px;
     border-radius: 20px;
     cursor: pointer;
     font-size: 14px;
+    color: #e0e7ff;
 }
 
 .recommend-item:hover {
-    background: #bae6fd;
+    background: #205de3;
 }
 
 /* FOOTER BUTTONS */
@@ -136,11 +147,11 @@ button {
 }
 
 .save-btn {
-    background: #22c55e;
+    background: #16a34a;
     color: white;
 }
 
 .back-btn {
-    background: #64748b;
+    background: #1e42ba;
     color: white;
 }

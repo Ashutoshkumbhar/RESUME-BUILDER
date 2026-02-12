@@ -1,14 +1,18 @@
 h2{
     font-size: 40px;
     text-align: center;
+    color: #f1f6ff; /* light navy text */
 }
+
 /* Page background */
 body {
     margin: 0;
     padding: 0;
     font-family: cursive;
-    background: #f5f7fb;
+    background: #0b1e3a; /* deep navy */
+    color: #e6edf7;
 }
+
 /* Companies container */
 #companies {
     display: grid;
@@ -20,45 +24,44 @@ body {
 /* Company card */
 .company-card {
     height: 280px;
-    background: #ffffff;
+    background: #13294b; /* navy card */
     border-radius: 16px;
     padding: 20px;
     text-align: center;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 /* Hover effect */
 .company-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
 }
 
 /* Company logo */
 .company-logo {
     width: 70px;
     height: 70px;
-    object-fit: contain;      /* keeps logo aspect ratio */
-    border-radius: 50%;      
-    background: #ffffff;      /* fallback background */
-    padding: 8px;             /* space for SVG logos */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    object-fit: contain;
+    border-radius: 50%;
+    background: #ffffff;
+    padding: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     margin-bottom: 12px;
 }
-
 
 /* Company name */
 .company-card h3 {
     margin: 10px 0;
     font-size: 18px;
-    color: #1f2933;
+    color: #f8fafc;
 }
 
 /* Text inside card */
 .company-card p {
     margin: 6px 0;
     font-size: 14px;
-    color: #4b5563;
+    color: #cbd5e1;
 }
 
 /* Apply button */
@@ -68,7 +71,7 @@ body {
     width: 100%;
     border: none;
     border-radius: 10px;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    background: linear-gradient(135deg, #1e40af, #1d4ed8);
     color: #ffffff;
     font-size: 15px;
     font-weight: 600;
@@ -78,7 +81,7 @@ body {
 
 /* Button hover */
 .apply-btn:hover {
-    background: linear-gradient(135deg, #1e40af, #1e3a8a);
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
     transform: scale(1.03);
 }
 
