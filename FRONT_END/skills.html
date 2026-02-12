@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Craft | Skills</title>
+    <link rel="stylesheet" href="skills.css">
+</head>
+
+<body>
+
+<header>
+    <h1>🧠 Build Your Skill Profile</h1>
+    <p>Add relevant skills to unlock better company matches</p>
+
+    <div class="progress-top">
+        <span>Skill Strength</span>
+        <span id="skillPercent">0%</span>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+</header>
+
+<main>
+    <div class="skillinputcontainer">
+
+        <!-- LEFT SIDE - ADD SKILL -->
+        <div class="card">
+            <h2>Add New Skill</h2>
+
+            <label>Skill Name</label>
+            <input type="text" id="skillInput" placeholder="Enter skill name">
+
+            <label>Category</label>
+            <select id="category">
+                <option>Programming</option>
+                <option>Frontend</option>
+                <option>Backend</option>
+                <option>Database</option>
+                <option>Cloud</option>
+                <option>Soft Skills</option>
+            </select>
+
+            <label>Skill Level</label>
+            <div class="radio-group">
+                <label><input type="radio" name="level" value="Beginner"> Beginner</label>
+                <label><input type="radio" name="level" value="Intermediate"> Intermediate</label>
+                <label><input type="radio" name="level" value="Advanced"> Advanced</label>
+            </div>
+
+            <button id="addSkillBtn">Add Skill</button>
+        </div>
+
+        <!-- RIGHT SIDE - SKILL LIST -->
+        <div class="card">
+            <h2>Your Skills</h2>
+            <div id="skilllist"></div>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+
+    <h3>Recommended Skills</h3>
+    <div id="recommendationBox"></div>
+
+    <div class="bottom-bar">
+        <button class="save-btn">Save Skills</button>
+        <button class="back-btn">Back to Dashboard</button>
+    </div>
+
+</footer>
+
+<script src="skills.js"></script>
+</body>
+</html>

@@ -81,12 +81,15 @@ body{
 
 /* Main section */
 #welcome{
-    padding: 70px;
+    background-image: url("welcome.jpg");
+    color: white;
+    padding: 80px;
     text-align: center;
-    font-size: 30px;
+    font-size: 35px;
     width: 100%;
     margin-top: 0px;
-    height: 70px;
+    height: 100px;
+    background-size: cover;
 }
 
 .featuresstatus{
@@ -108,7 +111,7 @@ body{
     align-items: center;
     justify-content: space-evenly;
     text-align:center;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
 }
 #innerstatusbox:hover{
@@ -118,7 +121,6 @@ body{
     text-shadow: 0 2px 6px rgba(0,0,0,0.7);
     box-shadow: 0 10px 25px rgba(0,0,0,0.18);
     transition: transform 0.3s ease, box-shadow 0.4s ease;
-
 }
 .dashitems{
     /* background-color: #f4f6f8; */
@@ -157,9 +159,9 @@ body{
 
 /* DOMAIN-BASED IMAGES */
 
-#profilebtn{
+/* #profilebtn{
     background-image: url("https://logodix.com/logo/1076691.jpg");
-}
+} */
 
 #companybtn{
     background-image: url("company_image.webp");
@@ -187,24 +189,28 @@ body{
 }
 /* Footer section */
 #footsection{
-    height: 350px;
+    height: 400px;
     width:100%;
     background-color: #1b2531;
 }
 .footcontent{
     display: flex;
+
 }
 #footboxes{
     color: white;
-    padding: 50px;
+    margin-top: 40px;
     margin-left: 180px;
+    margin-right: 30px;
 }
 #innerAbout{
     margin-top: 40px;
-    gap: 1.5;
+}
+#innerAbout li{
+    margin-top: 8px;
 }
 #copyright{
     text-align: center;
     color: white;
-    padding-top: 80px;
+    padding-top: 40px;
 }
