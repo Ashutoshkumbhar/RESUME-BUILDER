@@ -2,7 +2,7 @@
 const loginForm = document.getElementById("loginarea");
 const notfound = document.getElementById("notfound");
 
-/* ================= LOGIN LOGIC ================= */
+/*LOGIN LOGIC*/
 
 if (loginForm) {
     loginForm.addEventListener("submit", function (e) {

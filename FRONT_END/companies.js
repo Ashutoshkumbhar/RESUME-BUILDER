@@ -1,5 +1,4 @@
 // store companies info here
-// store companies info here
 const companies = [
     {
         name: "Amazon",

@@ -1,10 +1,15 @@
 const skillRecommendations = {
-    "Java": ["Spring Boot", "OOPS", "JDBC"],
-    "Python": ["Django", "Flask", "Data Structures"],
-    "HTML": ["CSS", "JavaScript", "Responsive Design"],
-    "CSS": ["Flexbox", "Grid", "Tailwind"],
-    "JavaScript": ["React", "Node.js", "DOM"],
-    "DSA": ["Algorithms", "System Design", "Problem Solving"]
+  "Java": ["Spring Boot", "Spring Security", "Hibernate/JPA", "Microservices", "REST APIs", "JUnit"],
+  "Python": ["Django", "FastAPI", "Flask", "Pandas", "NumPy", "PyTest"],
+  "C++": ["STL", "OOPS", "Multithreading", "Memory Management", "Design Patterns", "Competitive Programming"],
+  "HTML": ["Semantic HTML5", "Forms & Validation", "SEO Basics", "Accessibility (a11y)", "Responsive Design", "Web Performance"],
+  "CSS": ["Flexbox", "Grid", "Tailwind CSS", "Bootstrap", "Animations", "Media Queries"],
+  "JavaScript": ["ES6+", "TypeScript", "React.js", "Next.js", "Node.js", "DOM Manipulation"],
+  "Backend": ["Express.js", "REST API Design", "GraphQL", "JWT Authentication", "MVC Architecture", "WebSockets"],
+  "Databases": ["MySQL", "PostgreSQL", "MongoDB", "Redis", "Firebase", "Query Optimization"],
+  "DevOps": ["Git & GitHub", "Docker", "CI/CD", "AWS (EC2, S3)", "Linux", "Nginx"],
+  "AI/ML": ["Scikit-learn", "TensorFlow", "PyTorch", "OpenAI API", "Vector Databases", "Prompt Engineering"],
+  "DSA": ["Arrays & Strings", "Trees & Graphs", "Dynamic Programming", "Greedy Algorithms", "System Design Basics", "Problem Solving"]
 };
 
 const addBtn = document.getElementById("addSkillBtn");
