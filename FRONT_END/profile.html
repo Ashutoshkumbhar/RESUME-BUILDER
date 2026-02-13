@@ -5,36 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard|profile</title>
     <link rel="stylesheet" href="./profile.css" />
-    
   </head>
   <body>
     <div class="profile">
-      <img src="./logo.png" alt="" id="logo">
+      <img src="./logo.png" alt="" id="logo" />
+      <h3>Profile</h3>
       <div class="profile_photo">
         <img src="" alt="" />
       </div>
 
       <div class="personal">
-        <input type="text" placeholder="Name" />
-        <input type="text" placeholder="Phone" />
-        <input type="text" placeholder="Email" />
+        <input id="1" type="text" placeholder="Name" />
+        <input id="1" type="text" placeholder="Phone" />
+        <input id="1" type="text" placeholder="Email" />
       </div>
 
       <div class="academic">
-        <input type="text" placeholder="College" />
-        <input type="text" placeholder="Degree" />
-        <input type="text" placeholder="Branch" />
-        <input type="text" placeholder="CGPA" />
+        <input id="1" type="text" placeholder="College" />
+        <input id="1" type="text" placeholder="Degree" />
+        <input id="1" type="text" placeholder="Branch" />
+        <input id="1" type="text" placeholder="CGPA" />
+
+        <button>update profile</button>
+          
       </div>
 
-      <div class="button">
-        <button>update profile</button>
-        <button id="logout" onclick="logout()">Logout</button>
+      <div class="fill">
+        <a href="./skills.html"><button>Update Skills ➡️</button></a>
+
+        <a href="./projects.html"><button>Update Projects➡️</button></a>
       </div>
+
+      <button id="logout" onclick="logout()">Logout</button>
     </div>
 
     <script>
-      function logout(){
+      function logout() {
         window.location.href = "./index.html";
       }
     </script>
