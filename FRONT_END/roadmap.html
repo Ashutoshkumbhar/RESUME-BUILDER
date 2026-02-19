@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ATS Resume Checker</title>
+  <link rel="stylesheet" href="roadmap.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="header">
+      <h1>ATS Resume Checker</h1>
+      <p>Analyze resume compatibility with job description</p>
+    </div>
+
+    <div class="card">
+
+      <div class="section">
+        <h3>Upload Resume</h3>
+        <div class="upload-box">
+          <input type="file" accept=".pdf,.doc,.docx">
+          <span>Browse Resume</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Job Description</h3>
+        <textarea placeholder="Paste job description here..."></textarea>
+      </div>
+
+    </div>
+
+    <button class="check-btn">Check ATS Score</button>
+
+    <!-- Result Section -->
+    <div class="result-card">
+
+      <div class="score-section">
+        <div class="progress-circle">
+          <span>78%</span>
+        </div>
+        <p>Compatibility Score</p>
+      </div>
+
+      <div class="skills-section">
+
+        <div class="skill-box">
+          <h4>Matched Skills</h4>
+          <div class="tags green">
+            <span>JavaScript</span>
+            <span>React</span>
+            <span>Node.js</span>
+          </div>
+        </div>
+
+        <div class="skill-box">
+          <h4>Missing Skills</h4>
+          <div class="tags red">
+            <span>SQL</span>
+            <span>AWS</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+    <script src="roadmap.js"></script>
+</body>
+</html>
