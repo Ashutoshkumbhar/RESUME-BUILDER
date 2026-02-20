@@ -15,16 +15,17 @@
       </div>
 
       <div class="personal">
-        <input id="1" type="text" placeholder="Name" />
-        <input id="1" type="text" placeholder="Phone" />
-        <input id="1" type="text" placeholder="Email" />
+          <input id="1" type="text" placeholder="Name" />
+          <input id="1" type="text" placeholder="Phone" />
+          <input id="1" type="text" placeholder="Email" />
+          
       </div>
 
       <div class="academic">
-        <input id="1" type="text" placeholder="College" />
-        <input id="1" type="text" placeholder="Degree" />
-        <input id="1" type="text" placeholder="Branch" />
-        <input id="1" type="text" placeholder="CGPA" />
+          <input id="1" type="text" placeholder="College" />
+          <input id="1" type="text" placeholder="Degree" />
+          <input id="1" type="text" placeholder="Branch" />
+          <input id="1" type="text" placeholder="CGPA" />
 
         <button>update profile</button>
           
@@ -42,6 +43,21 @@
     <script>
       function logout() {
         window.location.href = "./index.html";
+      }
+
+      function updated_profile() {
+        let profile = {
+          name: document.getElementById("1").value,
+          phone: document.getElementById("1").value,
+          email: document.getElementById("1").value,
+          college: document.getElementById("1").value,
+          degree: document.getElementById("1").value,
+          branch: document.getElementById("1").value,
+          cgpa: document.getElementById("1").value
+
+        };
+        console.log(profile)
+
       }
     </script>
   </body>
