@@ -216,7 +216,7 @@ if(company){
         <p><b>Recruitment Rounds:</b> ${company.rounds.join(", ")}</p>
         <p><b>Bond:</b> ${company.bond}</p>
         <p><b>Eligibility:</b> ${company.eligibility}</p>
-        <a class="apply-btn" href="${company.applyLink}" target="_blank">Apply Now</a>
+        <a class="apply-btn" href="${company.applyLink}" target="_blank">More Info</a>
     `;
 } else {
     container.innerHTML = "<p>Company not found</p>";
