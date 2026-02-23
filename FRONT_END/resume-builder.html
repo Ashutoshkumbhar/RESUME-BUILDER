@@ -3,192 +3,216 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resume Builder Pro</title>
-  
+  <title>Pro Resume Builder</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-  --primary: #4f46e5;
-  --primary-dark: #4338ca;
-  --bg: #f3f4f6;
-  --text-dark: #111827;
-  --text-light: #6b7280;
-  --white: #ffffff;
-  --border: #e5e7eb;
-}
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --bg: #f3f4f6;
+      --text-dark: #111827;
+      --text-light: #6b7280;
+      --border: #e5e7eb;
+      --white: #ffffff;
+    }
 
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: var(--bg);
-  color: var(--text-dark);
-}
+    * {
+      box-sizing: border-box;
+    }
 
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 60px;
-  background: var(--white);
-  border-bottom: 1px solid var(--border);
-}
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+    }
 
-.top-bar h2 {
-  color: var(--primary);
-  font-weight: 700;
-}
+    /* ---------- TOP BAR ---------- */
 
-.top-bar-right {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
+    .top-bar {
+      padding: 20px 60px;
+      background: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
 
-button {
-  padding: 10px 18px;
-  background: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
+    .logo {
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--primary);
+    }
 
-button:hover {
-  background: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
-}
+    .top-controls {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
 
-select {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  font-weight: 500;
-}
+    select {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
 
-.main-container {
-  display: flex;
-  gap: 40px;
-  padding: 40px;
-  justify-content: center;
-  align-items: flex-start;
-}
+    button {
+      padding: 10px 18px;
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
 
-form {
-  background: var(--white);
-  padding: 30px;
-  width: 380px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+    button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79, 70, 229, 0.3);
+    }
 
-label {
-  font-weight: 600;
-  font-size: 14px;
-}
+    /* ---------- MAIN ---------- */
 
-input,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  font-size: 14px;
-  transition: 0.2s;
-}
+    .main-container {
+      display: flex;
+      gap: 40px;
+      padding: 40px;
+      justify-content: center;
+      align-items: flex-start;
+    }
 
-input:focus,
-textarea:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-}
+    /* ---------- FORM ---------- */
 
-.resume-container {
-  width: 750px;
-}
+    form {
+      background: white;
+      padding: 30px;
+      width: 380px;
+      border-radius: 12px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
 
-.template {
-  min-height: 900px;
-  padding: 60px;
-  background: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-  transition: opacity 0.3s ease;
-}
+    label {
+      font-weight: 600;
+      font-size: 14px;
+    }
 
-.hidden {
-  display: none;
-}
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+      transition: 0.2s;
+    }
 
-h1 {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
 
-.section-title {
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--primary);
-  margin-top: 30px;
-  margin-bottom: 8px;
-}
+    /* ---------- RESUME PREVIEW ---------- */
 
-#template2 {
-  background: #111827;
-  color: white;
-}
+    .resume-container {
+      width: 750px;
+    }
 
-#template2 .section-title {
-  color: #818cf8;
-}
+    .template {
+      min-height: 900px;
+      padding: 60px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.1);
+      transition: 0.3s ease;
+    }
 
-#template3 {
-  border-left: 6px solid var(--primary);
-  padding-left: 50px;
-}
+    .hidden {
+      display: none;
+    }
 
-#template4 {
-  background: #fafafa;
-}
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
 
-#template5 {
-  background: linear-gradient(135deg, #eef2ff, #fdf2f8);
-}
+    .section-title {
+      margin-top: 30px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 700;
+    }
 
-@media (max-width: 1000px) {
-  .main-container {
-    flex-direction: column;
-    align-items: center;
-  }
+    ul {
+      padding-left: 20px;
+    }
 
-  .resume-container {
-    width: 100%;
-  }
+    /* ---------- TEMPLATE VARIATIONS ---------- */
 
-  form {
-    width: 100%;
-  }
-}
+    #template2 {
+      background: #111827;
+      color: white;
+    }
+
+    #template2 .section-title {
+      color: #818cf8;
+    }
+
+    #template3 {
+      border-left: 6px solid var(--primary);
+      padding-left: 50px;
+    }
+
+    #template4 {
+      background: #fafafa;
+      font-family: Cambria, serif;
+    }
+
+    #template5 {
+      background: linear-gradient(135deg, #eef2ff, #fdf2f8);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+
+    @media (max-width: 1000px) {
+      .main-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .resume-container {
+        width: 100%;
+      }
+
+      form {
+        width: 100%;
+      }
+    }
+
   </style>
 </head>
 
 <body>
 
   <div class="top-bar">
-    <h2>Resume Builder</h2>
-    <div class="top-bar-right">
+    <div class="logo">ResumePro</div>
+
+    <div class="top-controls">
       <button onclick="downloadPDF()">Download PDF</button>
       <select id="templateSelector">
         <option value="template1">Classic</option>
-        <option value="template2">Modern</option>
+        <option value="template2">Modern Dark</option>
         <option value="template3">Minimal</option>
         <option value="template4">Professional</option>
         <option value="template5">Creative</option>
@@ -199,17 +223,25 @@ h1 {
   <div class="main-container">
 
     <form id="resumeForm">
-      <label>Full Name</label>
-      <input type="text" id="inputname" required />
+      <div>
+        <label>Full Name</label>
+        <input type="text" id="inputname" required />
+      </div>
 
-      <label>Skills (comma separated)</label>
-      <textarea id="inputskill"></textarea>
+      <div>
+        <label>Skills (comma separated)</label>
+        <textarea id="inputskill"></textarea>
+      </div>
 
-      <label>Projects</label>
-      <textarea id="inputproject"></textarea>
+      <div>
+        <label>Projects</label>
+        <textarea id="inputproject"></textarea>
+      </div>
 
-      <label>Experience</label>
-      <textarea id="inputexperience"></textarea>
+      <div>
+        <label>Experience</label>
+        <textarea id="inputexperience"></textarea>
+      </div>
 
       <button type="submit">Generate Resume</button>
     </form>
@@ -223,56 +255,63 @@ h1 {
     </div>
 
   </div>
-  
-  <script src="script.js">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+  <script>
     document.getElementById("resumeForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+      e.preventDefault();
 
-  let name = document.getElementById("inputname").value;
-  let skills = document.getElementById("inputskill").value;
-  let projects = document.getElementById("inputproject").value;
-  let experience = document.getElementById("inputexperience").value;
+      let name = document.getElementById("inputname").value;
+      let skills = document.getElementById("inputskill").value;
+      let projects = document.getElementById("inputproject").value;
+      let experience = document.getElementById("inputexperience").value;
 
-  let formattedSkills = skills
-    .split(",")
-    .map(s => "<li>" + s.trim() + "</li>")
-    .join("");
+      let formattedSkills = skills
+        .split(",")
+        .map((s) => "<li>" + s.trim() + "</li>")
+        .join("");
 
-  let resumeHTML = `
-    <h1>${name}</h1>
-    <div class="section-title">Skills</div>
-    <ul>${formattedSkills}</ul>
-    <div class="section-title">Projects</div>
-    <p>${projects}</p>
-    <div class="section-title">Experience</div>
-    <p>${experience}</p>
-  `;
+      let resumeHTML = `
+        <h1>${name}</h1>
 
-  document.querySelectorAll(".template").forEach(temp => {
-    temp.innerHTML = resumeHTML;
-  });
-});
+        <div class="section-title">Skills</div>
+        <ul>${formattedSkills}</ul>
 
-document.getElementById("templateSelector").addEventListener("change", function () {
-  document.querySelectorAll(".template").forEach(t => t.classList.add("hidden"));
-  document.getElementById(this.value).classList.remove("hidden");
-});
+        <div class="section-title">Projects</div>
+        <p>${projects}</p>
 
-function downloadPDF() {
-  const activeTemplate = document.querySelector(".template:not(.hidden)");
+        <div class="section-title">Experience</div>
+        <p>${experience}</p>
+      `;
 
-  let options = {
-    margin: 0.5,
-    filename: "My_Resume.pdf",
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-  };
+      document.querySelectorAll(".template").forEach((temp) => {
+        temp.innerHTML = resumeHTML;
+      });
+    });
 
-  html2pdf().set(options).from(activeTemplate).save();
-}
+    document.getElementById("templateSelector").addEventListener("change", function () {
+      document.querySelectorAll(".template").forEach((t) => {
+        t.classList.add("hidden");
+      });
+
+      document.getElementById(this.value).classList.remove("hidden");
+    });
+
+    function downloadPDF() {
+      const activeTemplate = document.querySelector(".template:not(.hidden)");
+
+      let options = {
+        margin: 0.5,
+        filename: "My_Resume.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+      };
+
+      html2pdf().set(options).from(activeTemplate).save();
+    }
   </script>
+
 </body>
 </html>
-
-
