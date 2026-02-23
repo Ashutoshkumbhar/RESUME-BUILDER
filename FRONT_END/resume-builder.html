@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Builder Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="top-bar">
+    <h2>Resume Builder</h2>
+    <div class="top-bar-right">
+      <button onclick="downloadPDF()">Download PDF</button>
+      <select id="templateSelector">
+        <option value="template1">Classic</option>
+        <option value="template2">Modern</option>
+        <option value="template3">Minimal</option>
+        <option value="template4">Professional</option>
+        <option value="template5">Creative</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="main-container">
+
+    <form id="resumeForm">
+      <label>Full Name</label>
+      <input type="text" id="inputname" required />
+
+      <label>Skills (comma separated)</label>
+      <textarea id="inputskill"></textarea>
+
+      <label>Projects</label>
+      <textarea id="inputproject"></textarea>
+
+      <label>Experience</label>
+      <textarea id="inputexperience"></textarea>
+
+      <button type="submit">Generate Resume</button>
+    </form>
+
+    <div class="resume-container">
+      <div id="template1" class="template"></div>
+      <div id="template2" class="template hidden"></div>
+      <div id="template3" class="template hidden"></div>
+      <div id="template4" class="template hidden"></div>
+      <div id="template5" class="template hidden"></div>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
