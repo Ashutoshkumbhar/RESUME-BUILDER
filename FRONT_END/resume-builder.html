@@ -31,6 +31,30 @@
         <label>Full Name</label>
         <input type="text" id="inputname" required />
 
+        <label>Email</label>
+        <input type="email" id="inputEmail" required />
+
+        <label>Phone</label>
+        <input type="text" id="inputPhone" required />
+
+        <label>Location</label>
+        <input type="text" id="inputLocation" />
+
+        <label>LinkedIn URL</label>
+        <input type="text" id="inputLinkedin" />
+
+        <label>GitHub URL</label>
+        <input type="text" id="inputGithub" />
+
+        <label>Professional Summary</label>
+        <textarea id="inputSummary"></textarea>
+
+        <label>Education</label>
+        <textarea id="inputEducation"></textarea>
+
+        <label>Achievements</label>
+        <textarea id="inputAchievements"></textarea>
+
         <label>Skills (comma separated)</label>
         <textarea id="inputskill"></textarea>
 
@@ -53,44 +77,91 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
     <script>
-      document
-        .getElementById("resumeForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+      const form = document.getElementById("resumeForm");
+      const selector = document.getElementById("templateSelector");
 
-          let name = document.getElementById("inputname").value;
-          let skills = document.getElementById("inputskill").value;
-          let projects = document.getElementById("inputproject").value;
-          let experience = document.getElementById("inputexperience").value;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-          let formattedSkills = skills
-            .split(",")
-            .map((s) => "<li>" + s.trim() + "</li>")
-            .join("");
+        let name = document.getElementById("inputname").value;
+        let skills = document.getElementById("inputskill").value;
+        let projects = document.getElementById("inputproject").value;
+        let experience = document.getElementById("inputexperience").value;
 
-          let resumeHTML = `
-    <h1>${name}</h1>
-    <div class="section-title">Skills</div>
-    <ul>${formattedSkills}</ul>
-    <div class="section-title">Projects</div>
-    <p>${projects}</p>
-    <div class="section-title">Experience</div>
-    <p>${experience}</p>`;
+        let email = document.getElementById("inputEmail").value || "";
+        let phone = document.getElementById("inputPhone").value || "";
+        let location = document.getElementById("inputLocation").value || "";
+        let linkedin = document.getElementById("inputLinkedin").value || "";
+        let github = document.getElementById("inputGithub").value || "";
+        let summary = document.getElementById("inputSummary").value || "";
 
-          document.querySelectorAll(".template").forEach((temp) => {
-            temp.innerHTML = resumeHTML;
-          });
+        let formattedSkills = skills
+          .split(",")
+          .filter((s) => s.trim() !== "")
+          .map((s) => `<li>${s.trim()}</li>`)
+          .join("");
+
+        let resumeHTML = `
+      <div class="resume-header">
+        <h1>${name}</h1>
+        <p>
+          ${email} ${phone ? " | " + phone : ""} 
+          ${location ? " | " + location : ""} <br>
+          ${linkedin ? `<a href="${linkedin}" target="_blank">LinkedIn</a>` : ""}
+          ${github ? ` | <a href="${github}" target="_blank">GitHub</a>` : ""}
+        </p>
+      </div>
+
+      <hr>
+
+      ${
+        summary
+          ? `
+      <div class="section">
+        <h2>Professional Summary</h2>
+        <p>${summary}</p>
+      </div>`
+          : ""
+      }
+
+      <div class="section">
+        <h2>Technical Skills</h2>
+        <ul>${formattedSkills}</ul>
+      </div>
+
+      <div class="section">
+        <h2>Projects</h2>
+        <p>${projects}</p>
+      </div>
+
+      <div class="section">
+        <h2>Experience</h2>
+        <p>${experience}</p>
+      </div>
+    `;
+
+        document.querySelectorAll(".template").forEach((temp) => {
+          temp.innerHTML = resumeHTML;
         });
 
-      document
-        .getElementById("templateSelector")
-        .addEventListener("change", function () {
-          document
-            .querySelectorAll(".template")
-            .forEach((t) => t.classList.add("hidden"));
-          document.getElementById(this.value).classList.remove("hidden");
+        showSelectedTemplate();
+      });
+
+      function showSelectedTemplate() {
+        const selected = selector.value;
+
+        document.querySelectorAll(".template").forEach((temp) => {
+          temp.classList.add("hidden");
         });
+
+        document.getElementById(selected).classList.remove("hidden");
+      }
+
+      selector.addEventListener("change", function () {
+        showSelectedTemplate();
+      });
 
       function downloadPDF() {
         const activeTemplate = document.querySelector(".template:not(.hidden)");
@@ -105,6 +176,8 @@
 
         html2pdf().set(options).from(activeTemplate).save();
       }
+
+      showSelectedTemplate();
     </script>
   </body>
 </html>

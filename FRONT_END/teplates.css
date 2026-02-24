@@ -15,6 +15,7 @@ body {
   color: var(--text-dark);
 }
 
+
 .top-bar {
   display: flex;
   justify-content: space-between;
@@ -27,6 +28,7 @@ body {
 .top-bar h2 {
   color: var(--primary);
   font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .top-bar-right {
@@ -59,6 +61,7 @@ select {
   font-weight: 500;
 }
 
+
 .main-container {
   display: flex;
   gap: 40px;
@@ -66,6 +69,7 @@ select {
   justify-content: center;
   align-items: flex-start;
 }
+
 
 form {
   background: var(--white);
@@ -101,6 +105,7 @@ textarea:focus {
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
 }
 
+
 .resume-container {
   width: 750px;
 }
@@ -112,34 +117,81 @@ textarea:focus {
   border-radius: 12px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.1);
   transition: opacity 0.3s ease;
+  line-height: 1.6;
 }
 
-.hidden {
-  display: none;
+
+.resume-header {
+  text-align: center;
+  margin-bottom: 25px;
 }
 
-h1 {
+.resume-header h1 {
   font-size: 32px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
 }
 
-.section-title {
+.resume-header p {
   font-size: 14px;
+  color: var(--text-light);
+}
+
+
+.section {
+  margin-top: 25px;
+}
+
+.section h2 {
+  font-size: 15px;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--primary);
-  margin-top: 30px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 6px;
 }
+
+.section p {
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.section ul {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.section li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+
+a {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 
 #template2 {
   background: #111827;
   color: white;
 }
 
-#template2 .section-title {
+#template2 .section h2 {
   color: #818cf8;
+  border-bottom: 2px solid #374151;
+}
+
+#template2 .resume-header p {
+  color: #d1d5db;
 }
 
 #template3 {
@@ -155,6 +207,7 @@ h1 {
   background: linear-gradient(135deg, #eef2ff, #fdf2f8);
 }
 
+
 @media (max-width: 1000px) {
   .main-container {
     flex-direction: column;
@@ -168,4 +221,8 @@ h1 {
   form {
     width: 100%;
   }
+}
+
+.template.hidden {
+  display: none !important;
 }
