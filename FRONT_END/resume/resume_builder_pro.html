@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Builder Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>  
+  <link rel="stylesheet" href="./resume_builder_pro.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-brand">
+    <div class="brand-icon">📄</div>
+    <h2>Resume Builder Pro</h2>
+  </div>
+  <div class="top-bar-right">
+    <div class="completion-badge">
+      <div class="completion-ring" id="completionRing"></div>
+      <span id="completionText">0% filled</span>
+    </div>
+    <select id="templateSelector">
+      <option value="template1">Classic</option>
+      <option value="template2">Dark Modern</option>
+      <option value="template3">Sidebar Accent</option>
+      <option value="template4">Clean Teal</option>
+      <option value="template5">Gradient Soft</option>
+    </select>
+    <button onclick="downloadPDF()">⬇ Download PDF</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-container">
+
+  <!-- FORM -->
+  <div class="form-panel">
+    <div class="form-tabs">
+      <button class="tab-btn active" onclick="switchTab('personal',this)">👤 Personal</button>
+      <button class="tab-btn" onclick="switchTab('profile',this)">📝 Profile</button>
+      <button class="tab-btn" onclick="switchTab('experience',this)">💼 Experience</button>
+      <button class="tab-btn" onclick="switchTab('skills',this)">🛠 Skills</button>
+    </div>
+
+    <form id="resumeForm" onsubmit="generateResume(event)">
+
+      <!-- PERSONAL -->
+      <div class="form-section active" id="tab-personal">
+        <p class="section-title">Contact Information</p>
+        <div class="field-group">
+          <label>Full Name *</label>
+          <input type="text" id="inputname" placeholder="John Doe" oninput="updateCompletion()"/>
+        </div>
+        <div class="input-row">
+          <div class="field-group">
+            <label>Email *</label>
+            <input type="email" id="inputEmail" placeholder="john@email.com" oninput="updateCompletion()"/>
+          </div>
+          <div class="field-group">
+            <label>Phone *</label>
+            <input type="text" id="inputPhone" placeholder="+91 98765 43210" oninput="updateCompletion()"/>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Location</label>
+          <input type="text" id="inputLocation" placeholder="City, Country" oninput="updateCompletion()"/>
+        </div>
+        <div class="input-row">
+          <div class="field-group">
+            <label>LinkedIn</label>
+            <input type="text" id="inputLinkedin" placeholder="linkedin.com/in/..." oninput="updateCompletion()"/>
+          </div>
+          <div class="field-group">
+            <label>GitHub</label>
+            <input type="text" id="inputGithub" placeholder="github.com/..." oninput="updateCompletion()"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="form-section" id="tab-profile">
+        <p class="section-title">Professional Profile</p>
+        <div class="field-group">
+          <label>Professional Summary</label>
+          <p class="field-hint">2–4 sentences about your background and goals</p>
+          <textarea id="inputSummary" placeholder="Experienced developer with 3+ years building scalable web apps..." maxlength="500" oninput="updateCompletion();charCount(this,'summaryCount',500)"></textarea>
+          <div class="char-count" id="summaryCount">0 / 500</div>
+        </div>
+        <div class="field-group">
+          <label>Education</label>
+          <textarea id="inputEducation" placeholder="B.Tech Computer Science, XYZ University, 2020–2024" oninput="updateCompletion()"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Achievements</label>
+          <textarea id="inputAchievements" placeholder="Best Developer Award 2023, Published research paper..." oninput="updateCompletion()"></textarea>
+        </div>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="form-section" id="tab-experience">
+        <p class="section-title">Work Experience &amp; Projects</p>
+        <div class="field-group">
+          <label>Experience</label>
+          <p class="field-hint">Job title, company, duration, responsibilities</p>
+          <textarea id="inputexperience" placeholder="Software Engineer at Google (2022–Present)&#10;• Built APIs serving 10M+ users..." style="min-height:120px" oninput="updateCompletion();charCount(this,'expCount',800)"></textarea>
+          <div class="char-count" id="expCount">0 / 800</div>
+        </div>
+        <div class="field-group">
+          <label>Projects</label>
+          <p class="field-hint">Name, description, technologies used</p>
+          <textarea id="inputproject" placeholder="Resume Builder App — React &amp; Node.js&#10;• Used by 500+ users..." style="min-height:120px" oninput="updateCompletion();charCount(this,'projCount',600)"></textarea>
+          <div class="char-count" id="projCount">0 / 600</div>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="form-section" id="tab-skills">
+        <p class="section-title">Skills</p>
+        <div class="field-group">
+          <label>Technical Skills</label>
+          <p class="field-hint">Comma-separated list</p>
+          <input type="text" id="inputskill" placeholder="JavaScript, React, Node.js, MongoDB..." oninput="updateCompletion();renderSkillTags()"/>
+        </div>
+        <div id="skillTagPreview" style="display:flex;flex-wrap:wrap;gap:6px;min-height:28px;padding:4px 0"></div>
+        <div class="field-group">
+          <label>Languages</label>
+          <input type="text" id="inputLanguages" placeholder="English (Native), Hindi (Fluent)" oninput="updateCompletion()"/>
+        </div>
+      </div>
+
+      <button type="submit" class="generate-btn">
+        <div class="btn-spinner"></div>
+        <span class="btn-text">✨ Generate Resume</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="preview-panel">
+    <div class="preview-toolbar">
+      <span class="preview-label">Live Preview</span>
+      <div class="template-dots">
+        <div class="template-dot active" onclick="setTemplate('template1',0)" title="Classic"></div>
+        <div class="template-dot" onclick="setTemplate('template2',1)" title="Dark Modern"></div>
+        <div class="template-dot" onclick="setTemplate('template3',2)" title="Sidebar Accent"></div>
+        <div class="template-dot" onclick="setTemplate('template4',3)" title="Clean Teal"></div>
+        <div class="template-dot" onclick="setTemplate('template5',4)" title="Gradient Soft"></div>
+      </div>
+    </div>
+    <div class="resume-container">
+      <div id="template1" class="template">
+        <div class="empty-state">
+          <div class="empty-icon">📄</div>
+          <h3>Your resume preview</h3>
+          <p>Fill in your details and click Generate Resume</p>
+        </div>
+      </div>
+      <div id="template2" class="template hidden"></div>
+      <div id="template3" class="template hidden"></div>
+      <div id="template4" class="template hidden"></div>
+      <div id="template5" class="template hidden"></div>
+    </div>
+  </div>
+
+  <!-- AI CHAT -->
+  <div class="chat-panel">
+    <div class="chat-header">
+      <div class="ai-avatar">🤖</div>
+      <div class="chat-header-info">
+        <h3>AI Resume Assistant</h3>
+        <p><span class="online-dot"></span> Powered by Llama 3 · Free</p>
+      </div>
+    </div>
+
+    <div class="api-banner" id="apiBanner">
+      <div>
+        <strong>🔑 Enter your Groq API Key</strong>
+        Free at console.groq.com — stored only in your browser.
+      </div>
+      <input type="password" class="api-key-input" id="apiKeyInput" placeholder="gsk_..."/>
+      <button class="api-save-btn" onclick="saveApiKey()">Save Key</button>
+    </div>
+
+    <div class="quick-actions">
+      <button class="quick-btn" onclick="quickAction('Fix spelling and grammar in my resume')">✏️ Fix Grammar</button>
+      <button class="quick-btn" onclick="quickAction('Rewrite my professional summary to be more impactful')">⚡ Improve Summary</button>
+      <button class="quick-btn" onclick="quickAction('Review my skills and suggest what else I should add')">🎯 Suggest Skills</button>
+      <button class="quick-btn" onclick="quickAction('Give me tips to make my resume stand out')">💡 Tips</button>
+      <button class="quick-btn" onclick="quickAction('Do a full review of my resume with detailed feedback')">🔍 Full Review</button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="message ai">
+        <div class="msg-avatar">🤖</div>
+        <div class="msg-bubble">
+          👋 Hi! I'm your <strong>AI Resume Assistant</strong>.<br><br>
+          I can help you:<br>
+          • Fix spelling &amp; grammar<br>
+          • Improve your summary &amp; experience<br>
+          • Suggest missing skills<br>
+          • Answer resume questions<br><br>
+          Add your free <strong>Groq key</strong> above, fill in your details, then ask anything!
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-input-area">
+      <textarea id="chatInput" placeholder="Ask me to improve your resume..." rows="1"
+        onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
+      <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<script src="./resume_builder_pro.js"></script>
+</body>
+</html>
