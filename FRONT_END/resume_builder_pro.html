@@ -1,1637 +1,1710 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resume Builder Pro</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Mono:wght@400;700&family=Cormorant+Garamond:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --primary: #4f46e5;
-        --primary-dark: #4338ca;
-        --bg: #f3f4f6;
-        --text-dark: #111827;
-        --text-light: #6b7280;
-        --white: #ffffff;
-        --border: #e5e7eb;
-      }
 
-      * {
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Builder Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Mono:wght@400;700&family=Cormorant+Garamond:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --bg: #f3f4f6;
+      --text-dark: #111827;
+      --text-light: #6b7280;
+      --white: #ffffff;
+      --border: #e5e7eb;
+    }
 
-      body {
-        margin: 0;
-        font-family: "Inter", sans-serif;
-        background: var(--bg);
-        color: var(--text-dark);
-        overflow-x: hidden;
-      }
+    * {
+      box-sizing: border-box;
+    }
 
-      .top-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 14px 32px;
-        background: var(--white);
-        border-bottom: 1px solid var(--border);
-        position: sticky;
-        top: 0;
-        z-index: 200;
-        box-shadow: 0 1px 12px rgba(79, 70, 229, 0.07);
-      }
-      .top-bar-brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .brand-icon {
-        width: 34px;
-        height: 34px;
-        background: var(--primary);
-        border-radius: 9px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 1rem;
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 32px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 1px 12px rgba(79, 70, 229, 0.07);
+    }
+
+    .top-bar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      background: var(--primary);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+      animation: iconPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes iconPulse {
+
+      0%,
+      100% {
         box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
-        animation: iconPulse 3s ease-in-out infinite;
-      }
-      @keyframes iconPulse {
-        0%,
-        100% {
-          box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
-        }
-        50% {
-          box-shadow: 0 4px 22px rgba(79, 70, 229, 0.6);
-        }
-      }
-      .top-bar h2 {
-        color: var(--primary);
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        font-size: 1.1rem;
-        margin: 0;
-      }
-      .top-bar-right {
-        display: flex;
-        gap: 12px;
-        align-items: center;
-      }
-      .completion-badge {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        background: #eef2ff;
-        border: 1px solid #c7d2fe;
-        color: var(--primary);
-        padding: 5px 13px;
-        border-radius: 99px;
-        font-size: 0.78rem;
-        font-weight: 600;
-      }
-      .completion-ring {
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        background: conic-gradient(var(--primary) 0%, #e0e7ff 0%);
-        transition: background 0.5s;
-        flex-shrink: 0;
-      }
-      button {
-        padding: 10px 18px;
-        background: var(--primary);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-weight: 600;
-        cursor: pointer;
-        font-family: "Inter", sans-serif;
-        font-size: 0.875rem;
-        transition: all 0.2s ease;
-      }
-      button:hover {
-        background: var(--primary-dark);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
-      }
-      select {
-        padding: 8px 12px;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        font-weight: 500;
-        font-family: "Inter", sans-serif;
-        font-size: 0.875rem;
-        cursor: pointer;
-        outline: none;
-        background: white;
-        color: var(--text-dark);
-        transition: border-color 0.2s;
-      }
-      select:focus {
-        border-color: var(--primary);
       }
 
-      .main-container {
-        display: grid;
-        grid-template-columns: 360px 1fr 340px;
-        height: calc(100vh - 61px);
-        overflow: hidden;
+      50% {
+        box-shadow: 0 4px 22px rgba(79, 70, 229, 0.6);
+      }
+    }
+
+    .top-bar h2 {
+      color: var(--primary);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    .top-bar-right {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .completion-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      color: var(--primary);
+      padding: 5px 13px;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .completion-ring {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: conic-gradient(var(--primary) 0%, #e0e7ff 0%);
+      transition: background 0.5s;
+      flex-shrink: 0;
+    }
+
+    button {
+      padding: 10px 18px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: "Inter", sans-serif;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+    }
+
+    select {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-weight: 500;
+      font-family: "Inter", sans-serif;
+      font-size: 0.875rem;
+      cursor: pointer;
+      outline: none;
+      background: white;
+      color: var(--text-dark);
+      transition: border-color 0.2s;
+    }
+
+    select:focus {
+      border-color: var(--primary);
+    }
+
+    .main-container {
+      display: grid;
+      grid-template-columns: 360px 1fr 340px;
+      height: calc(100vh - 61px);
+      overflow: hidden;
+    }
+
+    .form-panel {
+      background: var(--white);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-panel::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .form-panel::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 2px;
+    }
+
+    .form-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      gap: 2px;
+      background: #fafafa;
+      overflow-x: auto;
+      flex-shrink: 0;
+    }
+
+    .form-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      padding: 11px 13px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-light);
+      font-size: 0.77rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      border-radius: 0;
+      transition:
+        color 0.2s,
+        border-color 0.2s;
+      letter-spacing: 0.2px;
+    }
+
+    .tab-btn:hover {
+      color: var(--primary);
+      background: none;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .form-section {
+      padding: 18px 20px;
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      animation: sectionIn 0.22s ease;
+      flex: 1;
+    }
+
+    .form-section.active {
+      display: flex;
+    }
+
+    @keyframes sectionIn {
+      from {
+        opacity: 0;
+        transform: translateX(10px);
       }
 
-      .form-panel {
-        background: var(--white);
-        border-right: 1px solid var(--border);
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
+      to {
+        opacity: 1;
+        transform: translateX(0);
       }
-      .form-panel::-webkit-scrollbar {
-        width: 4px;
+    }
+
+    .section-title {
+      font-size: 0.67rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-light);
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--text-dark);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 9px 11px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 0.86rem;
+      font-family: "Inter", sans-serif;
+      transition: 0.2s;
+      background: #fafafa;
+      color: var(--text-dark);
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+      background: white;
+    }
+
+    textarea {
+      min-height: 88px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .generate-btn {
+      margin: 4px 20px 20px;
+      padding: 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .generate-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(79, 70, 229, 0.4);
+    }
+
+    .btn-spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    .generate-btn.loading .btn-spinner {
+      display: block;
+    }
+
+    .generate-btn.loading .btn-text {
+      display: none;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
       }
-      .form-panel::-webkit-scrollbar-thumb {
-        background: #d1d5db;
-        border-radius: 2px;
-      }
-      .form-tabs {
-        display: flex;
-        border-bottom: 1px solid var(--border);
-        padding: 0 16px;
-        gap: 2px;
-        background: #fafafa;
-        overflow-x: auto;
-        flex-shrink: 0;
-      }
-      .form-tabs::-webkit-scrollbar {
-        display: none;
-      }
-      .tab-btn {
-        padding: 11px 13px;
-        background: none;
-        border: none;
-        border-bottom: 2px solid transparent;
-        color: var(--text-light);
-        font-size: 0.77rem;
-        font-weight: 600;
-        cursor: pointer;
-        white-space: nowrap;
-        border-radius: 0;
-        transition:
-          color 0.2s,
-          border-color 0.2s;
-        letter-spacing: 0.2px;
-      }
-      .tab-btn:hover {
-        color: var(--primary);
-        background: none;
-        transform: none;
-        box-shadow: none;
-      }
-      .tab-btn.active {
-        color: var(--primary);
-        border-bottom-color: var(--primary);
-      }
-      .form-section {
-        padding: 18px 20px;
-        display: none;
-        flex-direction: column;
-        gap: 12px;
-        animation: sectionIn 0.22s ease;
-        flex: 1;
-      }
-      .form-section.active {
-        display: flex;
-      }
-      @keyframes sectionIn {
-        from {
-          opacity: 0;
-          transform: translateX(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      .section-title {
-        font-size: 0.67rem;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        color: var(--text-light);
-        font-weight: 600;
-        margin: 0;
-      }
-      .field-group {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-      label {
-        font-weight: 600;
-        font-size: 0.8rem;
-        color: var(--text-dark);
-      }
-      input,
-      textarea {
-        width: 100%;
-        padding: 9px 11px;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        font-size: 0.86rem;
-        font-family: "Inter", sans-serif;
-        transition: 0.2s;
-        background: #fafafa;
-        color: var(--text-dark);
-      }
-      input:focus,
-      textarea:focus {
-        outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
-        background: white;
-      }
-      textarea {
-        min-height: 88px;
-        resize: vertical;
-        line-height: 1.6;
-      }
-      .input-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
+    }
+
+    .preview-panel {
+      background: var(--bg);
+      overflow-y: auto;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .preview-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 750px;
+    }
+
+    .preview-label {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .template-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .template-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid transparent;
+    }
+
+    .template-dot.active {
+      background: var(--primary);
+      border-color: #c7d2fe;
+      transform: scale(1.3);
+    }
+
+    .resume-container {
+      width: 100%;
+      max-width: 750px;
+    }
+
+    .template {
+      min-height: 900px;
+      padding: 0;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      line-height: 1.5;
+      color: var(--text-dark);
+      font-size: 14px;
+      overflow: hidden;
+    }
+
+    .template.hidden {
+      display: none !important;
+    }
+
+    .template.animating {
+      animation: templateSwitch 0.3s ease;
+    }
+
+    @keyframes templateSwitch {
+      0% {
+        opacity: 0;
+        transform: scale(0.98) translateY(8px);
       }
 
-      .generate-btn {
-        margin: 4px 20px 20px;
-        padding: 12px;
-        background: var(--primary);
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-weight: 700;
-        font-size: 0.92rem;
-        cursor: pointer;
-        transition: all 0.2s;
-        box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
       }
-      .generate-btn:hover {
-        background: var(--primary-dark);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(79, 70, 229, 0.4);
-      }
-      .btn-spinner {
-        width: 16px;
-        height: 16px;
-        border: 2px solid rgba(255, 255, 255, 0.35);
-        border-top-color: white;
-        border-radius: 50%;
-        animation: spin 0.7s linear infinite;
-        display: none;
-      }
-      .generate-btn.loading .btn-spinner {
-        display: block;
-      }
-      .generate-btn.loading .btn-text {
-        display: none;
-      }
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
+    }
+
+    /* Template 1: Minimal & Clean - Improved */
+    #template1 {
+      background: white;
+      padding: 45px 50px;
+    }
+
+    #template1 .resume-header {
+      text-align: left;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #eef2f6;
+    }
+
+    #template1 .resume-header h1 {
+      font-size: 36px;
+      font-weight: 600;
+      margin: 0 0 10px 0;
+      color: #1a1f2b;
+      letter-spacing: -0.5px;
+    }
+
+    #template1 .resume-header p {
+      margin: 5px 0;
+      color: #4b5565;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    #template1 .resume-header a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    #template1 .section {
+      margin-bottom: 28px;
+    }
+
+    #template1 .section h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+      margin: 0 0 15px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e5e7eb;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    #template1 .entry {
+      margin-bottom: 20px;
+    }
+
+    #template1 .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    #template1 .entry-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    #template1 .entry-meta {
+      font-size: 14px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    #template1 .entry-sub {
+      font-size: 14px;
+      color: #4b5563;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+
+    #template1 .entry-bullets {
+      margin: 8px 0 0 0;
+      padding-left: 20px;
+    }
+
+    #template1 .entry-bullets li {
+      font-size: 14px;
+      color: #374151;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    #template1 .project-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    #template1 .project-tech {
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    /* Template 2: Creative Portfolio - Improved */
+    #template2 {
+      background: #0a0c10;
+      color: #e5e7eb;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100%;
+    }
+
+    #template2 .sidebar {
+      background: #14181f;
+      padding: 35px 25px;
+      border-right: 1px solid #2a313c;
+    }
+
+    #template2 .main-content {
+      padding: 35px 35px;
+    }
+
+    #template2 .resume-header {
+      margin-bottom: 30px;
+    }
+
+    #template2 .resume-header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+      color: #ffffff;
+      letter-spacing: -0.3px;
+    }
+
+    #template2 .resume-header p {
+      margin: 5px 0;
+      color: #9ca3af;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    #template2 .section {
+      margin-bottom: 25px;
+    }
+
+    #template2 .section h2 {
+      font-size: 14px;
+      color: #60a5fa;
+      margin: 0 0 15px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #2a313c;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    #template2 .sidebar .section h2 {
+      color: #fbbf24;
+    }
+
+    #template2 .skill-item {
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: #d1d5db;
+      line-height: 1.5;
+    }
+
+    #template2 .entry {
+      margin-bottom: 20px;
+    }
+
+    #template2 .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    #template2 .entry-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    #template2 .entry-meta {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    #template2 .entry-bullets {
+      margin: 8px 0 0 0;
+      padding-left: 18px;
+    }
+
+    #template2 .entry-bullets li {
+      font-size: 13px;
+      color: #d1d5db;
+      margin-bottom: 5px;
+      line-height: 1.5;
+    }
+
+    /* Template 3: Vintage Classic - Improved */
+    #template3 {
+      background: #fcf9f5;
+      font-family: "Cormorant Garamond", serif;
+      padding: 50px 55px;
+      border: 20px solid #ece3d9;
+    }
+
+    #template3 .resume-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 25px;
+      border-bottom: 2px dashed #cfbcad;
+    }
+
+    #template3 .resume-header h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 48px;
+      font-weight: 800;
+      margin: 0 0 15px 0;
+      color: #2c241b;
+      letter-spacing: 1px;
+    }
+
+    #template3 .resume-header p {
+      margin: 6px 0;
+      font-size: 16px;
+      color: #6b5a4c;
+      line-height: 1.7;
+    }
+
+    #template3 .section {
+      margin-bottom: 35px;
+    }
+
+    #template3 .section h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #4a3a2e;
+      margin: 0 0 20px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #dccfc4;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    #template3 .entry {
+      margin-bottom: 25px;
+    }
+
+    #template3 .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    #template3 .entry-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2c241b;
+    }
+
+    #template3 .entry-meta {
+      font-size: 15px;
+      color: #7f6e5e;
+      font-style: italic;
+    }
+
+    #template3 .entry-sub {
+      font-size: 16px;
+      color: #5f5246;
+      margin-bottom: 10px;
+    }
+
+    #template3 .entry-bullets {
+      margin: 10px 0 0 0;
+      padding-left: 25px;
+    }
+
+    #template3 .entry-bullets li {
+      font-size: 16px;
+      color: #4a3f36;
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    #template3 p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #4a3f36;
+    }
+
+    /* Template 4: Tech Modern - Improved */
+    #template4 {
+      background: linear-gradient(145deg, #1a1f2e 0%, #2a1f3a 100%);
+      color: #ffffff;
+    }
+
+    #template4 .header-section {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      padding: 40px 45px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    #template4 .content-section {
+      padding: 40px 45px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+    }
+
+    #template4 .resume-header h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    #template4 .resume-header p {
+      margin: 6px 0;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    #template4 .section {
+      margin-bottom: 28px;
+    }
+
+    #template4 .section h2 {
+      font-size: 15px;
+      color: #ffd966;
+      margin: 0 0 18px 0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(255, 215, 0, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+    }
+
+    #template4 .entry {
+      margin-bottom: 22px;
+    }
+
+    #template4 .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    #template4 .entry-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    #template4 .entry-meta {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    #template4 .entry-bullets {
+      margin: 8px 0 0 0;
+      padding-left: 20px;
+    }
+
+    #template4 .entry-bullets li {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    #template4 .project-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    #template4 .project-tech {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    #template4 p {
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.6;
+    }
+
+    /* Template 5: Corporate Pro - Improved */
+    #template5 {
+      background: #ffffff;
+      border-left: 6px solid #2563eb;
+    }
+
+    #template5 .resume-header {
+      background: #f8fafc;
+      padding: 35px 45px 30px 45px;
+      border-bottom: 1px solid #e9edf2;
+    }
+
+    #template5 .resume-header h1 {
+      font-size: 36px;
+      font-weight: 600;
+      margin: 0 0 10px 0;
+      color: #0a1a2f;
+      letter-spacing: -0.5px;
+    }
+
+    #template5 .resume-header p {
+      margin: 5px 0;
+      color: #3a4a62;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    #template5 .resume-header a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    #template5 .content-wrapper {
+      padding: 35px 45px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 35px;
+    }
+
+    #template5 .left-column {
+      border-right: 1px solid #e9edf2;
+      padding-right: 30px;
+    }
+
+    #template5 .right-column {
+      padding-left: 5px;
+    }
+
+    #template5 .section {
+      margin-bottom: 28px;
+    }
+
+    #template5 .section h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #2563eb;
+      margin: 0 0 15px 0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #2563eb;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    #template5 .entry {
+      margin-bottom: 22px;
+    }
+
+    #template5 .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    #template5 .entry-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2a41;
+    }
+
+    #template5 .entry-meta {
+      font-size: 13px;
+      color: #5a6b7c;
+      font-weight: 500;
+    }
+
+    #template5 .entry-sub {
+      font-size: 14px;
+      color: #4a5a6b;
+      margin-bottom: 8px;
+    }
+
+    #template5 .entry-bullets {
+      margin: 8px 0 0 0;
+      padding-left: 20px;
+    }
+
+    #template5 .entry-bullets li {
+      font-size: 14px;
+      color: #334155;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    #template5 .left-column p {
+      font-size: 14px;
+      color: #334155;
+      line-height: 1.6;
+      margin: 8px 0;
+    }
+
+    /* Common styles for all templates */
+    .resume-header a:hover {
+      text-decoration: underline;
+    }
+
+    .entry-bullets {
+      list-style-type: disc;
+    }
+
+    .entry-bullets li {
+      margin-left: 0;
+    }
+
+    .section p {
+      margin: 8px 0;
+      line-height: 1.6;
+    }
+
+    .chat-panel {
+      background: var(--white);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background: var(--primary);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .ai-avatar {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .chat-header-info h3 {
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .chat-header-info p {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin: 2px 0 0;
+    }
+
+    .online-dot {
+      width: 6px;
+      height: 6px;
+      background: #86efac;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
       }
 
-      .preview-panel {
-        background: var(--bg);
-        overflow-y: auto;
-        padding: 28px 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 14px;
+      50% {
+        opacity: 0.4;
       }
-      .preview-toolbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        max-width: 750px;
-      }
-      .preview-label {
-        font-size: 0.74rem;
-        font-weight: 600;
-        color: var(--text-light);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-      .template-dots {
-        display: flex;
-        gap: 7px;
-      }
-      .template-dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background: var(--border);
-        cursor: pointer;
-        transition: all 0.2s;
-        border: 2px solid transparent;
-      }
-      .template-dot.active {
-        background: var(--primary);
-        border-color: #c7d2fe;
-        transform: scale(1.3);
-      }
-      .resume-container {
-        width: 100%;
-        max-width: 750px;
+    }
+
+    .api-banner {
+      background: #eef2ff;
+      border-bottom: 1px solid #c7d2fe;
+      padding: 12px 16px;
+      font-size: 0.78rem;
+      color: var(--text-light);
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+
+    .api-banner strong {
+      color: var(--primary);
+      display: block;
+    }
+
+    .api-key-input {
+      width: 100%;
+      padding: 7px 10px;
+      border: 1px solid #c7d2fe;
+      border-radius: 7px;
+      font-size: 0.8rem;
+      outline: none;
+      background: white;
+    }
+
+    .api-key-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+    }
+
+    .api-save-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 0.78rem;
+      cursor: pointer;
+      align-self: flex-end;
+    }
+
+    .quick-actions {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+      background: #fafafa;
+    }
+
+    .quick-btn {
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--text-light);
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 0.71rem;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .quick-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: #eef2ff;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .chat-messages::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: #e5e7eb;
+      border-radius: 2px;
+    }
+
+    .message {
+      display: flex;
+      gap: 7px;
+      animation: msgIn 0.25s ease;
+    }
+
+    .message.user {
+      flex-direction: row-reverse;
+    }
+
+    @keyframes msgIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
       }
 
-      .template {
-        min-height: 900px;
-        padding: 0;
-        background: var(--white);
-        border-radius: 12px;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-        line-height: 1.5;
-        color: var(--text-dark);
-        font-size: 14px;
-        overflow: hidden;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
-      .template.hidden {
+    }
+
+    .msg-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .message.user .msg-avatar {
+      background: var(--primary);
+      color: white;
+    }
+
+    .message.ai .msg-avatar {
+      background: #eef2ff;
+      color: var(--primary);
+      font-size: 0.9rem;
+    }
+
+    .msg-bubble {
+      max-width: 82%;
+      padding: 9px 13px;
+      border-radius: 12px;
+      font-size: 0.81rem;
+      line-height: 1.55;
+    }
+
+    .message.user .msg-bubble {
+      background: var(--primary);
+      color: white;
+      border-bottom-right-radius: 3px;
+    }
+
+    .message.ai .msg-bubble {
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      color: var(--text-dark);
+      border-bottom-left-radius: 3px;
+    }
+
+    .message.user .msg-bubble strong {
+      color: #c7d2fe;
+    }
+
+    .msg-bubble code {
+      background: rgba(79, 70, 229, 0.1);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      color: var(--primary);
+    }
+
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 10px 13px;
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      border-bottom-left-radius: 3px;
+      width: fit-content;
+    }
+
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      background: #9ca3af;
+      border-radius: 50%;
+      animation: bounce 1.2s infinite;
+    }
+
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      60%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.4;
+      }
+
+      30% {
+        transform: translateY(-5px);
+        opacity: 1;
+      }
+    }
+
+    .chat-input-area {
+      padding: 11px 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+      background: #fafafa;
+      flex-shrink: 0;
+    }
+
+    .chat-input-area textarea {
+      flex: 1;
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--text-dark);
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      outline: none;
+      resize: none;
+      max-height: 110px;
+      min-height: 38px;
+      line-height: 1.5;
+    }
+
+    .chat-input-area textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+    }
+
+    .send-btn {
+      width: 38px;
+      height: 38px;
+      background: var(--primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.85rem;
+      color: white;
+      font-weight: 700;
+      transition: all 0.2s;
+      padding: 0;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+    }
+
+    .send-btn:hover {
+      background: var(--primary-dark);
+      transform: scale(1.06);
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+    }
+
+    .send-btn:disabled {
+      background: #e5e7eb;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--text-dark);
+      color: white;
+      padding: 10px 22px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media print {
+      body>*:not(#pdf-print-area) {
         display: none !important;
       }
-      .template.animating {
-        animation: templateSwitch 0.3s ease;
-      }
-      @keyframes templateSwitch {
-        0% {
-          opacity: 0;
-          transform: scale(0.98) translateY(8px);
-        }
-        100% {
-          opacity: 1;
-          transform: scale(1) translateY(0);
-        }
-      }
 
-      /* Template 1: Minimal & Clean - Improved */
-      #template1 {
-        background: white;
-        padding: 45px 50px;
-      }
-      #template1 .resume-header {
-        text-align: left;
-        margin-bottom: 30px;
-        padding-bottom: 20px;
-        border-bottom: 2px solid #eef2f6;
-      }
-      #template1 .resume-header h1 {
-        font-size: 36px;
-        font-weight: 600;
-        margin: 0 0 10px 0;
-        color: #1a1f2b;
-        letter-spacing: -0.5px;
-      }
-      #template1 .resume-header p {
-        margin: 5px 0;
-        color: #4b5565;
-        font-size: 14px;
-        line-height: 1.6;
-      }
-      #template1 .resume-header a {
-        color: #2563eb;
-        text-decoration: none;
-      }
-      #template1 .section {
-        margin-bottom: 28px;
-      }
-      #template1 .section h2 {
-        font-size: 16px;
-        font-weight: 600;
-        color: #1f2937;
-        margin: 0 0 15px 0;
-        padding-bottom: 8px;
-        border-bottom: 1px solid #e5e7eb;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-      }
-      #template1 .entry {
-        margin-bottom: 20px;
-      }
-      #template1 .entry-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        margin-bottom: 8px;
-      }
-      #template1 .entry-title {
-        font-size: 16px;
-        font-weight: 600;
-        color: #1f2937;
-      }
-      #template1 .entry-meta {
-        font-size: 14px;
-        color: #6b7280;
-        font-weight: 500;
-      }
-      #template1 .entry-sub {
-        font-size: 14px;
-        color: #4b5563;
-        margin-bottom: 8px;
-        font-style: italic;
-      }
-      #template1 .entry-bullets {
-        margin: 8px 0 0 0;
-        padding-left: 20px;
-      }
-      #template1 .entry-bullets li {
-        font-size: 14px;
-        color: #374151;
-        margin-bottom: 6px;
-        line-height: 1.5;
-      }
-      #template1 .project-name {
-        font-size: 16px;
-        font-weight: 600;
-        color: #1f2937;
-      }
-      #template1 .project-tech {
-        font-size: 14px;
-        color: #6b7280;
-      }
-
-      /* Template 2: Creative Portfolio - Improved */
-      #template2 {
-        background: #0a0c10;
-        color: #e5e7eb;
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        min-height: 100%;
-      }
-      #template2 .sidebar {
-        background: #14181f;
-        padding: 35px 25px;
-        border-right: 1px solid #2a313c;
-      }
-      #template2 .main-content {
-        padding: 35px 35px;
-      }
-      #template2 .resume-header {
-        margin-bottom: 30px;
-      }
-      #template2 .resume-header h1 {
-        font-size: 28px;
-        font-weight: 700;
-        margin: 0 0 10px 0;
-        color: #ffffff;
-        letter-spacing: -0.3px;
-      }
-      #template2 .resume-header p {
-        margin: 5px 0;
-        color: #9ca3af;
-        font-size: 13px;
-        line-height: 1.6;
-      }
-      #template2 .section {
-        margin-bottom: 25px;
-      }
-      #template2 .section h2 {
-        font-size: 14px;
-        color: #60a5fa;
-        margin: 0 0 15px 0;
-        padding-bottom: 8px;
-        border-bottom: 1px solid #2a313c;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: 600;
-      }
-      #template2 .sidebar .section h2 {
-        color: #fbbf24;
-      }
-      #template2 .skill-item {
-        margin-bottom: 10px;
-        font-size: 13px;
-        color: #d1d5db;
-        line-height: 1.5;
-      }
-      #template2 .entry {
-        margin-bottom: 20px;
-      }
-      #template2 .entry-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        margin-bottom: 8px;
-      }
-      #template2 .entry-title {
-        font-size: 15px;
-        font-weight: 600;
-        color: #ffffff;
-      }
-      #template2 .entry-meta {
-        font-size: 13px;
-        color: #9ca3af;
-      }
-      #template2 .entry-bullets {
-        margin: 8px 0 0 0;
-        padding-left: 18px;
-      }
-      #template2 .entry-bullets li {
-        font-size: 13px;
-        color: #d1d5db;
-        margin-bottom: 5px;
-        line-height: 1.5;
-      }
-
-      /* Template 3: Vintage Classic - Improved */
-      #template3 {
-        background: #fcf9f5;
-        font-family: "Cormorant Garamond", serif;
-        padding: 50px 55px;
-        border: 20px solid #ece3d9;
-      }
-      #template3 .resume-header {
-        text-align: center;
-        margin-bottom: 40px;
-        padding-bottom: 25px;
-        border-bottom: 2px dashed #cfbcad;
-      }
-      #template3 .resume-header h1 {
-        font-family: "Playfair Display", serif;
-        font-size: 48px;
-        font-weight: 800;
-        margin: 0 0 15px 0;
-        color: #2c241b;
-        letter-spacing: 1px;
-      }
-      #template3 .resume-header p {
-        margin: 6px 0;
-        font-size: 16px;
-        color: #6b5a4c;
-        line-height: 1.7;
-      }
-      #template3 .section {
-        margin-bottom: 35px;
-      }
-      #template3 .section h2 {
-        font-family: "Playfair Display", serif;
-        font-size: 22px;
-        font-weight: 700;
-        color: #4a3a2e;
-        margin: 0 0 20px 0;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #dccfc4;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-      }
-      #template3 .entry {
-        margin-bottom: 25px;
-      }
-      #template3 .entry-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        margin-bottom: 10px;
-      }
-      #template3 .entry-title {
-        font-size: 18px;
-        font-weight: 700;
-        color: #2c241b;
-      }
-      #template3 .entry-meta {
-        font-size: 15px;
-        color: #7f6e5e;
-        font-style: italic;
-      }
-      #template3 .entry-sub {
-        font-size: 16px;
-        color: #5f5246;
-        margin-bottom: 10px;
-      }
-      #template3 .entry-bullets {
-        margin: 10px 0 0 0;
-        padding-left: 25px;
-      }
-      #template3 .entry-bullets li {
-        font-size: 16px;
-        color: #4a3f36;
-        margin-bottom: 8px;
-        line-height: 1.6;
-      }
-      #template3 p {
-        font-size: 16px;
-        line-height: 1.7;
-        color: #4a3f36;
-      }
-
-      /* Template 4: Tech Modern - Improved */
-      #template4 {
-        background: linear-gradient(145deg, #1a1f2e 0%, #2a1f3a 100%);
-        color: #ffffff;
-      }
-      #template4 .header-section {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        padding: 40px 45px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      #template4 .content-section {
-        padding: 40px 45px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 35px;
-      }
-      #template4 .resume-header h1 {
-        font-size: 42px;
-        font-weight: 700;
-        margin: 0 0 12px 0;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-      #template4 .resume-header p {
-        margin: 6px 0;
-        color: rgba(255, 255, 255, 0.85);
-        font-size: 14px;
-        line-height: 1.6;
-      }
-      #template4 .section {
-        margin-bottom: 28px;
-      }
-      #template4 .section h2 {
-        font-size: 15px;
-        color: #ffd966;
-        margin: 0 0 18px 0;
-        padding-bottom: 8px;
-        border-bottom: 2px solid rgba(255, 215, 0, 0.4);
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        font-weight: 600;
-      }
-      #template4 .entry {
-        margin-bottom: 22px;
-      }
-      #template4 .entry-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        margin-bottom: 8px;
-      }
-      #template4 .entry-title {
-        font-size: 16px;
-        font-weight: 600;
-        color: #ffffff;
-      }
-      #template4 .entry-meta {
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.7);
-      }
-      #template4 .entry-bullets {
-        margin: 8px 0 0 0;
-        padding-left: 20px;
-      }
-      #template4 .entry-bullets li {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.85);
-        margin-bottom: 6px;
-        line-height: 1.5;
-      }
-      #template4 .project-name {
-        font-size: 16px;
-        font-weight: 600;
-        color: #ffffff;
-      }
-      #template4 .project-tech {
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.7);
-      }
-      #template4 p {
-        color: rgba(255, 255, 255, 0.85);
-        line-height: 1.6;
-      }
-
-      /* Template 5: Corporate Pro - Improved */
-      #template5 {
-        background: #ffffff;
-        border-left: 6px solid #2563eb;
-      }
-      #template5 .resume-header {
-        background: #f8fafc;
-        padding: 35px 45px 30px 45px;
-        border-bottom: 1px solid #e9edf2;
-      }
-      #template5 .resume-header h1 {
-        font-size: 36px;
-        font-weight: 600;
-        margin: 0 0 10px 0;
-        color: #0a1a2f;
-        letter-spacing: -0.5px;
-      }
-      #template5 .resume-header p {
-        margin: 5px 0;
-        color: #3a4a62;
-        font-size: 14px;
-        line-height: 1.6;
-      }
-      #template5 .resume-header a {
-        color: #2563eb;
-        text-decoration: none;
-        font-weight: 500;
-      }
-      #template5 .content-wrapper {
-        padding: 35px 45px;
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 35px;
-      }
-      #template5 .left-column {
-        border-right: 1px solid #e9edf2;
-        padding-right: 30px;
-      }
-      #template5 .right-column {
-        padding-left: 5px;
-      }
-      #template5 .section {
-        margin-bottom: 28px;
-      }
-      #template5 .section h2 {
-        font-size: 15px;
-        font-weight: 600;
-        color: #2563eb;
-        margin: 0 0 15px 0;
-        padding-bottom: 8px;
-        border-bottom: 2px solid #2563eb;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-      }
-      #template5 .entry {
-        margin-bottom: 22px;
-      }
-      #template5 .entry-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        margin-bottom: 8px;
-      }
-      #template5 .entry-title {
-        font-size: 16px;
-        font-weight: 600;
-        color: #1f2a41;
-      }
-      #template5 .entry-meta {
-        font-size: 13px;
-        color: #5a6b7c;
-        font-weight: 500;
-      }
-      #template5 .entry-sub {
-        font-size: 14px;
-        color: #4a5a6b;
-        margin-bottom: 8px;
-      }
-      #template5 .entry-bullets {
-        margin: 8px 0 0 0;
-        padding-left: 20px;
-      }
-      #template5 .entry-bullets li {
-        font-size: 14px;
-        color: #334155;
-        margin-bottom: 6px;
-        line-height: 1.5;
-      }
-      #template5 .left-column p {
-        font-size: 14px;
-        color: #334155;
-        line-height: 1.6;
-        margin: 8px 0;
-      }
-
-      /* Common styles for all templates */
-      .resume-header a:hover {
-        text-decoration: underline;
-      }
-      .entry-bullets {
-        list-style-type: disc;
-      }
-      .entry-bullets li {
-        margin-left: 0;
-      }
-      .section p {
-        margin: 8px 0;
-        line-height: 1.6;
-      }
-
-      .chat-panel {
-        background: var(--white);
-        border-left: 1px solid var(--border);
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        overflow: hidden;
-      }
-      .chat-header {
-        background: var(--primary);
-        padding: 14px 18px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex-shrink: 0;
-      }
-      .ai-avatar {
-        width: 36px;
-        height: 36px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.1rem;
-        flex-shrink: 0;
-      }
-      .chat-header-info h3 {
-        color: white;
-        font-size: 0.9rem;
-        font-weight: 700;
+      #pdf-print-area {
+        display: block !important;
+        padding: 0;
         margin: 0;
       }
-      .chat-header-info p {
-        font-size: 0.72rem;
-        color: rgba(255, 255, 255, 0.7);
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        margin: 2px 0 0;
-      }
-      .online-dot {
-        width: 6px;
-        height: 6px;
-        background: #86efac;
-        border-radius: 50%;
-        animation: pulse 2s infinite;
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.4;
-        }
-      }
-      .api-banner {
-        background: #eef2ff;
-        border-bottom: 1px solid #c7d2fe;
-        padding: 12px 16px;
-        font-size: 0.78rem;
-        color: var(--text-light);
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
-        flex-shrink: 0;
-      }
-      .api-banner strong {
-        color: var(--primary);
-        display: block;
-      }
-      .api-key-input {
-        width: 100%;
-        padding: 7px 10px;
-        border: 1px solid #c7d2fe;
-        border-radius: 7px;
-        font-size: 0.8rem;
-        outline: none;
-        background: white;
-      }
-      .api-key-input:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
-      }
-      .api-save-btn {
-        background: var(--primary);
-        color: white;
-        border: none;
-        padding: 7px 14px;
-        border-radius: 7px;
-        font-weight: 600;
-        font-size: 0.78rem;
-        cursor: pointer;
-        align-self: flex-end;
-      }
-      .quick-actions {
-        padding: 9px 14px;
-        border-bottom: 1px solid var(--border);
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-        flex-shrink: 0;
-        background: #fafafa;
-      }
-      .quick-btn {
-        background: white;
-        border: 1px solid var(--border);
-        color: var(--text-light);
-        padding: 4px 10px;
-        border-radius: 99px;
-        font-size: 0.71rem;
-        cursor: pointer;
-        font-weight: 500;
-        transition: all 0.2s;
-        white-space: nowrap;
-      }
-      .quick-btn:hover {
-        border-color: var(--primary);
-        color: var(--primary);
-        background: #eef2ff;
-      }
-      .chat-messages {
-        flex: 1;
-        overflow-y: auto;
-        padding: 14px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .chat-messages::-webkit-scrollbar {
-        width: 3px;
-      }
-      .chat-messages::-webkit-scrollbar-thumb {
-        background: #e5e7eb;
-        border-radius: 2px;
-      }
-      .message {
-        display: flex;
-        gap: 7px;
-        animation: msgIn 0.25s ease;
-      }
-      .message.user {
-        flex-direction: row-reverse;
-      }
-      @keyframes msgIn {
-        from {
-          opacity: 0;
-          transform: translateY(8px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .msg-avatar {
-        width: 28px;
-        height: 28px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.72rem;
-        font-weight: 700;
-        flex-shrink: 0;
-        margin-top: 2px;
-      }
-      .message.user .msg-avatar {
-        background: var(--primary);
-        color: white;
-      }
-      .message.ai .msg-avatar {
-        background: #eef2ff;
-        color: var(--primary);
-        font-size: 0.9rem;
-      }
-      .msg-bubble {
-        max-width: 82%;
-        padding: 9px 13px;
-        border-radius: 12px;
-        font-size: 0.81rem;
-        line-height: 1.55;
-      }
-      .message.user .msg-bubble {
-        background: var(--primary);
-        color: white;
-        border-bottom-right-radius: 3px;
-      }
-      .message.ai .msg-bubble {
-        background: #f9fafb;
-        border: 1px solid var(--border);
-        color: var(--text-dark);
-        border-bottom-left-radius: 3px;
-      }
-      .message.user .msg-bubble strong {
-        color: #c7d2fe;
-      }
-      .msg-bubble code {
-        background: rgba(79, 70, 229, 0.1);
-        padding: 1px 5px;
-        border-radius: 4px;
-        font-size: 0.78rem;
-        color: var(--primary);
-      }
-      .typing-indicator {
-        display: flex;
-        gap: 4px;
-        padding: 10px 13px;
-        background: #f9fafb;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        border-bottom-left-radius: 3px;
-        width: fit-content;
-      }
-      .typing-dot {
-        width: 6px;
-        height: 6px;
-        background: #9ca3af;
-        border-radius: 50%;
-        animation: bounce 1.2s infinite;
-      }
-      .typing-dot:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-      .typing-dot:nth-child(3) {
-        animation-delay: 0.4s;
-      }
-      @keyframes bounce {
-        0%,
-        60%,
-        100% {
-          transform: translateY(0);
-          opacity: 0.4;
-        }
-        30% {
-          transform: translateY(-5px);
-          opacity: 1;
-        }
-      }
-      .chat-input-area {
-        padding: 11px 14px;
-        border-top: 1px solid var(--border);
-        display: flex;
-        gap: 8px;
-        align-items: flex-end;
-        background: #fafafa;
-        flex-shrink: 0;
-      }
-      .chat-input-area textarea {
-        flex: 1;
-        background: white;
-        border: 1px solid var(--border);
-        color: var(--text-dark);
-        padding: 9px 12px;
-        border-radius: 8px;
-        font-size: 0.82rem;
-        outline: none;
-        resize: none;
-        max-height: 110px;
-        min-height: 38px;
-        line-height: 1.5;
-      }
-      .chat-input-area textarea:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
-      }
-      .send-btn {
-        width: 38px;
-        height: 38px;
-        background: var(--primary);
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        font-size: 0.85rem;
-        color: white;
-        font-weight: 700;
-        transition: all 0.2s;
-        padding: 0;
-        box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
-      }
-      .send-btn:hover {
-        background: var(--primary-dark);
-        transform: scale(1.06);
-        box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
-      }
-      .send-btn:disabled {
-        background: #e5e7eb;
-        cursor: not-allowed;
-        transform: none;
-        box-shadow: none;
-      }
-      .toast {
-        position: fixed;
-        bottom: 28px;
-        left: 50%;
-        transform: translateX(-50%) translateY(20px);
-        background: var(--text-dark);
-        color: white;
-        padding: 10px 22px;
-        border-radius: 10px;
-        font-size: 0.82rem;
-        font-weight: 500;
-        opacity: 0;
-        transition: all 0.3s;
-        pointer-events: none;
-        z-index: 999;
-      }
-      .toast.show {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-      }
+    }
+  </style>
+</head>
 
-      @media print {
-        body > *:not(#pdf-print-area) {
-          display: none !important;
-        }
-        #pdf-print-area {
-          display: block !important;
-          padding: 0;
-          margin: 0;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="top-bar">
-      <div class="top-bar-brand">
-        <div class="brand-icon">📄</div>
-        <h2>Resume Builder Pro</h2>
+<body>
+  <div class="top-bar">
+    <div class="top-bar-brand">
+      <div class="brand-icon">📄</div>
+      <h2>Resume Builder Pro</h2>
+    </div>
+    <div class="top-bar-right">
+      <div class="completion-badge">
+        <div class="completion-ring" id="completionRing"></div>
+        <span id="completionText">0% filled</span>
       </div>
-      <div class="top-bar-right">
-        <div class="completion-badge">
-          <div class="completion-ring" id="completionRing"></div>
-          <span id="completionText">0% filled</span>
+      <select id="templateSelector">
+        <option value="template1">Minimal & Clean</option>
+        <option value="template2">Creative Portfolio</option>
+        <option value="template3">Vintage Classic</option>
+        <option value="template4">Tech Modern</option>
+        <option value="template5">Corporate Pro</option>
+      </select>
+      <button onclick="downloadPDF()">⬇ Download PDF</button>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="form-panel">
+      <div class="form-tabs">
+        <button class="tab-btn active" onclick="switchTab('personal', this)">
+          👤 Personal
+        </button>
+        <button class="tab-btn" onclick="switchTab('profile', this)">
+          📝 Profile
+        </button>
+        <button class="tab-btn" onclick="switchTab('experience', this)">
+          💼 Experience
+        </button>
+        <button class="tab-btn" onclick="switchTab('skills', this)">
+          🛠 Skills
+        </button>
+      </div>
+
+      <form id="resumeForm">
+        <div class="form-section active" id="tab-personal">
+          <p class="section-title">Contact Information</p>
+          <div class="field-group">
+            <label>Full Name *</label>
+            <input type="text" id="inputname" oninput="updateCompletion()" />
+          </div>
+          <div class="input-row">
+            <div class="field-group">
+              <label>Email *</label>
+              <input type="email" id="inputEmail" oninput="updateCompletion()" />
+            </div>
+            <div class="field-group">
+              <label>Phone *</label>
+              <input type="text" id="inputPhone" oninput="updateCompletion()" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Location</label>
+            <input type="text" id="inputLocation" oninput="updateCompletion()" />
+          </div>
+          <div class="input-row">
+            <div class="field-group">
+              <label>LinkedIn</label>
+              <input type="text" id="inputLinkedin" oninput="updateCompletion()" />
+            </div>
+            <div class="field-group">
+              <label>GitHub</label>
+              <input type="text" id="inputGithub" oninput="updateCompletion()" />
+            </div>
+          </div>
         </div>
-        <select id="templateSelector">
-          <option value="template1">Minimal & Clean</option>
-          <option value="template2">Creative Portfolio</option>
-          <option value="template3">Vintage Classic</option>
-          <option value="template4">Tech Modern</option>
-          <option value="template5">Corporate Pro</option>
-        </select>
-        <button onclick="downloadPDF()">⬇ Download PDF</button>
+
+        <div class="form-section" id="tab-profile">
+          <p class="section-title">Professional Profile</p>
+          <div class="field-group">
+            <label>Professional Summary</label>
+            <textarea id="inputSummary" maxlength="500" oninput="
+                  updateCompletion();
+                  charCount(this, 'summaryCount', 500);
+                "></textarea>
+            <div class="char-count" id="summaryCount">0 / 500</div>
+          </div>
+          <div class="field-group">
+            <label>Education</label>
+            <textarea id="inputEducation" style="min-height: 100px" oninput="updateCompletion()"></textarea>
+          </div>
+          <div class="field-group">
+            <label>Achievements</label>
+            <textarea id="inputAchievements" oninput="updateCompletion()"></textarea>
+          </div>
+        </div>
+
+        <div class="form-section" id="tab-experience">
+          <p class="section-title">Work Experience & Projects</p>
+          <div class="field-group">
+            <label>Work Experience</label>
+            <textarea id="inputexperience" style="min-height: 160px" oninput="
+                  updateCompletion();
+                  charCount(this, 'expCount', 1200);
+                "></textarea>
+            <div class="char-count" id="expCount">0 / 1200</div>
+          </div>
+          <div class="field-group">
+            <label>Projects</label>
+            <textarea id="inputproject" style="min-height: 160px" oninput="
+                  updateCompletion();
+                  charCount(this, 'projCount', 1000);
+                "></textarea>
+            <div class="char-count" id="projCount">0 / 1000</div>
+          </div>
+        </div>
+
+        <div class="form-section" id="tab-skills">
+          <p class="section-title">Skills</p>
+          <div class="field-group">
+            <label>Technical Skills</label>
+            <textarea id="inputskill" style="min-height: 80px" oninput="updateCompletion()"></textarea>
+          </div>
+          <div class="field-group" style="margin-top: 8px">
+            <label>Languages</label>
+            <textarea id="inputLanguages" oninput="updateCompletion()" style="min-height: 60px"></textarea>
+          </div>
+          <div class="field-group">
+            <label>Certifications / Courses</label>
+            <textarea id="inputCerts" style="min-height: 80px" oninput="updateCompletion()"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="generate-btn">
+          <div class="btn-spinner"></div>
+          <span class="btn-text">✨ Generate Resume</span>
+        </button>
+      </form>
+    </div>
+
+    <div class="preview-panel">
+      <div class="preview-toolbar">
+        <span class="preview-label">Live Preview</span>
+        <div class="template-dots">
+          <div class="template-dot active" onclick="setTemplate('template1', 0)" title="Minimal & Clean"></div>
+          <div class="template-dot" onclick="setTemplate('template2', 1)" title="Creative Portfolio"></div>
+          <div class="template-dot" onclick="setTemplate('template3', 2)" title="Vintage Classic"></div>
+          <div class="template-dot" onclick="setTemplate('template4', 3)" title="Tech Modern"></div>
+          <div class="template-dot" onclick="setTemplate('template5', 4)" title="Corporate Pro"></div>
+        </div>
+      </div>
+      <div class="resume-container">
+        <div id="template1" class="template">
+          <div class="empty-state">
+            <div class="empty-icon">📄</div>
+            <h3>Your resume preview</h3>
+            <p>Fill in your details and click Generate Resume</p>
+          </div>
+        </div>
+        <div id="template2" class="template hidden">
+          <div class="sidebar"></div>
+          <div class="main-content"></div>
+        </div>
+        <div id="template3" class="template hidden"></div>
+        <div id="template4" class="template hidden">
+          <div class="header-section"></div>
+          <div class="content-section"></div>
+        </div>
+        <div id="template5" class="template hidden">
+          <div class="resume-header"></div>
+          <div class="content-wrapper">
+            <div class="left-column"></div>
+            <div class="right-column"></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="main-container">
-      <div class="form-panel">
-        <div class="form-tabs">
-          <button class="tab-btn active" onclick="switchTab('personal', this)">
-            👤 Personal
-          </button>
-          <button class="tab-btn" onclick="switchTab('profile', this)">
-            📝 Profile
-          </button>
-          <button class="tab-btn" onclick="switchTab('experience', this)">
-            💼 Experience
-          </button>
-          <button class="tab-btn" onclick="switchTab('skills', this)">
-            🛠 Skills
-          </button>
-        </div>
-
-        <form id="resumeForm">
-          <div class="form-section active" id="tab-personal">
-            <p class="section-title">Contact Information</p>
-            <div class="field-group">
-              <label>Full Name *</label>
-              <input type="text" id="inputname" oninput="updateCompletion()" />
-            </div>
-            <div class="input-row">
-              <div class="field-group">
-                <label>Email *</label>
-                <input
-                  type="email"
-                  id="inputEmail"
-                  oninput="updateCompletion()"
-                />
-              </div>
-              <div class="field-group">
-                <label>Phone *</label>
-                <input
-                  type="text"
-                  id="inputPhone"
-                  oninput="updateCompletion()"
-                />
-              </div>
-            </div>
-            <div class="field-group">
-              <label>Location</label>
-              <input
-                type="text"
-                id="inputLocation"
-                oninput="updateCompletion()"
-              />
-            </div>
-            <div class="input-row">
-              <div class="field-group">
-                <label>LinkedIn</label>
-                <input
-                  type="text"
-                  id="inputLinkedin"
-                  oninput="updateCompletion()"
-                />
-              </div>
-              <div class="field-group">
-                <label>GitHub</label>
-                <input
-                  type="text"
-                  id="inputGithub"
-                  oninput="updateCompletion()"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div class="form-section" id="tab-profile">
-            <p class="section-title">Professional Profile</p>
-            <div class="field-group">
-              <label>Professional Summary</label>
-              <textarea
-                id="inputSummary"
-                maxlength="500"
-                oninput="
-                  updateCompletion();
-                  charCount(this, 'summaryCount', 500);
-                "
-              ></textarea>
-              <div class="char-count" id="summaryCount">0 / 500</div>
-            </div>
-            <div class="field-group">
-              <label>Education</label>
-              <textarea
-                id="inputEducation"
-                style="min-height: 100px"
-                oninput="updateCompletion()"
-              ></textarea>
-            </div>
-            <div class="field-group">
-              <label>Achievements</label>
-              <textarea
-                id="inputAchievements"
-                oninput="updateCompletion()"
-              ></textarea>
-            </div>
-          </div>
-
-          <div class="form-section" id="tab-experience">
-            <p class="section-title">Work Experience & Projects</p>
-            <div class="field-group">
-              <label>Work Experience</label>
-              <textarea
-                id="inputexperience"
-                style="min-height: 160px"
-                oninput="
-                  updateCompletion();
-                  charCount(this, 'expCount', 1200);
-                "
-              ></textarea>
-              <div class="char-count" id="expCount">0 / 1200</div>
-            </div>
-            <div class="field-group">
-              <label>Projects</label>
-              <textarea
-                id="inputproject"
-                style="min-height: 160px"
-                oninput="
-                  updateCompletion();
-                  charCount(this, 'projCount', 1000);
-                "
-              ></textarea>
-              <div class="char-count" id="projCount">0 / 1000</div>
-            </div>
-          </div>
-
-          <div class="form-section" id="tab-skills">
-            <p class="section-title">Skills</p>
-            <div class="field-group">
-              <label>Technical Skills</label>
-              <textarea
-                id="inputskill"
-                style="min-height: 80px"
-                oninput="updateCompletion()"
-              ></textarea>
-            </div>
-            <div class="field-group" style="margin-top: 8px">
-              <label>Languages</label>
-              <textarea
-                id="inputLanguages"
-                oninput="updateCompletion()"
-                style="min-height: 60px"
-              ></textarea>
-            </div>
-            <div class="field-group">
-              <label>Certifications / Courses</label>
-              <textarea
-                id="inputCerts"
-                style="min-height: 80px"
-                oninput="updateCompletion()"
-              ></textarea>
-            </div>
-          </div>
-
-          <button type="submit" class="generate-btn">
-            <div class="btn-spinner"></div>
-            <span class="btn-text">✨ Generate Resume</span>
-          </button>
-        </form>
-      </div>
-
-      <div class="preview-panel">
-        <div class="preview-toolbar">
-          <span class="preview-label">Live Preview</span>
-          <div class="template-dots">
-            <div
-              class="template-dot active"
-              onclick="setTemplate('template1', 0)"
-              title="Minimal & Clean"
-            ></div>
-            <div
-              class="template-dot"
-              onclick="setTemplate('template2', 1)"
-              title="Creative Portfolio"
-            ></div>
-            <div
-              class="template-dot"
-              onclick="setTemplate('template3', 2)"
-              title="Vintage Classic"
-            ></div>
-            <div
-              class="template-dot"
-              onclick="setTemplate('template4', 3)"
-              title="Tech Modern"
-            ></div>
-            <div
-              class="template-dot"
-              onclick="setTemplate('template5', 4)"
-              title="Corporate Pro"
-            ></div>
-          </div>
-        </div>
-        <div class="resume-container">
-          <div id="template1" class="template">
-            <div class="empty-state">
-              <div class="empty-icon">📄</div>
-              <h3>Your resume preview</h3>
-              <p>Fill in your details and click Generate Resume</p>
-            </div>
-          </div>
-          <div id="template2" class="template hidden">
-            <div class="sidebar"></div>
-            <div class="main-content"></div>
-          </div>
-          <div id="template3" class="template hidden"></div>
-          <div id="template4" class="template hidden">
-            <div class="header-section"></div>
-            <div class="content-section"></div>
-          </div>
-          <div id="template5" class="template hidden">
-            <div class="resume-header"></div>
-            <div class="content-wrapper">
-              <div class="left-column"></div>
-              <div class="right-column"></div>
-            </div>
-          </div>
+    <div class="chat-panel">
+      <div class="chat-header">
+        <div class="ai-avatar">🤖</div>
+        <div class="chat-header-info">
+          <h3>AI Resume Assistant</h3>
+          <p><span class="online-dot"></span> Powered by Llama 3 · Free</p>
         </div>
       </div>
-
-      <div class="chat-panel">
-        <div class="chat-header">
-          <div class="ai-avatar">🤖</div>
-          <div class="chat-header-info">
-            <h3>AI Resume Assistant</h3>
-            <p><span class="online-dot"></span> Powered by Llama 3 · Free</p>
-          </div>
+      <div class="api-banner" id="apiBanner">
+        <div>
+          <strong>🔑 Enter your Groq API Key</strong> Free at console.groq.com
+          — stored only in your browser.
         </div>
-        <div class="api-banner" id="apiBanner">
-          <div>
-            <strong>🔑 Enter your Groq API Key</strong> Free at console.groq.com
-            — stored only in your browser.
-          </div>
-          <input
-            type="password"
-            class="api-key-input"
-            id="apiKeyInput"
-            placeholder="gsk_..."
-          />
-          <button class="api-save-btn" onclick="saveApiKey()">Save Key</button>
-        </div>
-        <div class="quick-actions">
-          <button
-            class="quick-btn"
-            onclick="quickAction('Fix spelling and grammar in my resume')"
-          >
-            ✏️ Fix Grammar
-          </button>
-          <button
-            class="quick-btn"
-            onclick="
+        <input type="password" class="api-key-input" id="apiKeyInput" placeholder="gsk_..." />
+        <button class="api-save-btn" onclick="saveApiKey()">Save Key</button>
+      </div>
+      <div class="quick-actions">
+        <button class="quick-btn" onclick="quickAction('Fix spelling and grammar in my resume')">
+          ✏️ Fix Grammar
+        </button>
+        <button class="quick-btn" onclick="
               quickAction(
                 'Rewrite my professional summary to be more impactful',
               )
-            "
-          >
-            ⚡ Improve Summary
-          </button>
-          <button
-            class="quick-btn"
-            onclick="
+            ">
+          ⚡ Improve Summary
+        </button>
+        <button class="quick-btn" onclick="
               quickAction('Review my skills and suggest what else I should add')
-            "
-          >
-            🎯 Suggest Skills
-          </button>
-          <button
-            class="quick-btn"
-            onclick="quickAction('Give me tips to make my resume stand out')"
-          >
-            💡 Tips
-          </button>
-          <button
-            class="quick-btn"
-            onclick="
+            ">
+          🎯 Suggest Skills
+        </button>
+        <button class="quick-btn" onclick="quickAction('Give me tips to make my resume stand out')">
+          💡 Tips
+        </button>
+        <button class="quick-btn" onclick="
               quickAction(
                 'Do a full review of my resume with detailed feedback',
               )
-            "
-          >
-          </button>
-        </div>
-        <div class="chat-messages" id="chatMessages">
-          <div class="message ai">
-            <div class="msg-avatar">🤖</div>
-            <div class="msg-bubble">
-              👋 Hi! I'm your <strong>AI Resume Assistant</strong>.<br /><br />
-              I can help you:<br />
-              • Fix spelling & grammar<br />
-              • Improve your summary & experience<br />
-              • Suggest missing skills<br />
-              • Answer resume questions<br /><br />
-              Add your free <strong>Groq key</strong> above, fill in your
-              details, then ask anything!
-            </div>
+            ">
+        </button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="message ai">
+          <div class="msg-avatar">🤖</div>
+          <div class="msg-bubble">
+            👋 Hi! I'm your <strong>AI Resume Assistant</strong>.<br /><br />
+            I can help you:<br />
+            • Fix spelling & grammar<br />
+            • Improve your summary & experience<br />
+            • Suggest missing skills<br />
+            • Answer resume questions<br /><br />
+            Add your free <strong>Groq key</strong> above, fill in your
+            details, then ask anything!
           </div>
         </div>
-        <div class="chat-input-area">
-          <textarea
-            id="chatInput"
-            placeholder="Ask me to improve your resume..."
-            rows="1"
-            onkeydown="handleChatKey(event)"
-            oninput="autoResize(this)"
-          ></textarea>
-          <button class="send-btn" id="sendBtn" onclick="sendMessage()">
-            ➤
-          </button>
-        </div>
+      </div>
+      <div class="chat-input-area">
+        <textarea id="chatInput" placeholder="Ask me to improve your resume..." rows="1"
+          onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+          ➤
+        </button>
       </div>
     </div>
+  </div>
 
-    <div class="toast" id="toast"></div>
-    <div id="pdf-print-area" style="display: none"></div>
+  <div class="toast" id="toast"></div>
+  <div id="pdf-print-area" style="display: none"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-    <script>
-      function switchTab(name, btn) {
-        document.querySelectorAll(".form-section").forEach(s => s.classList.remove("active"));
-        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-        document.getElementById("tab-" + name).classList.add("active");
-        btn.classList.add("active");
-      }
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  <script>
+    function switchTab(name, btn) {
+      document.querySelectorAll(".form-section").forEach(s => s.classList.remove("active"));
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.getElementById("tab-" + name).classList.add("active");
+      btn.classList.add("active");
+    }
 
-      const trackFields = [
-        "inputname",
-        "inputEmail",
-        "inputPhone",
-        "inputLocation",
-        "inputSummary",
-        "inputEducation",
-        "inputexperience",
-        "inputproject",
-        "inputskill",
-      ];
+    const trackFields = [
+      "inputname",
+      "inputEmail",
+      "inputPhone",
+      "inputLocation",
+      "inputSummary",
+      "inputEducation",
+      "inputexperience",
+      "inputproject",
+      "inputskill",
+    ];
 
-      function updateCompletion() {
-        const filled = trackFields.filter(id =>
-          document.getElementById(id)?.value.trim(),
-        ).length;
-        const pct = Math.round((filled / trackFields.length) * 100);
-        document.getElementById("completionText").textContent = pct + "% filled";
-        document.getElementById("completionRing").style.background =
-          `conic-gradient(var(--primary) ${pct}%, #e0e7ff ${pct}%)`;
-      }
+    function updateCompletion() {
+      const filled = trackFields.filter(id =>
+        document.getElementById(id)?.value.trim(),
+      ).length;
+      const pct = Math.round((filled / trackFields.length) * 100);
+      document.getElementById("completionText").textContent = pct + "% filled";
+      document.getElementById("completionRing").style.background =
+        `conic-gradient(var(--primary) ${pct}%, #e0e7ff ${pct}%)`;
+    }
 
-      function charCount(el, id, max) {
-        const len = el.value.length;
-        const out = document.getElementById(id);
-        out.textContent = len + " / " + max;
-        out.className = "char-count" +
-          (len > max * 0.9 ? " warning" : "") +
-          (len >= max ? " over" : "");
-      }
+    function charCount(el, id, max) {
+      const len = el.value.length;
+      const out = document.getElementById(id);
+      out.textContent = len + " / " + max;
+      out.className = "char-count" +
+        (len > max * 0.9 ? " warning" : "") +
+        (len >= max ? " over" : "");
+    }
 
-      function setTemplate(id, idx) {
-        document.getElementById("templateSelector").value = id;
-        document.querySelectorAll(".template-dot").forEach((d, i) =>
-          d.classList.toggle("active", i === idx)
-        );
-        showSelectedTemplate();
-      }
+    function setTemplate(id, idx) {
+      document.getElementById("templateSelector").value = id;
+      document.querySelectorAll(".template-dot").forEach((d, i) =>
+        d.classList.toggle("active", i === idx)
+      );
+      showSelectedTemplate();
+    }
 
-      const selector = document.getElementById("templateSelector");
-      selector.addEventListener("change", function() {
-        const idx = [
-          "template1",
-          "template2",
-          "template3",
-          "template4",
-          "template5",
-        ].indexOf(this.value);
-        document.querySelectorAll(".template-dot").forEach((d, i) =>
-          d.classList.toggle("active", i === idx)
-        );
-        showSelectedTemplate();
+    const selector = document.getElementById("templateSelector");
+    selector.addEventListener("change", function () {
+      const idx = [
+        "template1",
+        "template2",
+        "template3",
+        "template4",
+        "template5",
+      ].indexOf(this.value);
+      document.querySelectorAll(".template-dot").forEach((d, i) =>
+        d.classList.toggle("active", i === idx)
+      );
+      showSelectedTemplate();
+    });
+
+    function showSelectedTemplate() {
+      const selected = selector.value;
+      document.querySelectorAll(".template").forEach(t => {
+        t.classList.add("hidden");
+        t.classList.remove("animating");
       });
+      const el = document.getElementById(selected);
+      el.classList.remove("hidden");
+      void el.offsetWidth;
+      el.classList.add("animating");
+    }
 
-      function showSelectedTemplate() {
-        const selected = selector.value;
-        document.querySelectorAll(".template").forEach(t => {
-          t.classList.add("hidden");
-          t.classList.remove("animating");
-        });
-        const el = document.getElementById(selected);
-        el.classList.remove("hidden");
-        void el.offsetWidth;
-        el.classList.add("animating");
-      }
+    function parseEntries(raw) {
+      if (!raw.trim()) return [];
+      const blocks = raw.split(/\n{2,}/);
+      return blocks
+        .map(block => {
+          const lines = block
+            .split("\n")
+            .map(l => l.trim())
+            .filter(Boolean);
+          if (!lines.length) return null;
+          const firstLine = lines[0];
+          const parts = firstLine.split("|").map(s => s.trim());
+          const bullets = lines
+            .slice(1)
+            .filter(l => l.startsWith("•") || l.startsWith("-") || l.startsWith("*"));
+          const nonBullets = lines
+            .slice(1)
+            .filter(l => !l.startsWith("•") && !l.startsWith("-") && !l.startsWith("*"));
+          return {
+            title: parts[0] || "",
+            meta: parts.slice(1).join(" · "),
+            bullets,
+            nonBullets,
+          };
+        })
+        .filter(Boolean);
+    }
 
-      function parseEntries(raw) {
-        if (!raw.trim()) return [];
-        const blocks = raw.split(/\n{2,}/);
-        return blocks
-          .map(block => {
-            const lines = block
-              .split("\n")
-              .map(l => l.trim())
-              .filter(Boolean);
-            if (!lines.length) return null;
-            const firstLine = lines[0];
-            const parts = firstLine.split("|").map(s => s.trim());
-            const bullets = lines
-              .slice(1)
-              .filter(l => l.startsWith("•") || l.startsWith("-") || l.startsWith("*"));
-            const nonBullets = lines
-              .slice(1)
-              .filter(l => !l.startsWith("•") && !l.startsWith("-") && !l.startsWith("*"));
-            return {
-              title: parts[0] || "",
-              meta: parts.slice(1).join(" · "),
-              bullets,
-              nonBullets,
-            };
-          })
-          .filter(Boolean);
-      }
+    function parseProjects(raw) {
+      if (!raw.trim()) return [];
+      const blocks = raw.split(/\n{2,}/);
+      return blocks
+        .map(block => {
+          const lines = block
+            .split("\n")
+            .map(l => l.trim())
+            .filter(Boolean);
+          if (!lines.length) return null;
+          const firstLine = lines[0];
+          const boldMatch = firstLine.match(/\*\*(.+?)\*\*/);
+          const name = boldMatch ? boldMatch[1] : firstLine.split("|")[0].trim();
+          const rest = boldMatch
+            ? firstLine.replace(/\*\*(.+?)\*\*/, "").replace(/^\s*\|\s*/, "").trim()
+            : firstLine.split("|").slice(1).join(" | ").trim();
+          const bullets = lines
+            .slice(1)
+            .filter(l => l.startsWith("•") || l.startsWith("-") || l.startsWith("*"));
+          return { name, tech: rest, bullets };
+        })
+        .filter(Boolean);
+    }
 
-      function parseProjects(raw) {
-        if (!raw.trim()) return [];
-        const blocks = raw.split(/\n{2,}/);
-        return blocks
-          .map(block => {
-            const lines = block
-              .split("\n")
-              .map(l => l.trim())
-              .filter(Boolean);
-            if (!lines.length) return null;
-            const firstLine = lines[0];
-            const boldMatch = firstLine.match(/\*\*(.+?)\*\*/);
-            const name = boldMatch ? boldMatch[1] : firstLine.split("|")[0].trim();
-            const rest = boldMatch
-              ? firstLine.replace(/\*\*(.+?)\*\*/, "").replace(/^\s*\|\s*/, "").trim()
-              : firstLine.split("|").slice(1).join(" | ").trim();
-            const bullets = lines
-              .slice(1)
-              .filter(l => l.startsWith("•") || l.startsWith("-") || l.startsWith("*"));
-            return { name, tech: rest, bullets };
-          })
-          .filter(Boolean);
-      }
-
-      function renderEntries(raw) {
-        const entries = parseEntries(raw);
-        if (!entries.length) return `<p>${raw}</p>`;
-        return entries
-          .map(e => `
+    function renderEntries(raw) {
+      const entries = parseEntries(raw);
+      if (!entries.length) return `<p>${raw}</p>`;
+      return entries
+        .map(e => `
             <div class="entry">
               <div class="entry-header">
                 <span class="entry-title">${e.title}</span>
@@ -1641,14 +1714,14 @@
               ${e.bullets.length ? `<ul class="entry-bullets">${e.bullets.map(b => `<li>${b.replace(/^[•\-\*]\s*/, "")}</li>`).join("")}</ul>` : ""}
             </div>
           `)
-          .join("");
-      }
+        .join("");
+    }
 
-      function renderProjects(raw) {
-        const projects = parseProjects(raw);
-        if (!projects.length) return `<p>${raw}</p>`;
-        return projects
-          .map(p => `
+    function renderProjects(raw) {
+      const projects = parseProjects(raw);
+      if (!projects.length) return `<p>${raw}</p>`;
+      return projects
+        .map(p => `
             <div class="entry">
               <div class="entry-header">
                 <span class="project-name">${p.name}</span>
@@ -1657,40 +1730,40 @@
               ${p.bullets.length ? `<ul class="entry-bullets">${p.bullets.map(b => `<li>${b.replace(/^[•\-\*]\s*/, "")}</li>`).join("")}</ul>` : ""}
             </div>
           `)
-          .join("");
-      }
+        .join("");
+    }
 
-      function renderAchievements(raw) {
-        if (!raw.trim()) return "";
-        const lines = raw.split("\n").map(l => l.trim()).filter(Boolean);
-        const bullets = lines.filter(l => l.startsWith("•") || l.startsWith("-") || l.startsWith("*"));
-        if (bullets.length) {
-          return `<ul class="entry-bullets">${bullets.map(b => `<li>${b.replace(/^[•\-\*]\s*/, "")}</li>`).join("")}</ul>`;
-        }
-        return `<p style="white-space:pre-line">${raw}</p>`;
+    function renderAchievements(raw) {
+      if (!raw.trim()) return "";
+      const lines = raw.split("\n").map(l => l.trim()).filter(Boolean);
+      const bullets = lines.filter(l => l.startsWith("•") || l.startsWith("-") || l.startsWith("*"));
+      if (bullets.length) {
+        return `<ul class="entry-bullets">${bullets.map(b => `<li>${b.replace(/^[•\-\*]\s*/, "")}</li>`).join("")}</ul>`;
       }
+      return `<p style="white-space:pre-line">${raw}</p>`;
+    }
 
-      function getFormData() {
-        return {
-          name: document.getElementById("inputname").value,
-          email: document.getElementById("inputEmail").value || "",
-          phone: document.getElementById("inputPhone").value || "",
-          location: document.getElementById("inputLocation").value || "",
-          linkedin: document.getElementById("inputLinkedin").value || "",
-          github: document.getElementById("inputGithub").value || "",
-          summary: document.getElementById("inputSummary").value || "",
-          education: document.getElementById("inputEducation").value || "",
-          achievements: document.getElementById("inputAchievements").value || "",
-          skills: document.getElementById("inputskill").value || "",
-          languages: document.getElementById("inputLanguages").value || "",
-          certs: document.getElementById("inputCerts").value || "",
-          projects: document.getElementById("inputproject").value || "",
-          experience: document.getElementById("inputexperience").value || "",
-        };
-      }
+    function getFormData() {
+      return {
+        name: document.getElementById("inputname").value,
+        email: document.getElementById("inputEmail").value || "",
+        phone: document.getElementById("inputPhone").value || "",
+        location: document.getElementById("inputLocation").value || "",
+        linkedin: document.getElementById("inputLinkedin").value || "",
+        github: document.getElementById("inputGithub").value || "",
+        summary: document.getElementById("inputSummary").value || "",
+        education: document.getElementById("inputEducation").value || "",
+        achievements: document.getElementById("inputAchievements").value || "",
+        skills: document.getElementById("inputskill").value || "",
+        languages: document.getElementById("inputLanguages").value || "",
+        certs: document.getElementById("inputCerts").value || "",
+        projects: document.getElementById("inputproject").value || "",
+        experience: document.getElementById("inputexperience").value || "",
+      };
+    }
 
-      function buildTemplate1HTML(d) {
-        return `
+    function buildTemplate1HTML(d) {
+      return `
           <div class="resume-header">
             <h1>${d.name || "Your Name"}</h1>
             <p>${[d.email, d.phone, d.location].filter(Boolean).join(" | ")}</p>
@@ -1705,10 +1778,10 @@
           ${d.achievements ? `<div class="section"><h2>Achievements</h2>${renderAchievements(d.achievements)}</div>` : ""}
           ${d.certs ? `<div class="section"><h2>Certifications</h2>${renderAchievements(d.certs)}</div>` : ""}
         `;
-      }
+    }
 
-      function buildTemplate2HTML(d) {
-        return `
+    function buildTemplate2HTML(d) {
+      return `
           <div class="sidebar">
             <div class="resume-header">
               <h1>${d.name || "Your Name"}</h1>
@@ -1724,10 +1797,10 @@
             ${d.projects ? `<div class="section"><h2>Projects</h2>${renderProjects(d.projects)}</div>` : ""}
           </div>
         `;
-      }
+    }
 
-      function buildTemplate3HTML(d) {
-        return `
+    function buildTemplate3HTML(d) {
+      return `
           <div class="resume-header">
             <h1>${d.name || "Your Name"}</h1>
             <p>${[d.email, d.phone, d.location].filter(Boolean).join(" · ")}</p>
@@ -1740,10 +1813,10 @@
           ${d.projects ? `<div class="section"><h2>Selected Projects</h2>${renderProjects(d.projects)}</div>` : ""}
           ${d.achievements ? `<div class="section"><h2>Achievements</h2>${renderAchievements(d.achievements)}</div>` : ""}
         `;
-      }
+    }
 
-      function buildTemplate4HTML(d) {
-        return `
+    function buildTemplate4HTML(d) {
+      return `
           <div class="header-section">
             <div class="resume-header">
               <h1>${d.name || "Your Name"}</h1>
@@ -1764,10 +1837,10 @@
             </div>
           </div>
         `;
-      }
+    }
 
-      function buildTemplate5HTML(d) {
-        return `
+    function buildTemplate5HTML(d) {
+      return `
           <div class="resume-header">
             <h1>${d.name || "Your Name"}</h1>
             <p>${[d.email, d.phone, d.location].filter(Boolean).join(" | ")}</p>
@@ -1788,169 +1861,253 @@
             </div>
           </div>
         `;
+    }
+
+    function buildHTML(d) {
+      const template = document.getElementById("templateSelector").value;
+
+      switch (template) {
+        case "template1": return buildTemplate1HTML(d);
+        case "template2": return buildTemplate2HTML(d);
+        case "template3": return buildTemplate3HTML(d);
+        case "template4": return buildTemplate4HTML(d);
+        case "template5": return buildTemplate5HTML(d);
+        default: return buildTemplate1HTML(d);
       }
+    }
 
-      function buildHTML(d) {
-        const template = document.getElementById("templateSelector").value;
+    async function generateResume(e) {
 
-        switch(template) {
-          case "template1": return buildTemplate1HTML(d);
-          case "template2": return buildTemplate2HTML(d);
-          case "template3": return buildTemplate3HTML(d);
-          case "template4": return buildTemplate4HTML(d);
-          case "template5": return buildTemplate5HTML(d);
-          default: return buildTemplate1HTML(d);
-        }
-      }
+      if (e) e.preventDefault();
 
-      function generateResume(e) {
-        if (e) e.preventDefault();
-        const btn = document.querySelector(".generate-btn");
-        btn.classList.add("loading");
-        setTimeout(() => {
-          const html = buildHTML(getFormData());
-          document.getElementById("template1").innerHTML = html;
-          document.getElementById("template2").innerHTML = html;
-          document.getElementById("template3").innerHTML = html;
-          document.getElementById("template4").innerHTML = html;
-          document.getElementById("template5").innerHTML = html;
-          showSelectedTemplate();
-          btn.classList.remove("loading");
-          showToast("✅ Resume generated!");
-        }, 600);
-      }
+      const btn = document.querySelector(".generate-btn");
+      btn.classList.add("loading");
 
-      function downloadPDF() {
-        const active = document.querySelector(".template:not(.hidden)");
-        if (!active || active.querySelector(".empty-state")) {
-          showToast("⚠️ Generate your resume first!");
-          return;
-        }
+      /* GET FORM DATA */
+      const data = getFormData();
 
-        const wrapper = document.createElement("div");
-        wrapper.className = active.className.replace("animating", "");
-        wrapper.style.cssText = "padding:40px;line-height:1.6;font-family:Inter,sans-serif;font-size:14px;";
-        wrapper.innerHTML = active.innerHTML;
+      /* CREATE OBJECT FOR DATABASE */
+      const resumeData = {
 
-        const styleEl = document.createElement("style");
-        styleEl.textContent = document.querySelector("style").textContent;
-        wrapper.prepend(styleEl);
+        fullname: data.name,
+        email: data.email,
+        phone: data.phone,
+        location: data.location,
 
-        const opt = {
-          margin: 0,
-          filename: (document.getElementById("inputname").value.trim() || "Resume") + ".pdf",
-          image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-        };
+        linkedinUrl: data.linkedin,
+        gitUrl: data.github,
 
-        showToast("⬇ Preparing PDF...");
-        html2pdf().set(opt).from(wrapper).save().then(() => showToast("✅ PDF downloaded!"));
-      }
+        profsummary: data.summary,
 
-      let GROQ_API_KEY = localStorage.getItem("resume_groq_key") || "";
-      let chatHistory = [];
-      if (GROQ_API_KEY) document.getElementById("apiBanner").style.display = "none";
-
-      function saveApiKey() {
-        const key = document.getElementById("apiKeyInput").value.trim();
-        if (!key.startsWith("gsk_")) {
-          alert("Please enter a valid Groq API key (starts with gsk_)");
-          return;
-        }
-        GROQ_API_KEY = key;
-        localStorage.setItem("resume_groq_key", key);
-        document.getElementById("apiBanner").style.display = "none";
-        addMessage("ai", "✅ Key saved! I'm powered by <strong>Llama 3</strong> and ready to help. Ask me anything!");
-      }
-
-      function getResumeContext() {
-        const d = getFormData();
-        return `Resume data:\n- Name: ${d.name || "Empty"}\n- Email: ${d.email || "Empty"}\n- Phone: ${d.phone || "Empty"}\n- Location: ${d.location || "Empty"}\n- Summary: ${d.summary || "Empty"}\n- Education: ${d.education || "Empty"}\n- Experience: ${d.experience || "Empty"}\n- Skills: ${d.skills || "Empty"}\n- Projects: ${d.projects || "Empty"}\n- Achievements: ${d.achievements || "Empty"}`;
-      }
-
-      function addMessage(role, html) {
-        const msgs = document.getElementById("chatMessages");
-        const div = document.createElement("div");
-        div.className = `message ${role}`;
-        div.innerHTML = `<div class="msg-avatar">${role === "user" ? "You" : "🤖"}</div><div class="msg-bubble">${html}</div>`;
-        msgs.appendChild(div);
-        msgs.scrollTop = msgs.scrollHeight;
-      }
-
-      function addTypingIndicator() {
-        const msgs = document.getElementById("chatMessages");
-        const div = document.createElement("div");
-        div.className = "message ai";
-        div.id = "typingMsg";
-        div.innerHTML = `<div class="msg-avatar">🤖</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
-        msgs.appendChild(div);
-        msgs.scrollTop = msgs.scrollHeight;
-      }
-
-      function removeTypingIndicator() {
-        document.getElementById("typingMsg")?.remove();
-      }
-
-      async function sendMessage(overrideText) {
-        if (!GROQ_API_KEY) {
-          addMessage("ai", "⚠️ Please enter your <strong>Groq API key</strong> above.");
-          return;
-        }
-        const input = document.getElementById("chatInput");
-        const text = overrideText || input.value.trim();
-        if (!text) return;
-        input.value = "";
-        input.style.height = "auto";
-        document.getElementById("sendBtn").disabled = true;
-        addMessage("user", text);
-        chatHistory.push({ role: "user", content: text });
-        addTypingIndicator();
-        const system = `You are a professional resume writing assistant. Help users improve their resumes by fixing grammar, improving phrasing, suggesting skills, and giving actionable feedback. Be concise and friendly. Always show improved versions when correcting text.\n\n${getResumeContext()}`;
-        try {
-          const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${GROQ_API_KEY}`,
-            },
-            body: JSON.stringify({
-              model: "llama-3.3-70b-versatile",
-              max_tokens: 1000,
-              temperature: 0.7,
-              messages: [{ role: "system", content: system }, ...chatHistory],
-            }),
-          });
-          const data = await res.json();
-          removeTypingIndicator();
-          if (data.error) {
-            addMessage("ai", `❌ Groq Error: ${data.error.message}`);
-            chatHistory.pop();
-          } else {
-            const reply = data.choices[0].message.content;
-            chatHistory.push({ role: "assistant", content: reply });
-            addMessage("ai", reply
-              .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-              .replace(/\*(.*?)\*/g, "<em>$1</em>")
-              .replace(/`(.*?)`/g, "<code>$1</code>")
-              .replace(/\n/g, "<br>"));
+        education: [
+          {
+            degree: data.education,
+            college: "",
+            year: ""
           }
-        } catch (err) {
-          removeTypingIndicator();
-          addMessage("ai", "❌ Connection error. Check your internet and API key.");
-          chatHistory.pop();
-        }
-        document.getElementById("sendBtn").disabled = false;
+        ],
+
+        achievements: data.achievements,
+
+        skills: data.skills.split(",").map(s => s.trim()),
+
+        projects: [
+          {
+            title: "Project",
+            description: data.projects,
+            tech: ""
+          }
+        ],
+
+        experience: [
+          {
+            company: "",
+            role: data.experience,
+            duration: ""
+          }
+        ],
+
+        languages: data.languages,
+        certifications: data.certs
+      };
+
+      /* SEND DATA TO BACKEND (MongoDB) */
+
+      try {
+
+        const response = await fetch("http://localhost:3000/api/resume", {
+
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify(resumeData)
+
+        });
+
+        const result = await response.json();
+
+        console.log("Saved to MongoDB:", result);
+
+      } catch (error) {
+
+        console.error("Database error:", error);
+
       }
 
-      function quickAction(text) { sendMessage(text); }
-      function handleChatKey(e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
-      function autoResize(el) { el.style.height = "auto"; el.style.height = Math.min(el.scrollHeight, 110) + "px"; }
-      function showToast(msg) { const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2500); }
+      /* GENERATE PREVIEW */
 
-      document.getElementById('resumeForm').addEventListener('submit', generateResume);
-      showSelectedTemplate();
-      updateCompletion();
-    </script>
-  </body>
+      setTimeout(() => {
+
+        const html = buildHTML(data);
+
+        document.querySelectorAll(".template").forEach(t => {
+          t.innerHTML = html;
+        });
+
+        showSelectedTemplate();
+
+        btn.classList.remove("loading");
+
+        showToast("✅ Resume generated and saved!");
+
+      }, 600);
+    }
+
+    function downloadPDF() {
+      const active = document.querySelector(".template:not(.hidden)");
+      if (!active || active.querySelector(".empty-state")) {
+        showToast("⚠️ Generate your resume first!");
+        return;
+      }
+
+      const wrapper = document.createElement("div");
+      wrapper.className = active.className.replace("animating", "");
+      wrapper.style.cssText = "padding:40px;line-height:1.6;font-family:Inter,sans-serif;font-size:14px;";
+      wrapper.innerHTML = active.innerHTML;
+
+      const styleEl = document.createElement("style");
+      styleEl.textContent = document.querySelector("style").textContent;
+      wrapper.prepend(styleEl);
+
+      const opt = {
+        margin: 0,
+        filename: (document.getElementById("inputname").value.trim() || "Resume") + ".pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      };
+
+      showToast("⬇ Preparing PDF...");
+      html2pdf().set(opt).from(wrapper).save().then(() => showToast("✅ PDF downloaded!"));
+    }
+
+    let GROQ_API_KEY = localStorage.getItem("resume_groq_key") || "";
+    let chatHistory = [];
+    if (GROQ_API_KEY) document.getElementById("apiBanner").style.display = "none";
+
+    function saveApiKey() {
+      const key = document.getElementById("apiKeyInput").value.trim();
+      if (!key.startsWith("gsk_")) {
+        alert("Please enter a valid Groq API key (starts with gsk_)");
+        return;
+      }
+      GROQ_API_KEY = key;
+      localStorage.setItem("resume_groq_key", key);
+      document.getElementById("apiBanner").style.display = "none";
+      addMessage("ai", "✅ Key saved! I'm powered by <strong>Llama 3</strong> and ready to help. Ask me anything!");
+    }
+
+    function getResumeContext() {
+      const d = getFormData();
+      return `Resume data:\n- Name: ${d.name || "Empty"}\n- Email: ${d.email || "Empty"}\n- Phone: ${d.phone || "Empty"}\n- Location: ${d.location || "Empty"}\n- Summary: ${d.summary || "Empty"}\n- Education: ${d.education || "Empty"}\n- Experience: ${d.experience || "Empty"}\n- Skills: ${d.skills || "Empty"}\n- Projects: ${d.projects || "Empty"}\n- Achievements: ${d.achievements || "Empty"}`;
+    }
+
+    function addMessage(role, html) {
+      const msgs = document.getElementById("chatMessages");
+      const div = document.createElement("div");
+      div.className = `message ${role}`;
+      div.innerHTML = `<div class="msg-avatar">${role === "user" ? "You" : "🤖"}</div><div class="msg-bubble">${html}</div>`;
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function addTypingIndicator() {
+      const msgs = document.getElementById("chatMessages");
+      const div = document.createElement("div");
+      div.className = "message ai";
+      div.id = "typingMsg";
+      div.innerHTML = `<div class="msg-avatar">🤖</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      document.getElementById("typingMsg")?.remove();
+    }
+
+    async function sendMessage(overrideText) {
+      if (!GROQ_API_KEY) {
+        addMessage("ai", "⚠️ Please enter your <strong>Groq API key</strong> above.");
+        return;
+      }
+      const input = document.getElementById("chatInput");
+      const text = overrideText || input.value.trim();
+      if (!text) return;
+      input.value = "";
+      input.style.height = "auto";
+      document.getElementById("sendBtn").disabled = true;
+      addMessage("user", text);
+      chatHistory.push({ role: "user", content: text });
+      addTypingIndicator();
+      const system = `You are a professional resume writing assistant. Help users improve their resumes by fixing grammar, improving phrasing, suggesting skills, and giving actionable feedback. Be concise and friendly. Always show improved versions when correcting text.\n\n${getResumeContext()}`;
+      try {
+        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${GROQ_API_KEY}`,
+          },
+          body: JSON.stringify({
+            model: "llama-3.3-70b-versatile",
+            max_tokens: 1000,
+            temperature: 0.7,
+            messages: [{ role: "system", content: system }, ...chatHistory],
+          }),
+        });
+        const data = await res.json();
+        removeTypingIndicator();
+        if (data.error) {
+          addMessage("ai", `❌ Groq Error: ${data.error.message}`);
+          chatHistory.pop();
+        } else {
+          const reply = data.choices[0].message.content;
+          chatHistory.push({ role: "assistant", content: reply });
+          addMessage("ai", reply
+            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+            .replace(/\*(.*?)\*/g, "<em>$1</em>")
+            .replace(/`(.*?)`/g, "<code>$1</code>")
+            .replace(/\n/g, "<br>"));
+        }
+      } catch (err) {
+        removeTypingIndicator();
+        addMessage("ai", "❌ Connection error. Check your internet and API key.");
+        chatHistory.pop();
+      }
+      document.getElementById("sendBtn").disabled = false;
+    }
+
+    function quickAction(text) { sendMessage(text); }
+    function handleChatKey(e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
+    function autoResize(el) { el.style.height = "auto"; el.style.height = Math.min(el.scrollHeight, 110) + "px"; }
+    function showToast(msg) { const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2500); }
+
+    document.getElementById('resumeForm').addEventListener('submit', generateResume);
+    showSelectedTemplate();
+    updateCompletion();
+  </script>
+</body>
+
 </html>
