@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: cursive;
+    background: #0b1e3a; /* Deep navy */
+    color: #e6edf7;
+}
+
+.details-container {
+    max-width: 600px;
+    margin: 80px auto;
+    background: #13294b; /* Fresh navy card */
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    text-align: center;
+}
+
+.details-container img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: contain;
+    background: white;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.details-container h2 {
+    margin-bottom: 10px;
+    color: #f1f6ff;
+}
+
+.details-container p {
+    margin: 8px 0;
+    font-size: 15px;
+    color: #cbd5e1;
+}
+
+.apply-btn {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #1e40af, #1d4ed8); /* Navy blue gradient */
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+}
