@@ -3,1338 +3,1042 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resume Builder Pro | Professional Template</title>
+    <title>Resume Builder Pro</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --primary: #0f2b3d;
-        --primary-light: #1e4a6b;
-        --accent: #2c7da0;
-        --bg: #f5f7fa;
-        --text-dark: #1a2c3e;
-        --text-light: #5b6e8c;
-        --white: #ffffff;
-        --border: #e2e8f0;
+        --primary: #4f46e5;
+        --primary-hover: #4338ca;
+        --bg: #f3f4f6;
+        --sidebar-bg: #ffffff;
+        --text-main: #111827;
+        --text-muted: #6b7280;
+        --border: #e5e7eb;
       }
 
       * {
+        box-sizing: border-box;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
       }
 
       body {
-        font-family: "Inter", sans-serif;
-        background: var(--bg);
-        color: var(--text-dark);
-        overflow-x: hidden;
-      }
-
-      /* Top Bar */
-      .top-bar {
+        background-color: var(--bg);
+        color: var(--text-main);
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 12px 32px;
-        background: var(--white);
-        border-bottom: 1px solid var(--border);
-        position: sticky;
-        top: 0;
-        z-index: 200;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-      }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-      .brand-icon {
-        width: 38px;
-        height: 38px;
-        background: linear-gradient(
-          135deg,
-          var(--primary),
-          var(--primary-light)
-        );
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-        color: white;
-        box-shadow: 0 4px 10px rgba(15, 43, 61, 0.2);
-      }
-      .brand h2 {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--primary);
-        letter-spacing: -0.3px;
-      }
-      .top-bar-right {
-        display: flex;
-        gap: 16px;
-        align-items: center;
-      }
-      .completion-badge {
-        background: #eef2f6;
-        border-radius: 40px;
-        padding: 6px 14px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: var(--primary);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        border: 1px solid #dce3ec;
-      }
-      .completion-ring {
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        background: conic-gradient(var(--primary) 0%, #e2e8f0 0%);
-        transition: background 0.2s;
-      }
-      button,
-      .download-btn {
-        background: var(--primary);
-        border: none;
-        padding: 8px 20px;
-        border-radius: 40px;
-        font-weight: 600;
-        font-size: 0.8rem;
-        color: white;
-        cursor: pointer;
-        transition: all 0.2s;
-        font-family: "Inter", sans-serif;
-      }
-      button:hover,
-      .download-btn:hover {
-        background: var(--primary-light);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(15, 43, 61, 0.25);
-      }
-
-      /* Main Layout */
-      .main-container {
-        display: grid;
-        grid-template-columns: 360px 1fr 340px;
-        height: calc(100vh - 65px);
+        height: 100vh;
         overflow: hidden;
       }
 
-      /* Form Panel */
-      .form-panel {
-        background: var(--white);
+      /* Sidebar Form */
+      .sidebar {
+        width: 420px;
+        background: var(--sidebar-bg);
         border-right: 1px solid var(--border);
+        padding: 30px;
         overflow-y: auto;
+        box-shadow: 4px 0 15px rgba(0, 0, 0, 0.03);
         display: flex;
         flex-direction: column;
+        gap: 20px;
+        z-index: 10;
       }
-      .form-tabs {
-        display: flex;
-        border-bottom: 1px solid var(--border);
-        padding: 0 16px;
-        gap: 4px;
-        background: #fafcff;
-        flex-shrink: 0;
-      }
-      .tab-btn {
-        padding: 12px 16px;
-        background: none;
-        border: none;
-        border-bottom: 2px solid transparent;
-        color: var(--text-light);
-        font-size: 0.75rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-      .tab-btn:hover {
-        color: var(--primary);
-        background: none;
-      }
-      .tab-btn.active {
-        color: var(--primary);
-        border-bottom-color: var(--primary);
-      }
-      .form-section {
-        padding: 20px;
-        display: none;
-        flex-direction: column;
-        gap: 16px;
-      }
-      .form-section.active {
-        display: flex;
-      }
-      .section-title {
-        font-size: 0.65rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+
+      .header h1 {
+        font-size: 24px;
         font-weight: 700;
-        color: var(--text-light);
+        color: var(--primary);
+        margin-bottom: 5px;
       }
-      .field-group {
+
+      .header p {
+        font-size: 14px;
+        color: var(--text-muted);
+      }
+
+      .form-group {
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 8px;
       }
+
       label {
+        font-size: 13px;
         font-weight: 600;
-        font-size: 0.75rem;
-        color: var(--text-dark);
+        color: var(--text-main);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
+
       input,
       textarea {
         width: 100%;
-        padding: 10px 12px;
-        border-radius: 10px;
+        padding: 12px 14px;
         border: 1px solid var(--border);
-        font-size: 0.85rem;
-        font-family: "Inter", sans-serif;
-        background: #fefefe;
-        transition: 0.2s;
+        border-radius: 8px;
+        font-size: 14px;
+        background: #f9fafb;
+        transition: all 0.2s ease;
       }
+
       input:focus,
       textarea:focus {
         outline: none;
         border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(15, 43, 61, 0.08);
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
       }
+
       textarea {
-        min-height: 80px;
         resize: vertical;
+        min-height: 100px;
         line-height: 1.5;
       }
-      .input-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-      .char-count {
-        font-size: 0.65rem;
-        color: var(--text-light);
-        text-align: right;
-      }
-      .generate-btn {
-        margin: 8px 20px 20px;
-        background: var(--primary);
-        padding: 12px;
-        font-weight: 700;
-        border-radius: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.85rem;
-      }
-      .btn-spinner {
-        width: 16px;
-        height: 16px;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-top-color: white;
-        border-radius: 50%;
-        animation: spin 0.6s linear infinite;
-        display: none;
-      }
-      .generate-btn.loading .btn-spinner {
-        display: inline-block;
-      }
-      .generate-btn.loading .btn-text {
-        display: none;
-      }
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
 
-      /* Preview Panel */
-      .preview-panel {
-        background: var(--bg);
-        overflow-y: auto;
-        padding: 32px 28px;
-        display: flex;
-        justify-content: center;
-      }
-      .preview-toolbar {
-        position: absolute;
-        top: 80px;
-        right: 380px;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 6px 14px;
-        border-radius: 40px;
-        font-size: 0.7rem;
-        color: var(--text-light);
-        backdrop-filter: blur(4px);
-        border: 1px solid var(--border);
-      }
-      .resume-card {
-        max-width: 850px;
-        width: 100%;
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
-        overflow: hidden;
-        transition: all 0.2s;
-      }
-
-      /* ========== SINGLE PROFESSIONAL TEMPLATE ========== */
-      .professional-resume {
-        background: beige;
-        height: 100vh;
-
-        font-family: "Inter", sans-serif;
-      }
-      /* Centered big name */
-      .resume-name-centered {
-        text-align: center;
-        font-size: 42px;
-        font-weight: 800;
-        letter-spacing: -1px;
-        color: #0a2a3b;
-        margin: 0;
-        padding: 40px 48px 12px 48px;
-        line-height: 1.2;
-      }
-      .resume-contact-bar {
-        text-align: center;
-        border-bottom: 2px solid #e9edf2;
-        padding: 0 48px 24px 48px;
-        margin-bottom: 8px;
-      }
-      .contact-row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 24px;
-        font-size: 0.8rem;
-        color: #5a6e8a;
-        margin-top: 8px;
-      }
-      .contact-row span {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-      }
-      .contact-row a {
-        color: var(--primary);
-        text-decoration: none;
-        font-weight: 500;
-      }
-      .contact-row a:hover {
-        text-decoration: underline;
-      }
-
-      /* Content blocks */
-      .resume-content {
-        padding: 20px 48px 48px 48px;
-      }
-      .resume-block {
-        margin-bottom: 28px;
-      }
-      .block-heading {
-        font-size: 0.9rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        color: var(--primary);
-        border-left: 3px solid var(--primary);
-        padding-left: 14px;
-        margin-bottom: 14px;
-      }
-      .summary-text {
-        font-size: 0.85rem;
-        line-height: 1.6;
-        color: #2d3e50;
-        margin-top: 4px;
-      }
-      .entry-item {
-        margin-bottom: 18px;
-      }
-      .entry-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 5px;
-      }
-      .entry-title {
-        font-weight: 700;
-        font-size: 0.9rem;
-        color: #1e2f3f;
-      }
-      .entry-date {
-        font-size: 0.7rem;
-        font-weight: 500;
-        color: #7c8ea0;
-      }
-      .entry-sub {
-        font-size: 0.75rem;
-        font-weight: 500;
-        color: #6b7c94;
-        margin-bottom: 6px;
-      }
-      .bullet-list {
-        padding-left: 20px;
-        margin: 8px 0 0;
-        list-style: disc;
-      }
-      .bullet-list li {
-        font-size: 0.82rem;
-        margin-bottom: 5px;
-        color: #2d3e50;
-        line-height: 1.5;
-      }
-      .skills-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 6px;
-      }
-      .skill-tag {
-        background: #eef3fc;
-        padding: 5px 14px;
-        border-radius: 30px;
-        font-size: 0.75rem;
-        font-weight: 500;
-        color: var(--primary);
-      }
-      .plain-text {
-        font-size: 0.85rem;
-        line-height: 1.6;
-        color: #2d3e50;
-      }
-      .inline-list {
-        padding-left: 20px;
-        margin: 6px 0 0;
-        list-style: disc;
-      }
-      .inline-list li {
-        font-size: 0.82rem;
-        margin-bottom: 4px;
-      }
-
-      .empty-state {
-        text-align: center;
-        padding: 80px 40px;
-        color: var(--text-light);
-      }
-      .empty-icon {
-        font-size: 3rem;
-        margin-bottom: 16px;
-      }
-      .empty-state h3 {
-        font-size: 1.1rem;
-        margin-bottom: 8px;
-        color: var(--text-dark);
-      }
-
-      /* Chat Panel */
-      .chat-panel {
-        background: var(--white);
-        border-left: 1px solid var(--border);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-      }
-      .chat-header {
-        background: var(--primary);
-        padding: 14px 18px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-      .ai-avatar {
-        background: rgba(255, 255, 255, 0.15);
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-      }
-      .chat-header-info h3 {
-        color: white;
-        font-size: 0.85rem;
-        font-weight: 700;
-      }
-      .online-dot {
-        width: 6px;
-        height: 6px;
-        background: #86efac;
-        border-radius: 50%;
-        display: inline-block;
-        margin-right: 4px;
-      }
-      .api-banner {
-        background: #f0f7ff;
-        border-bottom: 1px solid #d4e2f0;
-        padding: 12px 16px;
-        font-size: 0.7rem;
-      }
-      .api-key-input {
-        width: 100%;
-        padding: 8px 12px;
-        border-radius: 30px;
-        border: 1px solid #d4e2f0;
-        margin-top: 6px;
-        font-size: 0.7rem;
-      }
-      .api-save-btn {
-        background: var(--primary);
-        font-size: 0.65rem;
-        padding: 5px 12px;
-        border-radius: 30px;
-        margin-top: 6px;
-      }
-      .quick-actions {
-        padding: 10px 12px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        border-bottom: 1px solid var(--border);
-        background: #fafcff;
-      }
-      .quick-btn {
-        background: #f0f2f5;
-        border: 1px solid #e2e8f0;
-        color: var(--text-dark);
-        font-size: 0.65rem;
-        padding: 5px 12px;
-        border-radius: 30px;
-        cursor: pointer;
-      }
-      .quick-btn:hover {
-        border-color: var(--primary);
-        color: var(--primary);
-        background: #eef3fc;
-      }
-      .chat-messages {
-        flex: 1;
-        overflow-y: auto;
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-      .message {
-        display: flex;
-        gap: 8px;
-        animation: fadeIn 0.2s;
-      }
-      .message.user {
-        flex-direction: row-reverse;
-      }
-      .msg-avatar {
-        width: 28px;
-        height: 28px;
-        border-radius: 8px;
-        background: #eef2f6;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.65rem;
-        font-weight: bold;
-      }
-      .message.user .msg-avatar {
-        background: var(--primary);
-        color: white;
-      }
-      .msg-bubble {
-        max-width: 80%;
-        padding: 8px 12px;
-        border-radius: 16px;
-        font-size: 0.75rem;
-        line-height: 1.45;
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
-      }
-      .message.user .msg-bubble {
+      .action-btn {
         background: var(--primary);
         color: white;
         border: none;
-      }
-      .typing-indicator {
+        padding: 14px;
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-top: 10px;
         display: flex;
-        gap: 4px;
-        padding: 8px 12px;
-        background: #f1f5f9;
-        border-radius: 20px;
-        width: fit-content;
-      }
-      .typing-dot {
-        width: 5px;
-        height: 5px;
-        background: #8ba0bc;
-        border-radius: 50%;
-        animation: bounce 1.2s infinite;
-      }
-      .chat-input-area {
-        padding: 12px;
-        border-top: 1px solid var(--border);
-        display: flex;
+        justify-content: center;
+        align-items: center;
         gap: 8px;
-        background: white;
       }
-      .chat-input {
+
+      .action-btn:hover {
+        background: var(--primary-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+      }
+
+      /* Main Preview Area */
+      .main {
         flex: 1;
-        border: 1px solid var(--border);
-        border-radius: 24px;
-        padding: 10px 14px;
-        resize: none;
-        font-family: inherit;
-        font-size: 0.75rem;
+        padding: 40px;
+        overflow-y: auto;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background: radial-gradient(circle at center, #f3f4f6 0%, #e5e7eb 100%);
       }
-      .send-btn {
-        background: var(--primary);
-        width: 36px;
-        height: 36px;
-        border-radius: 40px;
+
+      /* Professional Resume Template */
+      .resume-preview {
+        width: 210mm;
+        min-height: 297mm;
+        background: #ffffff;
+        box-shadow:
+          0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        padding: 50px 60px;
+        position: relative;
+      }
+
+      .res-header {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid var(--text-main);
+        padding-bottom: 25px;
+      }
+
+      .res-name {
+        font-size: 36px;
+        font-weight: 700;
+        color: var(--text-main);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 12px;
+      }
+
+      .res-contact {
+        font-size: 13px;
+        color: var(--text-muted);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .res-contact span {
         display: flex;
         align-items: center;
-        justify-content: center;
+        gap: 5px;
       }
-      .toast {
-        position: fixed;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #1e2a3e;
+
+      .res-section {
+        margin-bottom: 25px;
+      }
+
+      .res-section-title {
+        font-size: 16px;
+        color: var(--text-main);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+
+      .res-content {
+        font-size: 14px;
+        line-height: 1.7;
+        color: #374151;
+        white-space: pre-wrap;
+      }
+
+      /* Print Styles */
+      @media print {
+        @page {
+          size: A4;
+          margin: 0;
+        }
+        body {
+          background: white;
+          display: block;
+        }
+        .sidebar {
+          display: none !important;
+        }
+        .main {
+          padding: 0;
+          background: none;
+          display: block;
+        }
+        .resume-preview {
+          box-shadow: none;
+          width: 100%;
+          min-height: auto;
+          padding: 20mm;
+        }
+      }
+
+      /* Grok AI Sidebar */
+      .grok-sidebar {
+        width: 350px;
+        background: #000000;
+        color: #ffffff;
+        border-left: 1px solid #333333;
+        display: flex;
+        flex-direction: column;
+        z-index: 10;
+      }
+
+      .grok-header {
+        padding: 20px;
+        border-bottom: 1px solid #333333;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .grok-header h2 {
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .grok-api-key-container {
+        padding: 15px 20px;
+        border-bottom: 1px solid #333333;
+        background: #0a0a0a;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .grok-input-group {
+        display: flex;
+        gap: 10px;
+      }
+
+      .grok-api-key-input,
+      .grok-model-input {
+        flex: 1;
+        background: #1a1a1a;
+        border: 1px solid #333333;
+        color: #ccc;
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .grok-model-input {
+        flex: none;
+        width: 140px;
+      }
+
+      .grok-api-key-input:focus,
+      .grok-model-input:focus {
+        outline: none;
+        border-color: var(--primary);
         color: white;
-        padding: 8px 24px;
-        border-radius: 40px;
-        font-size: 0.75rem;
-        opacity: 0;
-        transition: 0.2s;
-        pointer-events: none;
-        z-index: 999;
       }
-      .toast.show {
-        opacity: 1;
+
+      .grok-loading {
+        font-style: italic;
+        opacity: 0.7;
+        animation: pulse 1.5s infinite;
       }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(4px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      @keyframes bounce {
-        0%,
-        100% {
-          transform: translateY(0);
+
+      @keyframes pulse {
+        0% {
+          opacity: 0.5;
         }
         50% {
-          transform: translateY(-3px);
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.5;
         }
       }
+
+      .grok-chat {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      /* Standardize scrollbar for Grok Sidebar */
+      .grok-chat::-webkit-scrollbar {
+        width: 8px;
+      }
+      .grok-chat::-webkit-scrollbar-track {
+        background: #000000;
+      }
+      .grok-chat::-webkit-scrollbar-thumb {
+        background: #333333;
+        border-radius: 4px;
+      }
+
+      .grok-message {
+        font-size: 14px;
+        line-height: 1.5;
+        padding: 12px 16px;
+        border-radius: 12px;
+        max-width: 90%;
+        word-wrap: break-word;
+      }
+
+      .grok-ai {
+        background: #1a1a1a;
+        color: #e5e7eb;
+        align-self: flex-start;
+        border-bottom-left-radius: 4px;
+      }
+
+      .grok-user {
+        background: var(--primary);
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 4px;
+      }
+
+      .grok-input-area {
+        padding: 20px;
+        border-top: 1px solid #333333;
+        display: flex;
+        gap: 10px;
+      }
+
+      .grok-input {
+        flex: 1;
+        background: #1a1a1a;
+        border: 1px solid #333333;
+        color: white;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 14px;
+      }
+
+      .grok-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: none;
+        background: #1a1a1a;
+      }
+
+      .grok-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        width: 44px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.2s;
+      }
+
+      .grok-btn:hover {
+        background: var(--primary-hover);
+      }
+
       @media print {
-        body * {
-          display: none;
-        }
-        #pdf-print-area {
-          display: block;
+        .grok-sidebar {
+          display: none !important;
         }
       }
     </style>
   </head>
   <body>
-    <div class="top-bar">
-      <div class="brand">
-        <div class="brand-icon">📄</div>
-        <h2>Resume Builder Pro</h2>
+    <div class="sidebar">
+      <div class="header">
+        <h1>Resume Builder</h1>
+        <p>Fill out the details to generate your resume instantly.</p>
       </div>
-      <div class="top-bar-right">
-        <div class="completion-badge">
-          <div class="completion-ring" id="completionRing"></div>
-          <span id="completionText">0% filled</span>
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input
+          type="text"
+          id="inpName"
+          placeholder="e.g. Jane Doe"
+          oninput="updateResume()"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input
+          type="email"
+          id="inpEmail"
+          placeholder="e.g. jane@example.com"
+          oninput="updateResume()"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input
+          type="text"
+          id="inpPhone"
+          placeholder="e.g. (555) 123-4567"
+          oninput="updateResume()"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Location</label>
+        <input
+          type="text"
+          id="inpLocation"
+          placeholder="e.g. San Francisco, CA"
+          oninput="updateResume()"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>LinkedIn</label>
+        <input
+          type="text"
+          id="inpLinkedin"
+          placeholder="e.g. linkedin.com/in/johndoe"
+          oninput="updateResume()"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>GitHub</label>
+        <input
+          type="text"
+          id="inpGithub"
+          placeholder="e.g. github.com/johndoe"
+          oninput="updateResume()"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Professional Summary</label>
+        <textarea
+          id="inpSummary"
+          placeholder="A brief, impactful summary of your professional background..."
+          oninput="updateResume()"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Work Experience</label>
+        <textarea
+          id="inpExperience"
+          placeholder="Senior Developer | Tech Solutions Inc. | 2020 - Present&#10;• Led a team of 5 engineers to build scalable web applications&#10;• Reduced latency by 40% using Redis caching"
+          oninput="updateResume()"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Projects</label>
+        <textarea
+          id="inpProjects"
+          placeholder="E-commerce Platform&#10;• Built a full-stack e-commerce app using React and Node.js&#10;• Integrated Stripe for payment processing"
+          oninput="updateResume()"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Education</label>
+        <textarea
+          id="inpEducation"
+          placeholder="Bachelor of Science in Computer Science&#10;University of Technology | 2016 - 2020"
+          oninput="updateResume()"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Key Skills</label>
+        <textarea
+          id="inpSkills"
+          placeholder="JavaScript, React, Node.js, Python, SQL, Agile Methodologies"
+          oninput="updateResume()"
+        ></textarea>
+      </div>
+
+      <button class="action-btn" onclick="window.print()">
+        <svg
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"
+          />
+        </svg>
+        Download Markdown
+      </button>
+      <!-- Fixed text but will still download PDF -->
+      <!-- Let's fix button text to Download as PDF in code, I notice a typo so let's keep it clean -->
+    </div>
+
+    <!-- We fix the button text using JS since it's an overwrite, actually let's just make sure it's correct. I will edit the text in the response if needed. I already sent the payload so let's see. Wait, I realize I typed Download Markdown. I will fix it. -->
+
+    <div class="main">
+      <div class="resume-preview">
+        <div class="res-header">
+          <div class="res-name" id="outName">JANE DOE</div>
+          <div class="res-contact">
+            <span id="outEmail">jane@example.com</span> •
+            <span id="outPhone">(555) 123-4567</span> •
+            <span id="outLocation">San Francisco, CA</span> •
+            <a
+              href="https://linkedin.com/in/janedoe"
+              id="outLinkedin"
+              target="_blank"
+              style="color: inherit; text-decoration: none"
+              >linkedin.com/in/janedoe</a
+            >
+            •
+            <a
+              href="https://github.com/janedoe"
+              id="outGithub"
+              target="_blank"
+              style="color: inherit; text-decoration: none"
+              >github.com/janedoe</a
+            >
+          </div>
         </div>
-        <button onclick="downloadPDF()">📄 Download PDF</button>
+
+        <div class="res-section">
+          <div class="res-section-title">Professional Summary</div>
+          <div class="res-content" id="outSummary">
+            A brief, impactful summary of your professional background. Focused
+            on driving results and growing business value through software.
+          </div>
+        </div>
+
+        <div class="res-section">
+          <div class="res-section-title">Skills</div>
+          <div class="res-content" id="outSkills">
+            JavaScript, React, Node.js, Python, SQL, Agile Methodologies
+          </div>
+        </div>
+
+        <div class="res-section">
+          <div class="res-section-title">Projects</div>
+          <div class="res-content" id="outProjects">
+            E-commerce Platform • Built a full-stack e-commerce app using React
+            and Node.js • Integrated Stripe for payment processing
+          </div>
+        </div>
+
+        <div class="res-section">
+          <div class="res-section-title">Education</div>
+          <div class="res-content" id="outEducation">
+            Bachelor of Science in Computer Science University of Technology |
+            2016 - 2020
+          </div>
+        </div>
+
+        <div class="res-section">
+          <div class="res-section-title">Experience</div>
+          <div class="res-content" id="outExperience">
+            Senior Developer | Tech Solutions Inc. | 2020 - Present • Led a team
+            of 5 engineers to build scalable web applications • Reduced latency
+            by 40% using Redis caching
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="main-container">
-      <!-- Form Panel -->
-      <div class="form-panel">
-        <div class="form-tabs">
-          <button class="tab-btn active" onclick="switchTab('personal', this)">
-            👤 Personal
-          </button>
-          <button class="tab-btn" onclick="switchTab('profile', this)">
-            📝 Profile
-          </button>
-          <button class="tab-btn" onclick="switchTab('experience', this)">
-            💼 Experience
-          </button>
-          <button class="tab-btn" onclick="switchTab('skills', this)">
-            ⚙️ Skills
-          </button>
+    <!-- Grok AI Sidebar -->
+    <div class="grok-sidebar">
+      <div class="grok-header" style="justify-content: space-between">
+        <div style="display: flex; align-items: center; gap: 12px">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
+            <path d="M12 12 2.1 7.1"></path>
+            <path d="M12 12l9.9 4.9"></path>
+          </svg>
+          <h2>Grok AI</h2>
         </div>
-        <form id="resumeForm">
-          <div id="tab-personal" class="form-section active">
-            <div class="field-group">
-              <label>Full Name *</label
-              ><input
-                id="fullname"
-                placeholder="Rohit Damodar Doiphode"
-                oninput="updateCompletion()"
-              />
-            </div>
-            <div class="input-row">
-              <div class="field-group">
-                <label>Email</label
-                ><input
-                  id="email"
-                  placeholder="rohit@example.com"
-                  oninput="updateCompletion()"
-                />
-              </div>
-              <div class="field-group">
-                <label>Phone</label
-                ><input
-                  id="phone"
-                  placeholder="+91 9876543210"
-                  oninput="updateCompletion()"
-                />
-              </div>
-            </div>
-            <div class="input-row">
-              <div class="field-group">
-                <label>Location</label
-                ><input
-                  id="location"
-                  placeholder="India"
-                  oninput="updateCompletion()"
-                />
-              </div>
-              <div class="field-group">
-                <label>LinkedIn</label
-                ><input id="linkedin" placeholder="linkedin.com/in/username" />
-              </div>
-            </div>
-            <div class="field-group">
-              <label>GitHub / Portfolio</label
-              ><input id="github" placeholder="github.com/username" />
-            </div>
-          </div>
-          <div id="tab-profile" class="form-section">
-            <div class="field-group">
-              <label>Professional Summary</label
-              ><textarea
-                id="summary"
-                rows="3"
-                placeholder="Results-driven professional with expertise in..."
-                oninput="updateCompletion()"
-              ></textarea>
-            </div>
-            <div class="field-group">
-              <label>Education (Degree, Institution, Year)</label
-              ><textarea
-                id="education"
-                rows="3"
-                placeholder="B.E. Computer Science, Pune University, 2024"
-                oninput="updateCompletion()"
-              ></textarea>
-            </div>
-            <div class="field-group">
-              <label>Achievements / Awards</label
-              ><textarea
-                id="achievements"
-                placeholder="• Dean's List 2023&#10;• Winner of Hackathon 2024"
-                oninput="updateCompletion()"
-              ></textarea>
-            </div>
-          </div>
-          <div id="tab-experience" class="form-section">
-            <div class="field-group">
-              <label>Work Experience (Role | Company | Duration)</label
-              ><textarea
-                id="workExp"
-                rows="4"
-                placeholder="Software Engineer Intern | Tech Corp | Summer 2024&#10;• Developed REST APIs&#10;• Optimized database queries"
-                oninput="updateCompletion()"
-              ></textarea>
-            </div>
-            <div class="field-group">
-              <label>Projects (Title | Technologies)</label
-              ><textarea
-                id="projects"
-                rows="4"
-                placeholder="E-commerce Platform | React, Node.js, MongoDB&#10;• Built full-stack application with 1000+ users"
-                oninput="updateCompletion()"
-              ></textarea>
-            </div>
-          </div>
-          <div id="tab-skills" class="form-section">
-            <div class="field-group">
-              <label>Technical Skills (comma separated)</label
-              ><textarea
-                id="skills"
-                placeholder="Python, JavaScript, React, Node.js, SQL, AWS"
-                oninput="updateCompletion()"
-              ></textarea>
-            </div>
-            <div class="field-group">
-              <label>Languages</label
-              ><textarea
-                id="languages"
-                placeholder="English (Fluent), Hindi (Native)"
-                oninput="updateCompletion()"
-              ></textarea>
-            </div>
-            <div class="field-group">
-              <label>Certifications</label
-              ><textarea
-                id="certs"
-                placeholder="AWS Certified Cloud Practitioner, Google IT Support"
-                oninput="updateCompletion()"
-              ></textarea>
-            </div>
-          </div>
-          <button type="submit" class="generate-btn">
-            <div class="btn-spinner"></div>
-            <span class="btn-text">✨ Generate Resume</span>
-          </button>
-        </form>
+        <button
+          onclick="document.getElementById('grokSettings').classList.toggle('hidden')"
+          style="
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+          "
+          onmouseover="this.style.color='white'"
+          onmouseout="this.style.color='#888'"
+        >
+          <svg
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="12" cy="12" r="3"></circle>
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+            ></path>
+          </svg>
+        </button>
       </div>
-
-      <!-- Preview Panel - Single Professional Template -->
-      <div class="preview-panel">
-        <div class="preview-toolbar">
-          🎓 College Approved · Professional Template
-        </div>
-        <div class="resume-card" id="resumePreviewContainer">
-          <div id="liveResume" class="professional-resume">
-            <div class="empty-state">
-              <div class="empty-icon">📄</div>
-              <h3>Your professional resume</h3>
-              <p>Fill in your details and click Generate Resume</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Chat Panel -->
-      <div class="chat-panel">
-        <div class="chat-header">
-          <div class="ai-avatar">🤖</div>
-          <div>
-            <h3>AI Resume Assistant</h3>
-            <p><span class="online-dot"></span> Llama 3 · Pro Tips</p>
-          </div>
-        </div>
-        <div class="api-banner" id="apiBanner">
-          <div><strong>🔑 Groq API Key (free)</strong> — console.groq.com</div>
+      <div id="grokSettings" class="grok-api-key-container hidden">
+        <div style="display: flex; flex-direction: column; gap: 5px">
+          <label
+            style="
+              font-size: 11px;
+              color: #888;
+              font-weight: 600;
+              text-transform: uppercase;
+            "
+            >Grok API Key</label
+          >
           <input
             type="password"
-            id="apiKeyInput"
-            class="api-key-input"
-            placeholder="gsk_..."
-          /><button class="api-save-btn" onclick="saveApiKey()">
-            Save Key
-          </button>
+            id="grokApiKey"
+            class="grok-api-key-input"
+            placeholder="xoxb-..."
+            style="width: 100%; border-radius: 6px"
+            onchange="saveGrokApiKey()"
+          />
         </div>
-        <div class="quick-actions">
-          <button
-            class="quick-btn"
-            onclick="quickAction('Fix spelling and grammar in my resume')"
+        <div style="display: flex; flex-direction: column; gap: 5px">
+          <label
+            style="
+              font-size: 11px;
+              color: #888;
+              font-weight: 600;
+              text-transform: uppercase;
+            "
+            >Model ID</label
           >
-            ✏️ Fix Grammar
-          </button>
-          <button
-            class="quick-btn"
-            onclick="quickAction('Improve my professional summary')"
-          >
-            ✨ Enhance Summary
-          </button>
-          <button
-            class="quick-btn"
-            onclick="quickAction('Suggest 3 skills for my resume')"
-          >
-            🎯 Suggest Skills
-          </button>
-          <button
-            class="quick-btn"
-            onclick="quickAction('Give me tips to make my resume stand out')"
-          >
-            💡 Tips
-          </button>
+          <input
+            type="text"
+            id="grokModel"
+            class="grok-model-input"
+            value="grok-2-latest"
+            style="width: 100%; border-radius: 6px"
+            onchange="saveGrokApiKey()"
+          />
         </div>
-        <div class="chat-messages" id="chatMessages">
-          <div class="message ai">
-            <div class="msg-avatar">🤖</div>
-            <div class="msg-bubble">
-              👋 Hi! Add your Groq API key, fill in your details, and I'll help
-              polish your professional resume!
-            </div>
-          </div>
-        </div>
-        <div class="chat-input-area">
-          <textarea
-            id="chatInput"
-            class="chat-input"
-            placeholder="Ask me to improve your resume..."
-            rows="1"
-            onkeydown="handleChatKey(event)"
-          ></textarea
-          ><button class="send-btn" onclick="sendMessage()">➤</button>
+        <button
+          onclick="saveGrokApiKey(); document.getElementById('grokSettings').classList.add('hidden');"
+          style="
+            background: var(--primary);
+            border: none;
+            color: white;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 5px;
+            transition: background 0.2s;
+          "
+          onmouseover="this.style.background='var(--primary-hover)'"
+          onmouseout="this.style.background='var(--primary)'"
+        >
+          Save Settings
+        </button>
+      </div>
+      <div class="grok-chat" id="grokChat">
+        <div class="grok-message grok-ai">
+          Hey there! I am your AI assistant. Enter your Grok API key above to edit your resume's style, text, fonts, and layout magically!
         </div>
       </div>
+      <div class="grok-input-area">
+        <input
+          type="text"
+          id="grokInput"
+          class="grok-input"
+          placeholder="Ask Grok..."
+          onkeypress="handleGrokKeyPress(event)"
+        />
+        <button class="grok-btn" onclick="sendGrokMessage()">
+          <svg
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            viewBox="0 0 24 24"
+          >
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
     </div>
-    <div class="toast" id="toast"></div>
-    <div id="pdf-print-area" style="display: none"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <script>
-      /* =================================================== */
-      /* Resume Builder UI Helpers - Completion + Tabs + Escape */
-      /* =================================================== */
-      // Fields to track in resume completion progress
-      const completionFields = [
-        "fullname",
-        "email",
-        "phone",
-        "summary",
-        "education",
-        "workExp",
-        "skills",
-      ];
+      // Fix the button text
+      document.querySelector(".action-btn").innerHTML =
+        `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Download as PDF`;
 
-      // Update top bar completion text and ring based on filled field count
-      function updateCompletion() {
-        let filled = completionFields.filter((id) =>
-          document.getElementById(id)?.value.trim(),
-        ).length;
-        let pct = Math.round((filled / completionFields.length) * 100);
-        document.getElementById("completionText").innerText = pct + "% filled";
-        document.getElementById("completionRing").style.background =
-          `conic-gradient(#0f2b3d ${pct}%, #e2e8f0 ${pct}%)`;
+      function updateResume() {
+        const name = document.getElementById("inpName").value;
+        const email = document.getElementById("inpEmail").value;
+        const phone = document.getElementById("inpPhone").value;
+        const location = document.getElementById("inpLocation").value;
+        const linkedin = document.getElementById("inpLinkedin").value;
+        const github = document.getElementById("inpGithub").value;
+        const summary = document.getElementById("inpSummary").value;
+        const experience = document.getElementById("inpExperience").value;
+        const projects = document.getElementById("inpProjects").value;
+        const education = document.getElementById("inpEducation").value;
+        const skills = document.getElementById("inpSkills").value;
+
+        document.getElementById("outName").innerText = name || "JANE DOE";
+        document.getElementById("outEmail").innerText =
+          email || "jane@example.com";
+        document.getElementById("outPhone").innerText =
+          phone || "(555) 123-4567";
+        document.getElementById("outLocation").innerText =
+          location || "San Francisco, CA";
+
+        const linkedinLink = document.getElementById("outLinkedin");
+        const linkedinVal = linkedin || "linkedin.com/in/janedoe";
+        linkedinLink.innerText = linkedinVal;
+        linkedinLink.href = linkedinVal.startsWith("http")
+          ? linkedinVal
+          : "https://" + linkedinVal;
+
+        const githubLink = document.getElementById("outGithub");
+        const githubVal = github || "github.com/janedoe";
+        githubLink.innerText = githubVal;
+        githubLink.href = githubVal.startsWith("http")
+          ? githubVal
+          : "https://" + githubVal;
+
+        document.getElementById("outSummary").innerText =
+          summary ||
+          "A brief, impactful summary of your professional background. Focused on driving results and growing business value through software.";
+        document.getElementById("outExperience").innerText =
+          experience ||
+          "Senior Developer | Tech Solutions Inc. | 2020 - Present\n• Led a team of 5 engineers to build scalable web applications\n• Reduced latency by 40% using Redis caching";
+        document.getElementById("outProjects").innerText =
+          projects ||
+          "E-commerce Platform\n• Built a full-stack e-commerce app using React and Node.js\n• Integrated Stripe for payment processing";
+        document.getElementById("outEducation").innerText =
+          education ||
+          "Bachelor of Science in Computer Science\nUniversity of Technology | 2016 - 2020";
+        document.getElementById("outSkills").innerText =
+          skills ||
+          "JavaScript, React, Node.js, Python, SQL, Agile Methodologies";
       }
 
-      // Switches form section tabs (Personal/Profile/Experience/Skills)
-      function switchTab(name, btn) {
-        document
-          .querySelectorAll(".form-section")
-          .forEach((s) => s.classList.remove("active"));
-        document
-          .querySelectorAll(".tab-btn")
-          .forEach((b) => b.classList.remove("active"));
-        document.getElementById(`tab-${name}`).classList.add("active");
-        btn.classList.add("active");
+      // Grok AI Logic
+      const GROK_API_URL = "https://api.x.ai/v1/chat/completions";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedKey = localStorage.getItem("grok_api_key");
+        if (savedKey) document.getElementById("grokApiKey").value = savedKey;
+
+        const savedModel = localStorage.getItem("grok_model");
+        if (savedModel) document.getElementById("grokModel").value = savedModel;
+      });
+
+      function saveGrokApiKey() {
+        const key = document.getElementById("grokApiKey").value.trim();
+        const model =
+          document.getElementById("grokModel").value.trim() || "grok-2-latest";
+
+        if (key) {
+          localStorage.setItem("grok_api_key", key);
+        } else {
+          localStorage.removeItem("grok_api_key");
+        }
+
+        localStorage.setItem("grok_model", model);
+        document.getElementById("grokModel").value = model;
       }
 
-      // Escapes HTML to prevent injection in generated resume text
-      function escapeHtml(str) {
-        if (!str) return "";
-        return str.replace(/[&<>]/g, function (m) {
-          if (m === "&") return "&amp;";
-          if (m === "<") return "&lt;";
-          if (m === ">") return "&gt;";
-          return m;
+      function handleGrokKeyPress(event) {
+        if (event.key === "Enter") {
+          sendGrokMessage();
+        }
+      }
+
+      function sendGrokMessage() {
+        const inputField = document.getElementById("grokInput");
+        const message = inputField.value.trim();
+        if (!message) return;
+
+        appendGrokMessage(message, "grok-user");
+        inputField.value = "";
+
+        setTimeout(() => {
+          processGrokCommand(message);
+        }, 600);
+      }
+
+      function appendGrokMessage(text, className) {
+        const chatObj = document.getElementById("grokChat");
+        const msgDiv = document.createElement("div");
+        msgDiv.className = `grok-message ${className}`;
+        msgDiv.innerHTML = text;
+        chatObj.appendChild(msgDiv);
+        chatObj.scrollTop = chatObj.scrollHeight;
+      }
+
+      function applyStylesToTarget(target, styles) {
+        let elements = [];
+        if (target === "name" || target === "title") {
+          elements = [document.getElementById("outName"), document.querySelector(".res-header")];
+        } else if (
+          target === "contact" ||
+          target === "email" ||
+          target === "phone"
+        ) {
+          elements = [document.querySelector(".res-contact")];
+        } else if (target === "summary") {
+          elements = [document.getElementById("outSummary")];
+        } else if (target === "experience" || target === "work") {
+          elements = [document.getElementById("outExperience")];
+        } else if (target === "projects") {
+          elements = [document.getElementById("outProjects")];
+        } else if (target === "education") {
+          elements = [document.getElementById("outEducation")];
+        } else if (target === "skills") {
+          elements = [document.getElementById("outSkills")];
+        } else if (
+          target === "all" ||
+          target === "everything" ||
+          target === "resume"
+        ) {
+          elements = [
+            document.querySelector(".resume-preview"),
+            ...document.querySelectorAll(".res-content, .res-section-title, .res-name, .res-contact")
+          ];
+        }
+
+        elements.forEach((el) => {
+          if (!el) return;
+          if (styles.textAlign) {
+             if(el.classList.contains('res-contact')) {
+                 el.style.justifyContent = styles.textAlign === 'center' ? 'center' : (styles.textAlign === 'right' ? 'flex-end' : 'flex-start');
+             } else {
+                 el.style.textAlign = styles.textAlign;
+             }
+          }
+          if (styles.fontSize) el.style.fontSize = styles.fontSize;
+          if (styles.fontFamily) el.style.fontFamily = styles.fontFamily;
+          if (styles.color) el.style.color = styles.color;
+          if (styles.fontWeight) el.style.fontWeight = styles.fontWeight;
         });
       }
 
-      /* ====================================== */
-      /* Data parsing utilities for resume text */
-      /* ====================================== */
-
-      // Parse multiline text into structured entries (title, date, bullets, description)
-      function parseEntriesWithBullets(raw) {
-        if (!raw.trim()) return [];
-        const blocks = raw.split(/\n{2,}/);
-        let entries = [];
-        for (let block of blocks) {
-          let lines = block
-            .split("\n")
-            .map((l) => l.trim())
-            .filter(Boolean);
-          if (!lines.length) continue;
-          let first = lines[0];
-          let titlePart = first,
-            datePart = "";
-          if (first.includes("|")) {
-            let parts = first.split("|").map((p) => p.trim());
-            titlePart = parts[0];
-            datePart = parts.slice(1).join(" · ");
-          }
-          let bullets = lines
-            .slice(1)
-            .filter(
-              (l) =>
-                l.startsWith("•") || l.startsWith("-") || l.startsWith("*"),
-            )
-            .map((l) => l.replace(/^[•\-\*]\s*/, "").trim());
-          let desc = lines
-            .slice(1)
-            .filter(
-              (l) =>
-                !l.startsWith("•") && !l.startsWith("-") && !l.startsWith("*"),
-            )
-            .join(" ");
-          entries.push({ title: titlePart, date: datePart, bullets, desc });
-        }
-        return entries;
-      }
-
-      /* ====================================== */
-      /* Rendering helpers for resume HTML     */
-      /* ====================================== */
-
-      function renderEntries(entries) {
-        if (!entries.length) return `<div class="plain-text">No entries</div>`;
-        return entries
-          .map(
-            (e) => `
-      <div class="entry-item">
-        <div class="entry-header">
-          <span class="entry-title">${escapeHtml(e.title)}</span>
-          ${e.date ? `<span class="entry-date">${escapeHtml(e.date)}</span>` : ""}
-        </div>
-        ${e.desc ? `<div class="entry-sub">${escapeHtml(e.desc)}</div>` : ""}
-        ${e.bullets.length ? `<ul class="bullet-list">${e.bullets.map((b) => `<li>${escapeHtml(b)}</li>`).join("")}</ul>` : ""}
-      </div>
-    `,
-          )
-          .join("");
-      }
-
-      function renderProjectsFromRaw(raw) {
-        if (!raw.trim()) return [];
-        const blocks = raw.split(/\n{2,}/);
-        let projects = [];
-        for (let block of blocks) {
-          let lines = block
-            .split("\n")
-            .map((l) => l.trim())
-            .filter(Boolean);
-          if (!lines.length) continue;
-          let first = lines[0];
-          let name = first.split("|")[0].trim();
-          let tech = first.includes("|")
-            ? first.split("|").slice(1).join(" | ").trim()
-            : "";
-          let bullets = lines
-            .slice(1)
-            .filter(
-              (l) =>
-                l.startsWith("•") || l.startsWith("-") || l.startsWith("*"),
-            )
-            .map((l) => l.replace(/^[•\-\*]\s*/, "").trim());
-          projects.push({ name, tech, bullets });
-        }
-        return projects;
-      }
-
-      function renderProjects(projects) {
-        if (!projects.length)
-          return `<div class="plain-text">No projects added</div>`;
-        return projects
-          .map(
-            (p) => `
-      <div class="entry-item">
-        <div class="entry-header">
-          <span class="entry-title">${escapeHtml(p.name)}</span>
-          ${p.tech ? `<span class="entry-date">${escapeHtml(p.tech)}</span>` : ""}
-        </div>
-        ${p.bullets.length ? `<ul class="bullet-list">${p.bullets.map((b) => `<li>${escapeHtml(b)}</li>`).join("")}</ul>` : ""}
-      </div>
-    `,
-          )
-          .join("");
-      }
-
-      function renderBulletOrText(raw) {
-        if (!raw.trim()) return "";
-        let lines = raw
-          .split("\n")
-          .map((l) => l.trim())
-          .filter(Boolean);
-        let bullets = lines.filter(
-          (l) => l.startsWith("•") || l.startsWith("-") || l.startsWith("*"),
-        );
-        if (bullets.length) {
-          return `<ul class="inline-list">${bullets.map((b) => `<li>${escapeHtml(b.replace(/^[•\-\*]\s*/, ""))}</li>`).join("")}</ul>`;
-        }
-        return `<div class="plain-text">${escapeHtml(raw).replace(/\n/g, "<br>")}</div>`;
-      }
-
-      /* ====================================== */
-      /* Main resume construction logic         */
-      /* ====================================== */
-
-      // Build the professional resume HTML and inject into preview container
-      function buildProfessionalResume() {
-        const name =
-          document.getElementById("fullname").value.trim() || "Your Name";
-        const email = document.getElementById("email").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const location = document.getElementById("location").value.trim();
-        const linkedin = document.getElementById("linkedin").value.trim();
-        const github = document.getElementById("github").value.trim();
-        const summary =
-          document.getElementById("summary").value.trim() ||
-          "No summary provided.";
-        const educationRaw = document.getElementById("education").value.trim();
-        const achievements = document
-          .getElementById("achievements")
-          .value.trim();
-        const workRaw = document.getElementById("workExp").value.trim();
-        const projectsRaw = document.getElementById("projects").value.trim();
-        const skillsRaw = document.getElementById("skills").value.trim();
-        const languagesRaw = document.getElementById("languages").value.trim();
-        const certsRaw = document.getElementById("certs").value.trim();
-
-        const workEntries = parseEntriesWithBullets(workRaw);
-        const projectItems = renderProjectsFromRaw(projectsRaw);
-        const skillsArray = skillsRaw
-          .split(",")
-          .map((s) => s.trim())
-          .filter((s) => s);
-
-        let contactHtml = `<div class="contact-row">`;
-        if (email) contactHtml += `<span>📧 ${escapeHtml(email)}</span>`;
-        if (phone) contactHtml += `<span>📞 ${escapeHtml(phone)}</span>`;
-        if (location) contactHtml += `<span>📍 ${escapeHtml(location)}</span>`;
-        contactHtml += `</div>`;
-
-        let socialHtml = "";
-        if (linkedin || github) {
-          socialHtml = `<div class="contact-row">`;
-          if (linkedin)
-            socialHtml += `<span>🔗 <a href="${escapeHtml(linkedin)}" target="_blank">${escapeHtml(linkedin)}</a></span>`;
-          if (github)
-            socialHtml += `<span>🐙 <a href="${escapeHtml(github)}" target="_blank">${escapeHtml(github)}</a></span>`;
-          socialHtml += `</div>`;
-        }
-
-        const finalHtml = `
-      <div class="professional-resume">
-        <h1 class="resume-name-centered">${escapeHtml(name)}</h1>
-        <div class="resume-contact-bar">
-          ${contactHtml}
-          ${socialHtml}
-        </div>
-        <div class="resume-content">
-          ${summary ? `<div class="resume-block"><div class="block-heading">Professional Summary</div><div class="summary-text">${escapeHtml(summary).replace(/\n/g, "<br>")}</div></div>` : ""}
-          
-          ${educationRaw ? `<div class="resume-block"><div class="block-heading">Education</div>${renderEntries(parseEntriesWithBullets(educationRaw))}</div>` : ""}
-          
-          ${workEntries.length ? `<div class="resume-block"><div class="block-heading">Work Experience</div>${renderEntries(workEntries)}</div>` : ""}
-          
-          ${projectItems.length ? `<div class="resume-block"><div class="block-heading">Projects</div>${renderProjects(projectItems)}</div>` : ""}
-          
-          ${skillsArray.length ? `<div class="resume-block"><div class="block-heading">Technical Skills</div><div class="skills-wrapper">${skillsArray.map((s) => `<span class="skill-tag">${escapeHtml(s)}</span>`).join("")}</div></div>` : ""}
-          
-          ${languagesRaw ? `<div class="resume-block"><div class="block-heading">Languages</div><div class="plain-text">${escapeHtml(languagesRaw)}</div></div>` : ""}
-          
-          ${certsRaw ? `<div class="resume-block"><div class="block-heading">Certifications</div>${renderBulletOrText(certsRaw)}</div>` : ""}
-          
-          ${achievements ? `<div class="resume-block"><div class="block-heading">Achievements</div>${renderBulletOrText(achievements)}</div>` : ""}
-        </div>
-      </div>
-    `;
-        document.getElementById("liveResume").innerHTML = finalHtml;
-      }
-
-      /* ====================================== */
-      /* User action event handlers             */
-      /* ====================================== */
-
-      // Called on form submit to render resume and optionally save data in backend
-      async function generateResume(e) {
-        if (e) e.preventDefault();
-        const btn = document.querySelector(".generate-btn");
-        btn.classList.add("loading");
-        buildProfessionalResume();
-        // Optional backend save
-        try {
-          const data = {
-            fullname: document.getElementById("fullname").value,
-            email: document.getElementById("email").value,
-            timestamp: new Date(),
-          };
-          await fetch("http://localhost:3000/api/resume", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-          }).catch(() => {});
-        } catch (e) {}
-        setTimeout(() => {
-          btn.classList.remove("loading");
-          showToast("✅ Resume generated successfully!");
-        }, 400);
-      }
-
-      // Generate and download the current preview as PDF using html2pdf
-      function downloadPDF() {
-        const resumeElem = document.getElementById("liveResume");
-        if (!resumeElem || resumeElem.querySelector(".empty-state")) {
-          showToast("⚠️ Generate your resume first!");
-          return;
-        }
-        const wrapper = document.createElement("div");
-        wrapper.style.padding = "30px";
-        wrapper.style.background = "white";
-        wrapper.style.fontFamily = "'Inter', sans-serif";
-        const styleCopy = document.createElement("style");
-        styleCopy.textContent = document.querySelector("style").textContent;
-        wrapper.appendChild(styleCopy);
-        wrapper.innerHTML += resumeElem.outerHTML;
-        const opt = {
-          margin: [0.4, 0.4, 0.4, 0.4],
-          filename:
-            (document.getElementById("fullname").value.trim() || "Resume") +
-            ".pdf",
-          image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2 },
-          jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-        };
-        showToast("📄 Generating PDF...");
-        html2pdf()
-          .set(opt)
-          .from(wrapper)
-          .save()
-          .then(() => showToast("✅ PDF downloaded!"));
-      }
-
-      /* ====================================== */
-      /* AI Chat Assistant and Groq API Helpers   */
-      /* ====================================== */
-
-      // Groq AI integration
-      let GROQ_API_KEY = localStorage.getItem("resume_groq_key") || "";
-      if (GROQ_API_KEY)
-        document.getElementById("apiBanner").style.display = "none";
-      let chatHistory = [];
-
-      function saveApiKey() {
-        let key = document.getElementById("apiKeyInput").value.trim();
-        if (!key.startsWith("gsk_")) {
-          alert("Enter valid Groq key (starts with gsk_)");
-          return;
-        }
-        GROQ_API_KEY = key;
-        localStorage.setItem("resume_groq_key", key);
-        document.getElementById("apiBanner").style.display = "none";
-        addAIMessage("✅ API key saved! Now I can help polish your resume.");
-      }
-
-      function getResumeContext() {
-        return `Resume: Name=${document.getElementById("fullname").value || "Empty"}, Summary=${document.getElementById("summary").value || "Empty"}, Skills=${document.getElementById("skills").value || "Empty"}, Experience=${document.getElementById("workExp").value || "Empty"}`;
-      }
-
-      function addAIMessage(html) {
-        let div = document.createElement("div");
-        div.className = "message ai";
-        div.innerHTML = `<div class="msg-avatar">🤖</div><div class="msg-bubble">${html}</div>`;
-        document.getElementById("chatMessages").appendChild(div);
-        div.scrollIntoView({ behavior: "smooth" });
-      }
-      function addUserMessage(text) {
-        let div = document.createElement("div");
-        div.className = "message user";
-        div.innerHTML = `<div class="msg-avatar">You</div><div class="msg-bubble">${escapeHtml(text)}</div>`;
-        document.getElementById("chatMessages").appendChild(div);
-        div.scrollIntoView({ behavior: "smooth" });
-      }
-      function addTyping() {
-        let d = document.createElement("div");
-        d.className = "message ai";
-        d.id = "typingMsg";
-        d.innerHTML = `<div class="msg-avatar">🤖</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
-        document.getElementById("chatMessages").appendChild(d);
-        d.scrollIntoView({ behavior: "smooth" });
-      }
-      function removeTyping() {
-        document.getElementById("typingMsg")?.remove();
-      }
-
-      async function sendMessage(override) {
-        let input = document.getElementById("chatInput");
-        let text = override || input.value.trim();
-        if (!text) return;
-        if (!GROQ_API_KEY) {
-          addAIMessage("⚠️ Please set your Groq API key first.");
-          return;
-        }
-        input.value = "";
-        addUserMessage(text);
-        chatHistory.push({ role: "user", content: text });
-        addTyping();
-        try {
-          let res = await fetch(
-            "https://api.groq.com/openai/v1/chat/completions",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${GROQ_API_KEY}`,
-              },
-              body: JSON.stringify({
-                model: "llama-3.3-70b-versatile",
-                max_tokens: 800,
-                temperature: 0.7,
-                messages: [
-                  {
-                    role: "system",
-                    content: `You are a professional resume advisor. Help improve resumes. Keep responses concise and actionable. Context: ${getResumeContext()}`,
-                  },
-                  ...chatHistory,
-                ],
-              }),
-            },
+      async function processGrokCommand(cmd) {
+        const apiKey = document.getElementById("grokApiKey").value.trim();
+        if (!apiKey) {
+          appendGrokMessage(
+            "Please paste your Grok API Key at the top first.",
+            "grok-ai",
           );
-          let data = await res.json();
-          removeTyping();
-          if (data.error) {
-            addAIMessage(`❌ ${data.error.message}`);
-            chatHistory.pop();
-          } else {
-            let reply = data.choices[0].message.content;
-            chatHistory.push({ role: "assistant", content: reply });
-            addAIMessage(
-              reply
-                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-                .replace(/\n/g, "<br>"),
+          return;
+        }
+
+        const chatObj = document.getElementById("grokChat");
+        const loadingDiv = document.createElement("div");
+        loadingDiv.className = "grok-message grok-ai grok-loading";
+        loadingDiv.innerHTML = "Thinking...";
+        chatObj.appendChild(loadingDiv);
+        chatObj.scrollTop = chatObj.scrollHeight;
+
+        const systemPrompt = `You are a professional Resume Assistant AI named Grok.
+You can execute formatting commands to edit font, size, and layout, or rewrite resume sections.
+Answer strictly in JSON when taking actions.
+
+JSON Structure:
+{
+  "action": "style" | "suggest" | "chat",
+  "target": "name" | "contact" | "summary" | "experience" | "projects" | "education" | "skills" | "all" | null,
+  "styles": {
+    "textAlign": "left" | "center" | "right" | "justify" | null,
+    "fontSize": "16px" | "24px" | null,
+    "fontFamily": "Arial" | "Times New Roman" | "Inter" | "Courier New" | null,
+    "color": "#333333" | "red" | null,
+    "fontWeight": "bold" | "normal" | null
+  },
+  "text": "new suggested text" | null,
+  "reply": "friendly explanation of what you did or your conversational answer"
+}
+
+Rules:
+1. STYLE: Whenever asked to change fonts, alignment, size, color, use action="style", specify the target, and pass the exact CSS values in "styles". 
+2. SUGGEST: When asked to improve/write content, use action="suggest", target=section, text=YOUR EXCELLENT WRITING, and reply.
+3. CHAT: For purely conversational questions, use action="chat", reply=your expert advice. 
+IMPORTANT: Output ONLY valid JSON block.`;
+
+        try {
+          const response = await fetch(GROK_API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+              model:
+                document.getElementById("grokModel").value.trim() ||
+                "grok-2-latest",
+              messages: [
+                { role: "system", content: systemPrompt },
+                { role: "user", content: cmd },
+              ],
+              temperature: 0.3,
+            }),
+          });
+
+          loadingDiv.remove();
+
+          if (!response.ok) {
+            let errMessage = response.statusText;
+            try {
+              const errObj = await response.json();
+              errMessage =
+                errObj.error?.message || errObj.error || response.statusText;
+            } catch (e) {}
+            appendGrokMessage(
+              `API Error (${response.status}): ${errMessage}`,
+              "grok-ai",
+            );
+            return;
+          }
+
+          const data = await response.json();
+          const content = data.choices[0].message.content.trim();
+
+          let result;
+          try {
+            const jsonMatch = content.match(/\{[\s\S]*\}/);
+            if (jsonMatch) {
+              result = JSON.parse(jsonMatch[0]);
+            } else {
+              result = { action: "chat", reply: content };
+            }
+          } catch (e) {
+            console.error("Grok JSON Parsing Error on:", content);
+            result = {
+              action: "chat",
+              reply: content.replace(/```json|```/g, "").trim(),
+            };
+          }
+
+          if (result.action === "style" && result.target) {
+             applyStylesToTarget(result.target, result.styles || {});
+          } else if (
+            result.action === "suggest" &&
+            result.text &&
+            result.target
+          ) {
+            const targetInfo = result.target;
+            const text = result.text;
+
+            if (targetInfo === "summary") {
+              document.getElementById("inpSummary").value = text;
+            } else if (targetInfo === "experience") {
+              document.getElementById("inpExperience").value = text;
+            } else if (targetInfo === "projects") {
+              document.getElementById("inpProjects").value = text;
+            } else if (targetInfo === "education") {
+              document.getElementById("inpEducation").value = text;
+            } else if (targetInfo === "skills") {
+              document.getElementById("inpSkills").value = text;
+            }
+            updateResume();
+          }
+
+          if (result.reply) {
+            appendGrokMessage(result.reply, "grok-ai");
+          } else if (!result.reply && result.action !== "chat") {
+            appendGrokMessage(
+              "I've successfully updated the resume style/content based on your request.",
+              "grok-ai",
             );
           }
-        } catch (e) {
-          removeTyping();
-          addAIMessage("Network error. Check API key.");
-          chatHistory.pop();
+        } catch (err) {
+          if (loadingDiv.parentNode) loadingDiv.remove();
+          console.error("Grok Network/Execution Error:", err);
+          appendGrokMessage(
+            "Error connecting to Grok API or executing the action. Check your network or API permissions.",
+            "grok-ai",
+          );
         }
       }
-      function quickAction(txt) {
-        sendMessage(txt);
-      }
-      function handleChatKey(e) {
-        if (e.key === "Enter" && !e.shiftKey) {
-          e.preventDefault();
-          sendMessage();
-        }
-      }
-      function showToast(msg) {
-        let t = document.getElementById("toast");
-        t.innerText = msg;
-        t.classList.add("show");
-        setTimeout(() => t.classList.remove("show"), 2000);
-      }
-
-      document
-        .getElementById("resumeForm")
-        .addEventListener("submit", generateResume);
-      window.addEventListener("load", () => {
-        updateCompletion();
-        buildProfessionalResume();
-      });
     </script>
   </body>
 </html>
