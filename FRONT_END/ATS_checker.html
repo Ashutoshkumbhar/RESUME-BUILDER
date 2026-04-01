@@ -1,0 +1,1149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ATS Resume Analyzer Pro</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+    <style>
+      :root {
+        --primary: #4f46e5;
+        --primary-hover: #4338ca;
+        --bg: #0f172a;
+        --surface: #1e293b;
+        --surface-light: #334155;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+        --border: #334155;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --accent: #8b5cf6;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        background-color: var(--bg);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      /* Navbar styling */
+      nav {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .logo-area {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo-area h1 {
+        font-size: 20px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #a855f7, #6366f1);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .api-settings {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.25),
+          rgba(59, 130, 246, 0.2)
+        );
+        border: 1px solid rgba(99, 102, 241, 0.5);
+        border-radius: 12px;
+        padding: 8px 12px;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
+      }
+
+      .api-input {
+        background: linear-gradient(135deg, #101827, #1e293b);
+        border: 2px solid #60a5fa;
+        color: #e0f2fe;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 14px;
+        width: 250px;
+        transition: all 0.2s ease;
+        box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .api-input:focus {
+        outline: none;
+        border-color: #38bdf8;
+        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+        background: linear-gradient(135deg, #0b1120, #172238);
+      }
+
+      .api-model {
+        width: 140px;
+      }
+
+      /* Main Content */
+      .container {
+        display: flex;
+        flex: 1;
+        overflow: hidden;
+      }
+
+      /* Input Section */
+      .input-section {
+        width: 45%;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        border-right: 1px solid var(--border);
+        background: var(--surface);
+        overflow-y: auto;
+      }
+
+      .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex: 1;
+      }
+
+      .input-group label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      textarea {
+        flex: 1;
+        width: 100%;
+        padding: 15px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text-main);
+        resize: none;
+        transition: all 0.3s ease;
+        line-height: 1.5;
+      }
+
+      textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+      }
+
+      .drop-zone {
+        flex: 1;
+        border: 2px dashed var(--border);
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(30, 41, 59, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        padding: 30px;
+        min-height: 150px;
+      }
+
+      .drop-zone:hover,
+      .drop-zone.dragover {
+        border-color: var(--primary);
+        background: rgba(79, 70, 229, 0.05);
+      }
+
+      .analyze-btn {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: white;
+        border: none;
+        padding: 16px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .analyze-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+      }
+
+      .analyze-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* Output Section */
+      .output-section {
+        flex: 1;
+        padding: 30px;
+        background: var(--bg);
+        overflow-y: auto;
+        position: relative;
+      }
+
+      .empty-state {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: var(--text-muted);
+      }
+
+      .empty-state svg {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 20px;
+        opacity: 0.5;
+      }
+
+      .loader {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid var(--surface-light);
+        border-top-color: var(--primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Results Dashboard */
+      .results-container {
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .score-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .score-circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 700;
+        background: conic-gradient(
+          var(--score-color) var(--percentage),
+          var(--surface-light) 0
+        );
+        position: relative;
+      }
+
+      .score-circle::before {
+        content: "";
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        background: var(--surface);
+        border-radius: 50%;
+      }
+
+      .score-circle span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .card-info h3 {
+        font-size: 14px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+
+      .card-info p {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .section-block {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 20px;
+      }
+
+      .section-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .section-title svg {
+        color: var(--accent);
+      }
+
+      .keywords-area {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .badge-success {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+      }
+      .badge-danger {
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--danger);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+      }
+
+      .feedback-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .feedback-item {
+        background: var(--bg);
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 3px solid var(--primary);
+      }
+
+      .feedback-item strong {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--accent);
+        font-size: 14px;
+      }
+
+      .feedback-item span {
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--text-muted);
+      }
+
+      .tips-list {
+        list-style: none;
+      }
+
+      .tips-list li {
+        position: relative;
+        padding-left: 25px;
+        margin-bottom: 12px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--text-main);
+      }
+
+      .tips-list li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--warning);
+        font-weight: bold;
+      }
+
+      .verdict {
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        padding: 20px;
+        border-radius: 8px;
+        background: linear-gradient(
+          90deg,
+          rgba(79, 70, 229, 0.1),
+          rgba(139, 92, 246, 0.1)
+        );
+        border: 1px solid var(--primary);
+        color: #c7d2fe;
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--surface-light);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo-area">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="url(#grad1)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color: #a855f7; stop-opacity: 1" />
+              <stop
+                offset="100%"
+                style="stop-color: #6366f1; stop-opacity: 1"
+              />
+            </linearGradient>
+          </defs>
+          <path
+            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+          ></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <h1>ATS Analyzer Pro</h1>
+      </div>
+      <div class="api-settings">
+        <input
+          type="password"
+          id="apiKey"
+          class="api-input"
+          placeholder="Enter Grok/xAI API Key (xoxb-...)"
+        />
+        <input
+          type="text"
+          id="apiModel"
+          class="api-input api-model"
+          value="grok-4.20-reasoning"
+        />
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="input-section">
+        <div class="input-group">
+          <label>Job Description</label>
+          <textarea
+            id="jobDesc"
+            placeholder="Paste the full job description here... Requirements, responsibilities, etc."
+          ></textarea>
+        </div>
+        <div class="input-group">
+          <label>Candidate Resume</label>
+          <div id="dropZone" class="drop-zone">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="color: var(--accent); margin-bottom: 10px"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <p style="font-size: 14px; font-weight: 500; margin-bottom: 5px">
+              Click to upload or drag and drop
+            </p>
+            <p style="font-size: 12px; color: var(--text-muted)">
+              PDF, DOCX, or TXT supported
+            </p>
+            <input
+              type="file"
+              id="fileInput"
+              accept=".pdf,.doc,.docx,.txt"
+              style="display: none"
+            />
+          </div>
+          <div
+            id="fileInfo"
+            style="
+              display: none;
+              align-items: center;
+              justify-content: space-between;
+              background: var(--surface-light);
+              padding: 15px;
+              border-radius: 8px;
+              border: 1px solid var(--primary);
+              flex: 1;
+            "
+          >
+            <div style="display: flex; align-items: center; gap: 10px">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--primary)"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"
+                ></path>
+                <polyline points="13 2 13 9 20 9"></polyline>
+              </svg>
+              <div>
+                <p
+                  id="fileName"
+                  style="
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: var(--text-main);
+                    word-break: break-all;
+                  "
+                ></p>
+                <p
+                  style="
+                    font-size: 12px;
+                    color: var(--success);
+                    margin-top: 4px;
+                  "
+                >
+                  Ready to analyze
+                </p>
+              </div>
+            </div>
+            <button
+              onclick="removeFile()"
+              style="
+                background: none;
+                border: none;
+                color: var(--danger);
+                cursor: pointer;
+                padding: 5px;
+              "
+              title="Remove File"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <button class="analyze-btn" id="analyzeBtn" onclick="analyzeResume()">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          Analyze ATS Compatibility
+        </button>
+      </div>
+
+      <div class="output-section">
+        <div class="empty-state" id="emptyState">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+            ></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <path d="M9 15L11 17L15 13"></path>
+          </svg>
+          <h2>Ready to Analyze</h2>
+          <p style="margin-top: 10px; font-size: 14px">
+            Paste the job description and upload a resume on the left, then
+            click analyze.
+          </p>
+        </div>
+
+        <div class="loader" id="loader">
+          <div class="spinner"></div>
+          <p>Analyzing Resume vs Job Description...</p>
+          <p style="font-size: 12px; color: var(--text-muted)">
+            Please wait, AI is strictly evaluating keywords and sections.
+          </p>
+        </div>
+
+        <div class="results-container" id="results">
+          <div class="score-cards">
+            <div class="card">
+              <div class="score-circle" id="overallScoreCircle">
+                <span id="overallScoreText">0%</span>
+              </div>
+              <div class="card-info">
+                <h3>ATS Match Score</h3>
+                <p>
+                  Overall compatibility based on keywords, skills, and
+                  experience.
+                </p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="score-circle" id="skillsScoreCircle">
+                <span id="skillsScoreText">0%</span>
+              </div>
+              <div class="card-info">
+                <h3>Skills Match</h3>
+                <p>
+                  Alignment of candidate skills with job description
+                  requirements.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-block">
+            <div class="section-title">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Keyword Analysis
+            </div>
+            <p
+              style="
+                font-size: 13px;
+                color: var(--text-muted);
+                margin-bottom: 10px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+              "
+            >
+              Matched Keywords
+            </p>
+            <div
+              class="keywords-area"
+              id="matchedKeywords"
+              style="margin-bottom: 20px"
+            ></div>
+
+            <p
+              style="
+                font-size: 13px;
+                color: var(--text-muted);
+                margin-bottom: 10px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+              "
+            >
+              Missing Keywords
+            </p>
+            <div class="keywords-area" id="missingKeywords"></div>
+          </div>
+
+          <div class="section-block">
+            <div class="section-title">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                ></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              Section Feedback
+            </div>
+            <div class="feedback-grid" id="sectionFeedback">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <div class="section-block">
+            <div class="section-title">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+                ></path>
+              </svg>
+              Improvement Tips
+            </div>
+            <ul class="tips-list" id="improvementTips">
+              <!-- Dynamically populated -->
+            </ul>
+          </div>
+
+          <div class="verdict" id="finalVerdict">
+            <!-- Final verdict text -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let extractedResumeText = "";
+
+      function setupFileUpload() {
+        const dropZone = document.getElementById("dropZone");
+        const fileInput = document.getElementById("fileInput");
+
+        dropZone.addEventListener("click", () => fileInput.click());
+
+        dropZone.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          dropZone.classList.add("dragover");
+        });
+
+        dropZone.addEventListener("dragleave", () => {
+          dropZone.classList.remove("dragover");
+        });
+
+        dropZone.addEventListener("drop", (e) => {
+          e.preventDefault();
+          dropZone.classList.remove("dragover");
+          if (e.dataTransfer.files.length > 0) {
+            handleFile(e.dataTransfer.files[0]);
+          }
+        });
+
+        fileInput.addEventListener("change", (e) => {
+          if (e.target.files.length > 0) {
+            handleFile(e.target.files[0]);
+          }
+        });
+      }
+
+      async function handleFile(file) {
+        document.getElementById("fileName").innerText = file.name;
+        document.getElementById("dropZone").style.display = "none";
+        document.getElementById("fileInfo").style.display = "flex";
+
+        extractedResumeText = "";
+        const statusText =
+          document.getElementById("fileName").nextElementSibling;
+        statusText.innerText = "Extracting text... please wait.";
+        statusText.style.color = "var(--warning)";
+
+        const ext = file.name.split(".").pop().toLowerCase();
+        try {
+          if (ext === "pdf") {
+            extractedResumeText = await extractPdfText(file);
+          } else if (ext === "docx") {
+            extractedResumeText = await extractDocxText(file);
+          } else if (ext === "txt") {
+            extractedResumeText = await extractTxtText(file);
+          } else {
+            throw new Error(
+              "Unsupported file type. Please upload PDF, DOCX, or TXT.",
+            );
+          }
+          statusText.innerText =
+            "Ready to analyze text (" +
+            extractedResumeText.length +
+            " characters)";
+          statusText.style.color = "var(--success)";
+        } catch (err) {
+          console.error(err);
+          alert(err.message);
+          removeFile();
+        }
+      }
+
+      function removeFile() {
+        extractedResumeText = "";
+        const fileInput = document.getElementById("fileInput");
+        if (fileInput) fileInput.value = "";
+        document.getElementById("fileInfo").style.display = "none";
+        document.getElementById("dropZone").style.display = "flex";
+      }
+
+      async function extractPdfText(file) {
+        const arrayBuffer = await file.arrayBuffer();
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        let text = "";
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const content = await page.getTextContent();
+          const strings = content.items.map((item) => item.str);
+          text += strings.join(" ") + "\n";
+        }
+        return text;
+      }
+
+      async function extractDocxText(file) {
+        const arrayBuffer = await file.arrayBuffer();
+        const result = await mammoth.extractRawText({
+          arrayBuffer: arrayBuffer,
+        });
+        return result.value;
+      }
+
+      function extractTxtText(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = (e) => resolve(e.target.result);
+          reader.onerror = (e) => reject(e);
+          reader.readAsText(file);
+        });
+      }
+
+      // Load saved settings
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedKey = localStorage.getItem("grok_api_key");
+        const savedModel = localStorage.getItem("grok_model");
+        if (savedKey) document.getElementById("apiKey").value = savedKey;
+        if (savedModel) document.getElementById("apiModel").value = savedModel;
+        setupFileUpload();
+      });
+
+      function saveSettings() {
+        localStorage.setItem(
+          "grok_api_key",
+          document.getElementById("apiKey").value.trim(),
+        );
+        localStorage.setItem(
+          "grok_model",
+          document.getElementById("apiModel").value.trim(),
+        );
+      }
+
+      function getColorForPercentage(percentage) {
+        if (percentage >= 80) return "var(--success)"; // Green
+        if (percentage >= 50) return "var(--warning)"; // Yellow
+        return "var(--danger)"; // Red
+      }
+
+      function setScoreCircle(elementId, textElementId, scoreStr) {
+        const score = parseInt(scoreStr.replace("%", ""));
+        const percentage = score ? score + "%" : "0%";
+        const color = getColorForPercentage(score);
+
+        const circle = document.getElementById(elementId);
+        circle.style.setProperty("--percentage", percentage);
+        circle.style.setProperty("--score-color", color);
+
+        document.getElementById(textElementId).innerText = percentage;
+      }
+
+      async function analyzeResume() {
+        const apiKey = document.getElementById("apiKey").value.trim();
+        const model =
+          document.getElementById("apiModel").value.trim() ||
+          "grok-4.20-reasoning";
+        const jobDesc = document.getElementById("jobDesc").value.trim();
+        const resumeText = extractedResumeText.trim();
+
+        if (!apiKey) {
+          alert("Please enter your Grok/xAI API Key in the top right corner.");
+          return;
+        }
+        if (!jobDesc || !resumeText) {
+          alert("Please paste the Job Description and upload a valid resume.");
+          return;
+        }
+
+        saveSettings();
+
+        const btn = document.getElementById("analyzeBtn");
+        btn.disabled = true;
+        btn.innerHTML = `Analyzing...`;
+
+        document.getElementById("emptyState").style.display = "none";
+        document.getElementById("results").style.display = "none";
+        document.getElementById("loader").style.display = "flex";
+
+        const systemPrompt = `You are an advanced ATS (Applicant Tracking System) Resume Analyzer.
+
+Your task is to evaluate a candidate's resume against a given job description and provide a detailed ATS compatibility report.
+
+INSTRUCTIONS:
+
+1. Calculate ATS Match Score (0-100%) based on keyword matching, skills alignment, experience relevance, and education match.
+2. Calculate Skills Match Percentage (0-100%).
+3. Extract and compare Required Skills (from job description) and Candidate Skills (from resume).
+4. Identify Missing Keywords (important skills not in resume) and Matching Keywords.
+5. Identify Weak Sections (e.g., vague experience, no metrics).
+6. Analyze Resume Sections: Summary/Objectives, Skills, Projects, Experience, and Education.
+7. Provide Suggestions: Add missing keywords, improve bullet points using action verbs, add measurable achievements, optimize formatting.
+
+Output Format (STRICT JSON). Do not use markdown wrappers, ONLY return the raw JSON object:
+{
+  "ATS_Score": "85%",
+  "Matched_Keywords": ["Python", "React"],
+  "Missing_Keywords": ["Docker", "AWS"],
+  "Skills_Match_Percentage": "80%",
+  "Section_Feedback": {
+    "Summary": "Feedback...",
+    "Skills": "Feedback...",
+    "Projects": "Feedback...",
+    "Experience": "Feedback...",
+    "Education": "Feedback..."
+  },
+  "Improvement_Tips": ["Tip 1", "Tip 2"],
+  "Final_Verdict": "Short summary of the candidate's fit."
+}
+
+IMPORTANT:
+* Be strict and realistic like a real ATS system.
+* Do NOT give generic answers. Focus on improving chances of shortlisting.
+* Keep suggestions concise and actionable.`;
+
+        const userMessage = `INPUT:\n\n1. Job Description:\n${jobDesc}\n\n2. Resume Text:\n${resumeText}`;
+
+        try {
+          const response = await fetch(
+            "https://api.grok.ai/v1/chat/completions",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${apiKey}`,
+              },
+              body: JSON.stringify({
+                model: model,
+                messages: [
+                  { role: "system", content: systemPrompt },
+                  { role: "user", content: userMessage },
+                ],
+                temperature: 0.1,
+              }),
+            },
+          );
+
+          if (!response.ok) {
+            const err = await response.json();
+            throw new Error(err.error?.message || response.statusText);
+          }
+
+          const data = await response.json();
+          let content = data.choices[0].message.content.trim();
+
+          // Strip markdown backticks if present
+          if (content.startsWith("```json")) {
+            content = content
+              .replace(/^```json/, "")
+              .replace(/```$/, "")
+              .trim();
+          } else if (content.startsWith("```")) {
+            content = content.replace(/^```/, "").replace(/```$/, "").trim();
+          }
+
+          const result = JSON.parse(content);
+
+          // Populate Dashboard
+          setScoreCircle(
+            "overallScoreCircle",
+            "overallScoreText",
+            result.ATS_Score,
+          );
+          setScoreCircle(
+            "skillsScoreCircle",
+            "skillsScoreText",
+            result.Skills_Match_Percentage,
+          );
+
+          // Keywords
+          const matchedContainer = document.getElementById("matchedKeywords");
+          matchedContainer.innerHTML = "";
+          if (result.Matched_Keywords && result.Matched_Keywords.length > 0) {
+            result.Matched_Keywords.forEach((kw) => {
+              matchedContainer.innerHTML += `<span class="badge badge-success">${kw}</span>`;
+            });
+          } else {
+            matchedContainer.innerHTML =
+              '<span style="color:var(--text-muted); font-size: 13px;">None found.</span>';
+          }
+
+          const missingContainer = document.getElementById("missingKeywords");
+          missingContainer.innerHTML = "";
+          if (result.Missing_Keywords && result.Missing_Keywords.length > 0) {
+            result.Missing_Keywords.forEach((kw) => {
+              missingContainer.innerHTML += `<span class="badge badge-danger">${kw}</span>`;
+            });
+          } else {
+            missingContainer.innerHTML =
+              '<span style="color:var(--text-muted); font-size: 13px;">None missing. Great job!</span>';
+          }
+
+          // Section Feedback
+          const feedbackGrid = document.getElementById("sectionFeedback");
+          feedbackGrid.innerHTML = "";
+          if (result.Section_Feedback) {
+            for (const [section, feedback] of Object.entries(
+              result.Section_Feedback,
+            )) {
+              if (feedback) {
+                feedbackGrid.innerHTML += `
+                        <div class="feedback-item">
+                            <strong>${section}</strong>
+                            <span>${feedback}</span>
+                        </div>
+                    `;
+              }
+            }
+          }
+
+          // Tips
+          const tipsList = document.getElementById("improvementTips");
+          tipsList.innerHTML = "";
+          if (result.Improvement_Tips) {
+            result.Improvement_Tips.forEach((tip) => {
+              tipsList.innerHTML += `<li>${tip}</li>`;
+            });
+          }
+
+          // Final Verdict
+          document.getElementById("finalVerdict").innerText =
+            result.Final_Verdict || "";
+
+          // UI transitions
+          document.getElementById("loader").style.display = "none";
+          document.getElementById("results").style.display = "block";
+        } catch (err) {
+          console.error(err);
+          alert("Error analyzing resume: " + err.message);
+          document.getElementById("loader").style.display = "none";
+          document.getElementById("emptyState").style.display = "block";
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = `
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          Analyze ATS Compatibility
+        `;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();//app is like blueprint instance for server creation
-const connectDB = require("../config/db");
+const connectDB = require("../BACKEND/config/db");
 const cors = require("cors");
 
 require("dotenv").config();
@@ -13,11 +13,11 @@ app.use(express.json());
 connectDB();
 
 //import resume routes
-const resumeRoutes = require('../routes/resumeRoutes');
+const resumeRoutes = require('../BACKEND/routes/resumeRoutes');
 app.use('/api/resume', resumeRoutes); 
 
 //import user router for auth
-const userRoutes = require("../routes/userRoutes");
+const userRoutes = require("../BACKEND/routes/userRoutes");
 app.use('/api/users',userRoutes);
 
 app.get('/',(req, res) => {
