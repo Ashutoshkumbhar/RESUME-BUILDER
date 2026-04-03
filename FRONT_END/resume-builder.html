@@ -1,395 +1,627 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Resume Builder Pro with AI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="resume_craft.css">
-</head>
-<body>
-
-<!-- LEFT SIDEBAR -->
-<div class="sidebar">
-    <div class="header">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="resume_craft.css" />
+  </head>
+  <body>
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar">
+      <div class="header">
         <h1>Resume Builder Pro</h1>
         <p>Live preview updates as you type.</p>
-    </div>
+      </div>
 
-    <div class="template-selector">
+      <div class="template-selector">
         <label>Choose Template</label>
         <div class="template-grid">
-            <button class="tpl-btn active" onclick="switchTemplate(1)">Classic</button>
-            <button class="tpl-btn" onclick="switchTemplate(2)">Blue & Gray</button>
-            <button class="tpl-btn" onclick="switchTemplate(3)">Web Dev Blue</button>
-            <button class="tpl-btn" onclick="switchTemplate(4)">Gray & White</button>
-            <button class="tpl-btn" onclick="switchTemplate(5)">Dark Sidebar</button>
+          <button class="tpl-btn active" onclick="switchTemplate(1)">
+            Classic
+          </button>
+          <button class="tpl-btn" onclick="switchTemplate(2)">
+            Blue & Gray
+          </button>
+          <button class="tpl-btn" onclick="switchTemplate(3)">
+            Web Dev Blue
+          </button>
+          <button class="tpl-btn" onclick="switchTemplate(4)">
+            Gray & White
+          </button>
+          <button class="tpl-btn" onclick="switchTemplate(5)">
+            Dark Sidebar
+          </button>
         </div>
-    </div>
+      </div>
 
-    <!-- Photo Input (Only for Template 5) -->
-    <div class="form-group" id="photoGroup" style="display: none;">
+      <!-- Photo Input (Only for Template 5) -->
+      <div class="form-group" id="photoGroup" style="display: none">
         <label>Profile Photo</label>
-        <input type="file" id="inpPhoto" accept="image/*" onchange="previewPhoto(event)">
-    </div>
+        <input
+          type="file"
+          id="inpPhoto"
+          accept="image/*"
+          onchange="previewPhoto(event)"
+        />
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
         <label>Full Name</label>
-        <input type="text" id="inpName" placeholder="e.g. Jane Doe" oninput="updateResume()">
-    </div>
+        <input
+          type="text"
+          id="inpName"
+          placeholder="e.g. Jane Doe"
+          oninput="updateResume()"
+        />
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
         <label>Job Title</label>
-        <input type="text" id="inpTitle" placeholder="e.g. Web Developer" oninput="updateResume()">
-    </div>
+        <input
+          type="text"
+          id="inpTitle"
+          placeholder="e.g. Web Developer"
+          oninput="updateResume()"
+        />
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
         <label>Email & Phone</label>
-        <input type="email" id="inpEmail" placeholder="e.g. jane@example.com" oninput="updateResume()" style="margin-bottom:4px;">
-        <input type="text" id="inpPhone" placeholder="e.g. (555) 123-4567" oninput="updateResume()">
-    </div>
+        <input
+          type="email"
+          id="inpEmail"
+          placeholder="e.g. jane@example.com"
+          oninput="updateResume()"
+          style="margin-bottom: 4px"
+        />
+        <input
+          type="text"
+          id="inpPhone"
+          placeholder="e.g. (555) 123-4567"
+          oninput="updateResume()"
+        />
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
         <label>Location</label>
-        <input type="text" id="inpLocation" placeholder="e.g. San Francisco, CA" oninput="updateResume()">
-    </div>
+        <input
+          type="text"
+          id="inpLocation"
+          placeholder="e.g. San Francisco, CA"
+          oninput="updateResume()"
+        />
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
         <label>Links (LinkedIn / GitHub)</label>
-        <input type="text" id="inpLinkedin" placeholder="LinkedIn URL" oninput="updateResume()" style="margin-bottom:4px;">
-        <input type="text" id="inpGithub" placeholder="GitHub URL" oninput="updateResume()">
-    </div>
+        <input
+          type="text"
+          id="inpLinkedin"
+          placeholder="LinkedIn URL"
+          oninput="updateResume()"
+          style="margin-bottom: 4px"
+        />
+        <input
+          type="text"
+          id="inpGithub"
+          placeholder="GitHub URL"
+          oninput="updateResume()"
+        />
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
         <label>Professional Summary</label>
-        <textarea id="inpSummary" placeholder="A brief, impactful summary..." oninput="updateResume()"></textarea>
-    </div>
+        <textarea
+        id="inpSummary"
+        placeholder="A brief, impactful summary..."
+        oninput="updateResume()"
+        ></textarea>
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
         <label>Key Skills</label>
-        <textarea id="inpSkills" placeholder="JavaScript, React, Node.js..." oninput="updateResume()"></textarea>
-    </div>
+        <textarea
+          id="inpSkills"
+          placeholder="JavaScript, React, Node.js..."
+          oninput="updateResume()"
+        ></textarea>
+      </div>
 
-    <div class="form-group">
-        <label>Work Experience</label>
-        <textarea id="inpExperience" placeholder="Role | Company | Duration&#10;• Responsibility 1&#10;• Responsibility 2" oninput="updateResume()"></textarea>
-    </div>
-
-    <div class="form-group">
+      <div class="form-group">
         <label>Projects</label>
-        <textarea id="inpProjects" placeholder="Project Name&#10;• Detail 1&#10;• Detail 2" oninput="updateResume()"></textarea>
-    </div>
+        <textarea
+          id="inpProjects"
+          placeholder="Project Name&#10;• Detail 1&#10;• Detail 2"
+          oninput="updateResume()"
+        ></textarea>
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
+        <label>Work Experience</label>
+        <textarea
+          id="inpExperience"
+          placeholder="Role | Company | Duration&#10;• Responsibility 1&#10;• Responsibility 2"
+          oninput="updateResume()"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
         <label>Education</label>
-        <textarea id="inpEducation" placeholder="Degree, University, Year" oninput="updateResume()"></textarea>
-    </div>
+        <textarea
+          id="inpEducation"
+          placeholder="Degree, University, Year"
+          oninput="updateResume()"
+        ></textarea>
+      </div>
 
-    <button class="btn" onclick="window.print()" style="margin-top: 8px;">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      <button class="btn" onclick="window.print()" style="margin-top: 8px">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"
+          />
+        </svg>
         Download as PDF
-    </button>
-</div>
+      </button>
 
-<!-- MAIN PREVIEW -->
-<div class="main">
-
-    <!-- TEMPLATE 1: Classic -->
-    <div class="resume-preview active" id="tpl1">
-        <div class="res-header">
-            <div class="res-name" id="t1-name">JANE DOE</div>
-            <div class="res-contact">
-                <span id="t1-email">jane@example.com</span> •
-                <span id="t1-phone">(555) 123-4567</span> •
-                <span id="t1-location">San Francisco, CA</span> •
-                <a href="#" id="t1-linkedin" target="_blank">linkedin.com/in/janedoe</a> •
-                <a href="#" id="t1-github" target="_blank">github.com/janedoe</a>
-            </div>
-        </div>
-        <div class="res-section">
-            <div class="res-section-title">Professional Summary</div>
-            <div class="res-content" id="t1-summary">A brief, impactful summary of your professional background.</div>
-        </div>
-        <div class="res-section">
-            <div class="res-section-title">Skills</div>
-            <div class="res-content" id="t1-skills">JavaScript, React, Node.js, Python, SQL</div>
-        </div>
-        <div class="res-section">
-            <div class="res-section-title">Experience</div>
-            <div class="res-content" id="t1-experience">Senior Developer | Tech Solutions Inc. | 2020 - Present
-• Led a team of 5 engineers to build scalable web applications
-• Reduced latency by 40% using Redis caching</div>
-        </div>
-        <div class="res-section">
-            <div class="res-section-title">Projects</div>
-            <div class="res-content" id="t1-projects">E-commerce Platform
-• Built a full-stack e-commerce app using React and Node.js</div>
-        </div>
-        <div class="res-section">
-            <div class="res-section-title">Education</div>
-            <div class="res-content" id="t1-education">Bachelor of Science in Computer Science
-University of Technology | 2016 - 2020</div>
-        </div>
+      <div class="form-group" style="margin-top: 10px">
+        <button
+          class="btn"
+          onclick="saveResumeToDb()"
+          style="background-color: #28a745; border: none"
+        >
+          Save Resume to Database
+        </button>
+        <button
+          class="btn"
+          onclick="loadSavedResumes()"
+          style="background-color: #007bff; border: none; margin-left: 6px"
+        >
+          Load Saved Resumes
+        </button>
+      </div>
+      <div
+        id="savedResumesPanel"
+        style="
+          margin-top: 10px;
+          background: #f9f9f9;
+          border: 1px solid #ddd;
+          padding: 10px;
+          max-height: 170px;
+          overflow: auto;
+        "
+      >
+        <strong>Saved Resumes</strong>
+        <div id="savedResumesList">(no resumes loaded yet)</div>
+      </div>
     </div>
 
-    <!-- TEMPLATE 2: Blue & Gray (AHMDD SAAH style) -->
-    <div class="resume-preview" id="tpl2">
+    <!-- MAIN PREVIEW -->
+    <div class="main">
+      <!-- TEMPLATE 1: Classic -->
+      <div class="resume-preview active" id="tpl1">
+        <div class="res-header">
+          <div class="res-name" id="t1-name">JANE DOE</div>
+          <div class="res-contact">
+            <span id="t1-email">jane@example.com</span> •
+            <span id="t1-phone">(555) 123-4567</span> •
+            <span id="t1-location">San Francisco, CA</span> •
+            <a href="#" id="t1-linkedin" target="_blank"
+              >linkedin.com/in/janedoe</a
+            >
+            •
+            <a href="#" id="t1-github" target="_blank">github.com/janedoe</a>
+          </div>
+        </div>
+        <div class="res-section">
+          <div class="res-section-title">Professional Summary</div>
+          <div class="res-content" id="t1-summary">
+            A brief, impactful summary of your professional background.
+          </div>
+        </div>
+        <div class="res-section">
+          <div class="res-section-title">Skills</div>
+          <div class="res-content" id="t1-skills">
+            JavaScript, React, Node.js, Python, SQL
+          </div>
+        </div>
+        <div class="res-section">
+          <div class="res-section-title">Experience</div>
+          <div class="res-content" id="t1-experience">
+            Senior Developer | Tech Solutions Inc. | 2020 - Present • Led a team
+            of 5 engineers to build scalable web applications • Reduced latency
+            by 40% using Redis caching
+          </div>
+        </div>
+        <div class="res-section">
+          <div class="res-section-title">Projects</div>
+          <div class="res-content" id="t1-projects">
+            E-commerce Platform • Built a full-stack e-commerce app using React
+            and Node.js
+          </div>
+        </div>
+        <div class="res-section">
+          <div class="res-section-title">Education</div>
+          <div class="res-content" id="t1-education">
+            Bachelor of Science in Computer Science University of Technology |
+            2016 - 2020
+          </div>
+        </div>
+      </div>
+
+      <!-- TEMPLATE 2: Blue & Gray (AHMDD SAAH style) -->
+      <div class="resume-preview" id="tpl2">
         <!-- Left sidebar -->
         <div class="t2-left">
-            <div>
-                <div class="t2-section-label">Contact</div>
-                <div class="t2-contact-item" id="t2-phone">+124-4236-7894</div>
-                <div class="t2-contact-item" id="t2-email">hello@example.com</div>
-                <div class="t2-contact-item" id="t2-location">123 Any City</div>
-                <div class="t2-contact-item" id="t2-linkedin">www.linkedin.com/in/you</div>
+          <div>
+            <div class="t2-section-label">Contact</div>
+            <div class="t2-contact-item" id="t2-phone">+124-4236-7894</div>
+            <div class="t2-contact-item" id="t2-email">hello@example.com</div>
+            <div class="t2-contact-item" id="t2-location">123 Any City</div>
+            <div class="t2-contact-item" id="t2-linkedin">
+              www.linkedin.com/in/you
             </div>
-            <div>
-                <div class="t2-section-label">Skills</div>
-                <div id="t2-skills-list">
-                    <div class="t2-skill-item">Strategic Planning</div>
-                    <div class="t2-skill-item">Problem Solving</div>
-                    <div class="t2-skill-item">Data Analysis</div>
-                </div>
+          </div>
+          <div>
+            <div class="t2-section-label">Skills</div>
+            <div id="t2-skills-list">
+              <div class="t2-skill-item">Strategic Planning</div>
+              <div class="t2-skill-item">Problem Solving</div>
+              <div class="t2-skill-item">Data Analysis</div>
             </div>
-            <div>
-                <div class="t2-section-label">Languages</div>
-                <div class="t2-skill-item" id="t2-lang">English (Fluent)</div>
-            </div>
+          </div>
+          <div>
+            <div class="t2-section-label">Languages</div>
+            <div class="t2-skill-item" id="t2-lang">English (Fluent)</div>
+          </div>
         </div>
         <!-- Right content -->
         <div class="t2-right">
-            <div class="t2-name-block">
-                <div class="t2-name" id="t2-name">AHMDD SAAH</div>
-                <div class="t2-title" id="t2-title">MARKETING MANAGER</div>
+          <div class="t2-name-block">
+            <div class="t2-name" id="t2-name">AHMDD SAAH</div>
+            <div class="t2-title" id="t2-title">MARKETING MANAGER</div>
+          </div>
+          <div class="t2-r-section">
+            <div class="t2-r-title">Profile</div>
+            <div class="t2-profile-text" id="t2-summary">
+              A brief, impactful summary of your professional background and key
+              achievements that align with your target role.
             </div>
-            <div class="t2-r-section">
-                <div class="t2-r-title">Profile</div>
-                <div class="t2-profile-text" id="t2-summary">A brief, impactful summary of your professional background and key achievements that align with your target role.</div>
-            </div>
-            <div class="t2-r-section">
-                <div class="t2-r-title">Work Experience</div>
-                <div id="t2-exp-list">
-                    <div class="t2-exp-item">
-                        <div><span class="t2-exp-company">Tech Solutions Inc.</span><span class="t2-exp-date">2020 - Present</span></div>
-                        <div class="t2-exp-role">Senior Developer</div>
-                        <div class="t2-exp-bullets">• Led a team of 5 engineers
-• Reduced latency by 40%</div>
-                    </div>
+          </div>
+          <div class="t2-r-section">
+            <div class="t2-r-title">Work Experience</div>
+            <div id="t2-exp-list">
+              <div class="t2-exp-item">
+                <div>
+                  <span class="t2-exp-company">Tech Solutions Inc.</span
+                  ><span class="t2-exp-date">2020 - Present</span>
                 </div>
+                <div class="t2-exp-role">Senior Developer</div>
+                <div class="t2-exp-bullets">
+                  • Led a team of 5 engineers • Reduced latency by 40%
+                </div>
+              </div>
             </div>
-            <div class="t2-r-section">
-                <div class="t2-r-title">Education</div>
-                <div class="t2-edu-degree" id="t2-edu-degree">Bachelor of Science in Computer Science</div>
-                <div class="t2-edu-school" id="t2-edu-school">University of Technology | 2016 - 2020</div>
+          </div>
+          <div class="t2-r-section">
+            <div class="t2-r-title">Education</div>
+            <div class="t2-edu-degree" id="t2-edu-degree">
+              Bachelor of Science in Computer Science
             </div>
+            <div class="t2-edu-school" id="t2-edu-school">
+              University of Technology | 2016 - 2020
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <!-- TEMPLATE 3: Web Dev Blue (ELEANOR FITZGERALD style) -->
-    <div class="resume-preview" id="tpl3">
+      <!-- TEMPLATE 3: Web Dev Blue (ELEANOR FITZGERALD style) -->
+      <div class="resume-preview" id="tpl3">
         <div class="t3-name" id="t3-name">ELEANOR FITZGERALD</div>
         <div class="t3-title" id="t3-title">Web Developer</div>
-        <div class="t3-contact-bar" id="t3-contact">123 Anywhere St., Any City | +123-456-7890 | hello@reallygreatsite.com</div>
-        <hr class="t3-divider">
-        <div class="t3-section">
-            <div class="t3-section-title">Career Summary</div>
-            <div class="t3-summary" id="t3-summary">Solution-oriented professional with experience building and maintaining software. Highly skilled in communication, collaboration, and technical documentation.</div>
+        <div class="t3-contact-bar" id="t3-contact">
+          123 Anywhere St., Any City | +123-456-7890 | hello@reallygreatsite.com
         </div>
-        <hr class="t3-divider">
+        <hr class="t3-divider" />
         <div class="t3-section">
-            <div class="t3-section-title">Work Experience</div>
-            <div id="t3-exp-list">
-                <div class="t3-exp-item">
-                    <div class="t3-exp-company">Tech Solutions Inc.</div>
-                    <div class="t3-exp-role-date">Senior Developer | 2020 - Present</div>
-                    <div class="t3-exp-bullets">• Led a team of 5 engineers to build scalable web applications
-• Reduced latency by 40% using Redis caching</div>
-                </div>
+          <div class="t3-section-title">Career Summary</div>
+          <div class="t3-summary" id="t3-summary">
+            Solution-oriented professional with experience building and
+            maintaining software. Highly skilled in communication,
+            collaboration, and technical documentation.
+          </div>
+        </div>
+        <hr class="t3-divider" />
+        <div class="t3-section">
+          <div class="t3-section-title">Work Experience</div>
+          <div id="t3-exp-list">
+            <div class="t3-exp-item">
+              <div class="t3-exp-company">Tech Solutions Inc.</div>
+              <div class="t3-exp-role-date">
+                Senior Developer | 2020 - Present
+              </div>
+              <div class="t3-exp-bullets">
+                • Led a team of 5 engineers to build scalable web applications •
+                Reduced latency by 40% using Redis caching
+              </div>
             </div>
+          </div>
         </div>
-        <hr class="t3-divider">
+        <hr class="t3-divider" />
         <div class="t3-section">
-            <div class="t3-section-title">Relevant Projects</div>
-            <div class="t3-skills-text" id="t3-projects">E-commerce Platform
-• Built a full-stack e-commerce app using React and Node.js</div>
+          <div class="t3-section-title">Relevant Projects</div>
+          <div class="t3-skills-text" id="t3-projects">
+            E-commerce Platform • Built a full-stack e-commerce app using React
+            and Node.js
+          </div>
         </div>
-        <hr class="t3-divider">
+        <hr class="t3-divider" />
         <div class="t3-section">
-            <div class="t3-section-title">Education</div>
-            <div class="t3-edu-degree" id="t3-education">Bachelor of Science in Computer Science
-University of Technology | 2016 - 2020</div>
+          <div class="t3-section-title">Education</div>
+          <div class="t3-edu-degree" id="t3-education">
+            Bachelor of Science in Computer Science University of Technology |
+            2016 - 2020
+          </div>
         </div>
-        <hr class="t3-divider">
+        <hr class="t3-divider" />
         <div class="t3-section">
-            <div class="t3-section-title">Skills</div>
-            <div class="t3-skills-text" id="t3-skills">JavaScript, React, Node.js, Python, SQL</div>
+          <div class="t3-section-title">Skills</div>
+          <div class="t3-skills-text" id="t3-skills">
+            JavaScript, React, Node.js, Python, SQL
+          </div>
         </div>
-    </div>
+      </div>
 
-    <!-- TEMPLATE 4: Gray & White (ISABEL MERCADO style) -->
-    <div class="resume-preview" id="tpl4">
-        <div class="t4-top t4-top-wrap" style="position:relative;">
-            <div class="t4-name" id="t4-name">ISABEL <strong>MERCADO</strong></div>
-            <div class="t4-role" id="t4-role">Executive Secretary</div>
-            <div class="t4-contact-right">
-                <div class="t4-contact-item" id="t4-phone-right">
-                    <span>📞</span> +123-456-7890
-                </div>
-                <div class="t4-contact-item" id="t4-email-right">
-                    <span>✉</span> hello@example.com
-                </div>
-                <div class="t4-contact-item" id="t4-loc-right">
-                    <span>🏠</span> 123 Anywhere St.
-                </div>
+      <!-- TEMPLATE 4: Gray & White (ISABEL MERCADO style) -->
+      <div class="resume-preview" id="tpl4">
+        <div class="t4-top t4-top-wrap" style="position: relative">
+          <div class="t4-name" id="t4-name">
+            ISABEL <strong>MERCADO</strong>
+          </div>
+          <div class="t4-role" id="t4-role">Executive Secretary</div>
+          <div class="t4-contact-right">
+            <div class="t4-contact-item" id="t4-phone-right">
+              <span>📞</span> +123-456-7890
             </div>
+            <div class="t4-contact-item" id="t4-email-right">
+              <span>✉</span> hello@example.com
+            </div>
+            <div class="t4-contact-item" id="t4-loc-right">
+              <span>🏠</span> 123 Anywhere St.
+            </div>
+          </div>
         </div>
         <div class="t4-summary-section">
-            <div class="t4-summary-title">Summary</div>
-            <div class="t4-summary-underline"></div>
-            <div class="t4-summary-text" id="t4-summary">Highly motivated professional with years of experience. Proficient in managing complex tasks and communicating with internal and external stakeholders. Possess exceptional communication and interpersonal skills.</div>
+          <div class="t4-summary-title">Summary</div>
+          <div class="t4-summary-underline"></div>
+          <div class="t4-summary-text" id="t4-summary">
+            Highly motivated professional with years of experience. Proficient
+            in managing complex tasks and communicating with internal and
+            external stakeholders. Possess exceptional communication and
+            interpersonal skills.
+          </div>
         </div>
         <div class="t4-body">
-            <div class="t4-col-left">
-                <div class="t4-section">
-                    <div class="t4-col-title">Education</div>
-                    <div id="t4-edu-content">
-                        <div class="t4-edu-degree">University of Technology</div>
-                        <div class="t4-edu-meta">Bachelor of Science in Computer Science
-2016 – 2020</div>
-                    </div>
+          <div class="t4-col-left">
+            <div class="t4-section">
+              <div class="t4-col-title">Education</div>
+              <div id="t4-edu-content">
+                <div class="t4-edu-degree">University of Technology</div>
+                <div class="t4-edu-meta">
+                  Bachelor of Science in Computer Science 2016 – 2020
                 </div>
-                <div class="t4-section">
-                    <div class="t4-col-title">Skills</div>
-                    <div id="t4-skills-list">
-                        <div class="t4-skill-item">• Strong organizational skills</div>
-                        <div class="t4-skill-item">• Exceptional communication</div>
-                        <div class="t4-skill-item">• Detail-oriented</div>
-                    </div>
-                </div>
-                <div class="t4-section">
-                    <div class="t4-col-title">Certifications / Projects</div>
-                    <div id="t4-certs">
-                        <div class="t4-cert-item">• Professional Certificate Program</div>
-                    </div>
-                </div>
+              </div>
             </div>
-            <div class="t4-col-right">
-                <div class="t4-col-title">Professional Experience</div>
-                <div id="t4-exp-list">
-                    <div class="t4-exp-item">
-                        <div class="t4-exp-title">Senior Developer</div>
-                        <div class="t4-exp-company">Tech Solutions Inc. | 2020 - Present</div>
-                        <div class="t4-exp-bullets">• Led a team of 5 engineers to build scalable web applications
-• Reduced latency by 40% using Redis caching</div>
-                    </div>
-                </div>
+            <div class="t4-section">
+              <div class="t4-col-title">Skills</div>
+              <div id="t4-skills-list">
+                <div class="t4-skill-item">• Strong organizational skills</div>
+                <div class="t4-skill-item">• Exceptional communication</div>
+                <div class="t4-skill-item">• Detail-oriented</div>
+              </div>
             </div>
+            <div class="t4-section">
+              <div class="t4-col-title">Certifications / Projects</div>
+              <div id="t4-certs">
+                <div class="t4-cert-item">
+                  • Professional Certificate Program
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="t4-col-right">
+            <div class="t4-col-title">Professional Experience</div>
+            <div id="t4-exp-list">
+              <div class="t4-exp-item">
+                <div class="t4-exp-title">Senior Developer</div>
+                <div class="t4-exp-company">
+                  Tech Solutions Inc. | 2020 - Present
+                </div>
+                <div class="t4-exp-bullets">
+                  • Led a team of 5 engineers to build scalable web applications
+                  • Reduced latency by 40% using Redis caching
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <!-- TEMPLATE 5: Dark Sidebar (MARIANA ANDERSON style) -->
-    <div class="resume-preview" id="tpl5">
+      <!-- TEMPLATE 5: Dark Sidebar (MARIANA ANDERSON style) -->
+      <div class="resume-preview" id="tpl5">
         <div class="t5-left">
-            <div class="t5-photo-circle" id="t5-photo-circle" style="background-size: cover; background-position: center; border: 3px solid #3a5068; color: #90cdf4;">👤</div>
-            <div>
-                <div class="t5-section-label">Contact</div>
-                <div class="t5-contact-item" id="t5-phone">📞 123-456-7890</div>
-                <div class="t5-contact-item" id="t5-email">✉ hello@example.com</div>
-                <div class="t5-contact-item" id="t5-location">📍 123 Anywhere St.</div>
+          <div
+            class="t5-photo-circle"
+            id="t5-photo-circle"
+            style="
+              background-size: cover;
+              background-position: center;
+              border: 3px solid #3a5068;
+              color: #90cdf4;
+            "
+          >
+            👤
+          </div>
+          <div>
+            <div class="t5-section-label">Contact</div>
+            <div class="t5-contact-item" id="t5-phone">📞 123-456-7890</div>
+            <div class="t5-contact-item" id="t5-email">✉ hello@example.com</div>
+            <div class="t5-contact-item" id="t5-location">
+              📍 123 Anywhere St.
             </div>
-            <div>
-                <div class="t5-section-label">Education</div>
-                <div id="t5-edu-content">
-                    <div class="t5-edu-item">
-                        <div class="t5-edu-year">2016 - 2020</div>
-                        <div class="t5-edu-degree">Bachelor of Science</div>
-                        <div class="t5-edu-school">University of Technology</div>
-                    </div>
-                </div>
+          </div>
+          <div>
+            <div class="t5-section-label">Education</div>
+            <div id="t5-edu-content">
+              <div class="t5-edu-item">
+                <div class="t5-edu-year">2016 - 2020</div>
+                <div class="t5-edu-degree">Bachelor of Science</div>
+                <div class="t5-edu-school">University of Technology</div>
+              </div>
             </div>
-            <div>
-                <div class="t5-section-label">Expertise</div>
-                <div id="t5-skills-list">
-                    <div class="t5-skill-item">JavaScript</div>
-                    <div class="t5-skill-item">React</div>
-                    <div class="t5-skill-item">Node.js</div>
-                </div>
+          </div>
+          <div>
+            <div class="t5-section-label">Expertise</div>
+            <div id="t5-skills-list">
+              <div class="t5-skill-item">JavaScript</div>
+              <div class="t5-skill-item">React</div>
+              <div class="t5-skill-item">Node.js</div>
             </div>
-            <div>
-                <div class="t5-section-label">Language</div>
-                <div class="t5-lang-item" id="t5-lang">English</div>
-            </div>
+          </div>
+          <div>
+            <div class="t5-section-label">Language</div>
+            <div class="t5-lang-item" id="t5-lang">English</div>
+          </div>
         </div>
         <div class="t5-right">
-            <div class="t5-name" id="t5-name">Mariana Anderson</div>
-            <div class="t5-title" id="t5-title">Marketing Manager</div>
-            <div class="t5-summary" id="t5-summary">A brief, impactful summary of your professional background and key achievements.</div>
-            <div class="t5-section">
-                <div class="t5-section-title">Experience</div>
-                <div id="t5-exp-list">
-                    <div class="t5-exp-item">
-                        <div class="t5-timeline-dot"></div>
-                        <div class="t5-exp-content">
-                            <div class="t5-exp-date">2020 - Present</div>
-                            <div class="t5-exp-company">Tech Solutions Inc.</div>
-                            <div class="t5-exp-role">Senior Developer</div>
-                            <div class="t5-exp-desc">• Led a team of 5 engineers
-• Reduced latency by 40%</div>
-                        </div>
-                    </div>
+          <div class="t5-name" id="t5-name">Mariana Anderson</div>
+          <div class="t5-title" id="t5-title">Marketing Manager</div>
+          <div class="t5-summary" id="t5-summary">
+            A brief, impactful summary of your professional background and key
+            achievements.
+          </div>
+          <div class="t5-section">
+            <div class="t5-section-title">Experience</div>
+            <div id="t5-exp-list">
+              <div class="t5-exp-item">
+                <div class="t5-timeline-dot"></div>
+                <div class="t5-exp-content">
+                  <div class="t5-exp-date">2020 - Present</div>
+                  <div class="t5-exp-company">Tech Solutions Inc.</div>
+                  <div class="t5-exp-role">Senior Developer</div>
+                  <div class="t5-exp-desc">
+                    • Led a team of 5 engineers • Reduced latency by 40%
+                  </div>
                 </div>
+              </div>
             </div>
-            <div class="t5-section">
-                <div class="t5-section-title">Reference</div>
-                <div class="t5-ref-grid" id="t5-refs">
-                    <div>
-                        <div class="t5-ref-name">Contact Reference</div>
-                        <div class="t5-ref-company">Company / Position</div>
-                        <div class="t5-ref-contact">Add your references here</div>
-                    </div>
-                </div>
+          </div>
+          <div class="t5-section">
+            <div class="t5-section-title">Reference</div>
+            <div class="t5-ref-grid" id="t5-refs">
+              <div>
+                <div class="t5-ref-name">Contact Reference</div>
+                <div class="t5-ref-company">Company / Position</div>
+                <div class="t5-ref-contact">Add your references here</div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
-</div>
+    <!-- RIGHT AI SIDEBAR -->
+    <div class="ai-sidebar">
+      <div class="ai-header"><span>✨</span> AI Resume Assistant</div>
 
-<!-- RIGHT AI SIDEBAR -->
-<div class="ai-sidebar">
-    <div class="ai-header">
-        <span>✨</span> AI Resume Assistant
-    </div>
-
-    <div class="ai-banner" id="apiBanner">
-        <strong style="font-size:11px;">Connect Anthropic API</strong>
+      <div class="ai-banner" id="apiBanner">
+        <strong style="font-size: 11px">Connect Anthropic API</strong>
         <div class="api-input-wrap">
-            <input type="password" id="apiKeyInput" class="api-key-input" placeholder="sk-ant-...">
-            <button class="api-save-btn" onclick="saveApiKey()">Save</button>
+          <input
+            type="password"
+            id="apiKeyInput"
+            class="api-key-input"
+            placeholder="sk-ant-..."
+          />
+          <button class="api-save-btn" onclick="saveApiKey()">Save</button>
         </div>
-    </div>
+      </div>
 
-    <div class="ai-actions">
-        <button class="ai-quick-btn" onclick="quickAction('Analyze my resume and list 3 improvements.')">Review Resume</button>
-        <button class="ai-quick-btn" onclick="quickAction('Fix grammar and spelling in my experience section.')">Fix Grammar</button>
-        <button class="ai-quick-btn" onclick="quickAction('Rewrite my professional summary to make it more impactful.')">Enhance Profile</button>
-        <button class="ai-quick-btn" onclick="quickAction('Suggest relevant technical skills to add based on my experience.')">Suggest Skills</button>
-    </div>
-
-    <div class="chat-messages" id="chatMessages">
-        <div class="msg ai">
-            <div class="msg-avatar">✨</div>
-            <div class="msg-bubble">Hi! I'm your AI Assistant. Add your Anthropic API key and I can help you improve your resume.</div>
-        </div>
-    </div>
-
-    <div class="chat-input-area">
-        <textarea id="chatInput" class="chat-input" placeholder="Ask AI..." rows="1" onkeydown="handleChatKey(event)"></textarea>
-        <button class="send-btn" onclick="sendMessage()">
-            <svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      <div class="ai-actions">
+        <button
+          class="ai-quick-btn"
+          onclick="quickAction('Analyze my resume and list 3 improvements.')"
+        >
+          Review Resume
         </button>
-    </div>
-</div>
+        <button
+          class="ai-quick-btn"
+          onclick="
+            quickAction('Fix grammar and spelling in my experience section.')
+          "
+        >
+          Fix Grammar
+        </button>
+        <button
+          class="ai-quick-btn"
+          onclick="
+            quickAction(
+              'Rewrite my professional summary to make it more impactful.',
+            )
+          "
+        >
+          Enhance Profile
+        </button>
+        <button
+          class="ai-quick-btn"
+          onclick="
+            quickAction(
+              'Suggest relevant technical skills to add based on my experience.',
+            )
+          "
+        >
+          Suggest Skills
+        </button>
+      </div>
 
-<script src="resume_craft.js"></script>
-</body>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg ai">
+          <div class="msg-avatar">✨</div>
+          <div class="msg-bubble">
+            Hi! I'm your AI Assistant. Add your Anthropic API key and I can help
+            you improve your resume.
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <textarea
+          id="chatInput"
+          class="chat-input"
+          placeholder="Ask AI..."
+          rows="1"
+          onkeydown="handleChatKey(event)"
+        ></textarea>
+        <button class="send-btn" onclick="sendMessage()">
+          <svg width="16" height="16" fill="white" viewBox="0 0 24 24">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <script src="resume_craft.js"></script>
+  </body>
 </html>

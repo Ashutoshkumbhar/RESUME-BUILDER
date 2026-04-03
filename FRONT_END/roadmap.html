@@ -1,71 +1,751 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>ATS Resume Checker</title>
-  <link rel="stylesheet" href="roadmap.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Roadmaps</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2ed;
+    --surface: #ffffff;
+    --surface2: #faf8f5;
+    --border: #e8e2d9;
+    --text: #1a1714;
+    --text-muted: #7a7068;
+    --accent-aiml: #e8611a;
+    --accent-web: #1a6ee8;
+    --accent-dsa: #8b1ae8;
+    --accent-ds: #0aaa6e;
+    --accent-devops: #e8a01a;
+    --accent-android: #1ae8c8;
+    --accent-cyber: #e81a4a;
+    --done-bg: #edfaf4;
+    --done-border: #0aaa6e;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.07);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.13);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    padding: 52px 60px 36px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  header .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 5vw, 62px);
+    font-weight: 800;
+    line-height: 1.05;
+    color: var(--text);
+  }
+  header h1 span { color: var(--accent-aiml); }
+  header p.subtitle {
+    margin-top: 14px;
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.6;
+  }
+
+  /* ─── CARDS GRID ─── */
+  .cards-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 60px 80px;
+  }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1.5px solid var(--border);
+    padding: 32px 28px 28px;
+    cursor: pointer;
+    transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), box-shadow 0.22s ease, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--accent);
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent);
+  }
+  .card-icon {
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  .card h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+  .card-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+  .card-arrow {
+    position: absolute;
+    bottom: 28px; right: 28px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-size: 16px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .card:hover .card-arrow {
+    background: var(--accent);
+    color: #fff;
+    transform: rotate(45deg);
+  }
+
+  /* ─── ROADMAP MODAL ─── */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,23,20,0.45);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    overflow-y: auto;
+    padding: 32px 20px;
+  }
+  .overlay.active { display: flex; justify-content: center; align-items: flex-start; }
+
+  .modal {
+    background: var(--surface);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 820px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.18);
+    animation: slideUp 0.3s cubic-bezier(.34,1.3,.64,1);
+    overflow: hidden;
+  }
+  @keyframes slideUp {
+    from { opacity:0; transform: translateY(40px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .modal-header {
+    padding: 36px 40px 24px;
+    border-bottom: 1.5px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+  }
+  .modal-icon {
+    width: 60px; height: 60px;
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--modal-accent) 14%, transparent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px;
+    flex-shrink: 0;
+  }
+  .modal-title h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .modal-title p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .modal-close {
+    position: absolute;
+    top: 28px; right: 32px;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted);
+    transition: background 0.15s, color 0.15s;
+  }
+  .modal-close:hover { background: var(--text); color: #fff; }
+
+  .modal-body { padding: 32px 40px 40px; }
+
+  /* ─── PHASES ─── */
+  .phase {
+    margin-bottom: 36px;
+  }
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .phase-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--modal-accent);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .phase-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .phase-duration {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .topics-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .topic-tag {
+    font-size: 13px;
+    padding: 6px 13px;
+    border-radius: 8px;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    color: var(--text);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .topic-tag:hover {
+    border-color: var(--modal-accent);
+    background: color-mix(in srgb, var(--modal-accent) 7%, white);
+  }
+
+  /* connector line */
+  .phase:not(:last-child)::after {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 20px;
+    background: var(--border);
+    margin: 16px 0 0 15px;
+  }
+
+  /* ─── RESOURCES ─── */
+  .resources-section {
+    margin-top: 8px;
+    padding-top: 28px;
+    border-top: 1.5px solid var(--border);
+  }
+  .resources-section h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .resource-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .resource-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+  .resource-link:hover {
+    border-color: var(--modal-accent);
+    color: var(--modal-accent);
+    background: color-mix(in srgb, var(--modal-accent) 6%, white);
+  }
+  .resource-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--modal-accent);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 36px 24px 24px; }
+    .cards-section { padding: 0 24px 60px; }
+    .modal-header, .modal-body { padding: 24px; }
+  }
+</style>
 </head>
 <body>
 
-  <div class="container">
+<header>
+  <div class="eyebrow">Learning Paths</div>
+  <h1>Course <span>Roadmaps</span></h1>
+  <p class="subtitle">Step-by-step learning paths for the most in-demand tech skills. Click any course to explore the full roadmap.</p>
+</header>
 
-    <div class="header">
-      <h1>ATS Resume Checker</h1>
-      <p>Analyze resume compatibility with job description</p>
+<section class="cards-section">
+  <div class="cards-grid" id="cardsGrid"></div>
+</section>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-icon" id="modalIcon"></div>
+      <div class="modal-title">
+        <h2 id="modalTitle"></h2>
+        <p id="modalSubtitle"></p>
+      </div>
+      <button class="modal-close" id="modalClose">✕</button>
     </div>
-
-    <div class="card">
-
-      <div class="section">
-        <h3>Upload Resume</h3>
-        <div class="upload-box">
-          <input type="file" accept=".pdf,.doc,.docx">
-          <span>Browse Resume</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <h3>Job Description</h3>
-        <textarea placeholder="Paste job description here..."></textarea>
-      </div>
-
-    </div>
-
-    <button class="check-btn">Check ATS Score</button>
-
-    <!-- Result Section -->
-    <div class="result-card">
-
-      <div class="score-section">
-        <div class="progress-circle">
-          <span>78%</span>
-        </div>
-        <p>Compatibility Score</p>
-      </div>
-
-      <div class="skills-section">
-
-        <div class="skill-box">
-          <h4>Matched Skills</h4>
-          <div class="tags green">
-            <span>JavaScript</span>
-            <span>React</span>
-            <span>Node.js</span>
-          </div>
-        </div>
-
-        <div class="skill-box">
-          <h4>Missing Skills</h4>
-          <div class="tags red">
-            <span>SQL</span>
-            <span>AWS</span>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
+    <div class="modal-body" id="modalBody"></div>
   </div>
-    <script src="roadmap.js"></script>
+</div>
+
+<script>
+const courses = [
+  {
+    id: 'aiml',
+    icon: '🤖',
+    title: 'AI & Machine Learning',
+    desc: 'From Python basics to deploying real ML models. Covers math, algorithms, deep learning, and MLOps.',
+    accent: '#e8611a',
+    badges: ['Beginner → Advanced', '~12 months'],
+    subtitle: 'Artificial Intelligence & Machine Learning',
+    phases: [
+      {
+        num: 1, title: 'Programming Foundations', duration: '4–6 weeks',
+        topics: ['Python Basics', 'Data Structures', 'OOP in Python', 'NumPy', 'Pandas', 'Matplotlib / Seaborn', 'Jupyter Notebooks']
+      },
+      {
+        num: 2, title: 'Mathematics for ML', duration: '4–6 weeks',
+        topics: ['Linear Algebra (Vectors, Matrices)', 'Calculus (Derivatives, Chain Rule)', 'Probability & Statistics', 'Bayes Theorem', 'Distributions', 'Gradient Descent (intuition)']
+      },
+      {
+        num: 3, title: 'Core Machine Learning', duration: '8–10 weeks',
+        topics: ['Supervised Learning', 'Linear & Logistic Regression', 'Decision Trees & Random Forests', 'SVM', 'K-Means, DBSCAN (Unsupervised)', 'Cross-Validation', 'Bias-Variance Tradeoff', 'Scikit-learn']
+      },
+      {
+        num: 4, title: 'Deep Learning', duration: '8–10 weeks',
+        topics: ['Neural Networks & Backprop', 'CNNs (Image)', 'RNNs & LSTMs (Sequence)', 'Transformers & Attention', 'Transfer Learning', 'TensorFlow / PyTorch', 'Model Fine-tuning']
+      },
+      {
+        num: 5, title: 'Specializations', duration: '6–8 weeks',
+        topics: ['NLP (BERT, GPT concepts)', 'Computer Vision', 'Reinforcement Learning (basics)', 'Generative AI (GANs, Diffusion)', 'LLM APIs & Prompt Engineering']
+      },
+      {
+        num: 6, title: 'MLOps & Deployment', duration: '4–6 weeks',
+        topics: ['Model Evaluation & Monitoring', 'Flask / FastAPI for ML', 'Docker for ML', 'MLflow / Weights & Biases', 'Cloud ML (AWS SageMaker / GCP Vertex AI)', 'CI/CD for ML Pipelines']
+      }
+    ],
+    resources: [
+      { name: 'Andrew Ng – ML Specialization (Coursera)', url: 'https://www.coursera.org/specializations/machine-learning-introduction' },
+      { name: 'Deep Learning Specialization (Coursera)', url: 'https://www.coursera.org/specializations/deep-learning' },
+      { name: 'NPTEL – Introduction to ML', url: 'https://nptel.ac.in/courses/106105152' },
+      { name: 'fast.ai Practical Deep Learning', url: 'https://course.fast.ai' },
+      { name: 'Udemy – ML A-Z (Kirill Eremenko)', url: 'https://www.udemy.com/course/machinelearning/' },
+      { name: 'Google ML Crash Course (Free)', url: 'https://developers.google.com/machine-learning/crash-course' }
+    ]
+  },
+  {
+    id: 'web',
+    icon: '🌐',
+    title: 'Web Development',
+    desc: 'Build full-stack web apps from scratch. Covers HTML/CSS, JavaScript, React, Node.js, and databases.',
+    accent: '#1a6ee8',
+    badges: ['Beginner → Pro', '~10 months'],
+    subtitle: 'Full-Stack Web Development',
+    phases: [
+      {
+        num: 1, title: 'Web Fundamentals', duration: '4–5 weeks',
+        topics: ['HTML5 Semantics', 'CSS3 & Flexbox & Grid', 'Responsive Design', 'CSS Variables & Animations', 'Browser DevTools', 'Git & GitHub basics']
+      },
+      {
+        num: 2, title: 'JavaScript Essentials', duration: '6–8 weeks',
+        topics: ['JS Syntax & Data Types', 'DOM Manipulation', 'Events & Forms', 'ES6+ (Arrow fns, Promises, Async/Await)', 'Fetch API & AJAX', 'LocalStorage', 'Error Handling']
+      },
+      {
+        num: 3, title: 'Frontend Frameworks', duration: '8 weeks',
+        topics: ['React.js (Components, Props, State)', 'React Hooks', 'React Router', 'State Management (Redux / Zustand)', 'Tailwind CSS', 'TypeScript basics', 'Testing (Jest, React Testing Library)']
+      },
+      {
+        num: 4, title: 'Backend Development', duration: '8 weeks',
+        topics: ['Node.js & npm', 'Express.js', 'REST API Design', 'Authentication (JWT, Sessions)', 'Middleware', 'File Uploads', 'MVC Pattern']
+      },
+      {
+        num: 5, title: 'Databases', duration: '4–5 weeks',
+        topics: ['SQL (PostgreSQL / MySQL)', 'NoSQL (MongoDB)', 'ORMs (Prisma / Mongoose)', 'Database Design & Normalization', 'Caching (Redis basics)', 'Indexing & Queries']
+      },
+      {
+        num: 6, title: 'DevOps & Deployment', duration: '3–4 weeks',
+        topics: ['Linux CLI basics', 'Docker basics', 'CI/CD (GitHub Actions)', 'Deploy on Vercel / Railway / Render', 'NGINX basics', 'Environment Variables & Secrets', 'HTTPS & Domain setup']
+      }
+    ],
+    resources: [
+      { name: 'The Odin Project (Free & Structured)', url: 'https://www.theodinproject.com' },
+      { name: 'freeCodeCamp (Free)', url: 'https://www.freecodecamp.org' },
+      { name: 'Udemy – Web Dev Bootcamp (Angela Yu)', url: 'https://www.udemy.com/course/the-complete-web-development-bootcamp/' },
+      { name: 'Full-Stack Open (University of Helsinki, Free)', url: 'https://fullstackopen.com/en/' },
+      { name: 'NPTEL – Internet Technologies', url: 'https://nptel.ac.in/courses/106105084' },
+      { name: 'Meta Front-End Developer (Coursera)', url: 'https://www.coursera.org/professional-certificates/meta-front-end-developer' }
+    ]
+  },
+  {
+    id: 'dsa',
+    icon: '🧩',
+    title: 'Data Structures & Algorithms',
+    desc: 'Master DSA to crack coding interviews at top tech companies and build efficient software.',
+    accent: '#8b1ae8',
+    badges: ['Beginner → Advanced', '~6 months'],
+    subtitle: 'DSA for Competitive Programming & Interviews',
+    phases: [
+      {
+        num: 1, title: 'Programming Language Basics', duration: '2–3 weeks',
+        topics: ['Choose C++ / Java / Python', 'Basic Syntax', 'STL / Collections', 'Time & Space Complexity (Big-O)', 'Recursion Basics']
+      },
+      {
+        num: 2, title: 'Linear Data Structures', duration: '4–5 weeks',
+        topics: ['Arrays & Strings', 'Linked Lists (Singly, Doubly, Circular)', 'Stack (applications)', 'Queue & Deque', 'Hashing & HashMaps', 'Prefix Sums, Sliding Window, Two Pointers']
+      },
+      {
+        num: 3, title: 'Non-Linear Data Structures', duration: '5–6 weeks',
+        topics: ['Binary Trees & BST', 'Heaps & Priority Queues', 'Graphs (BFS, DFS)', 'Tries', 'Segment Trees (intro)', 'Disjoint Set Union (Union-Find)']
+      },
+      {
+        num: 4, title: 'Algorithms', duration: '6–8 weeks',
+        topics: ['Sorting (Merge, Quick, Heap sort)', 'Binary Search (variations)', 'Greedy Algorithms', 'Backtracking', 'Divide & Conquer', 'Graph Algorithms (Dijkstra, Bellman-Ford, Kruskal, Prim)']
+      },
+      {
+        num: 5, title: 'Dynamic Programming', duration: '5–6 weeks',
+        topics: ['Memoization & Tabulation', '1D DP (Fibonacci, Climbing Stairs)', '2D DP (Knapsack, LCS, Edit Distance)', 'DP on Trees & Graphs', 'Bitmask DP', 'DP on Strings']
+      },
+      {
+        num: 6, title: 'Practice & Interview Prep', duration: 'Ongoing',
+        topics: ['LeetCode 150 (NeetCode list)', 'Codeforces Div-2 A/B problems', 'Mock Interviews', 'System Design basics', 'FAANG patterns (Sliding window, Monotonic stack, etc.)']
+      }
+    ],
+    resources: [
+      { name: 'Striver\'s A2Z DSA Sheet (free)', url: 'https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/' },
+      { name: 'Udemy – DSA Masterclass (Abdul Bari)', url: 'https://www.udemy.com/course/datastructurescncpp/' },
+      { name: 'NPTEL – Programming, Data Structures and Algorithms', url: 'https://nptel.ac.in/courses/106102064' },
+      { name: 'NeetCode (Free YouTube + Roadmap)', url: 'https://neetcode.io' },
+      { name: 'Coursera – Algorithms (Princeton, Tim Roughgarden)', url: 'https://www.coursera.org/specializations/algorithms' },
+      { name: 'LeetCode Practice', url: 'https://leetcode.com' }
+    ]
+  },
+  {
+    id: 'ds',
+    icon: '📊',
+    title: 'Data Science',
+    desc: 'Learn to collect, clean, analyze, and visualize data to derive actionable business insights.',
+    accent: '#0aaa6e',
+    badges: ['Beginner → Advanced', '~10 months'],
+    subtitle: 'Data Science & Analytics',
+    phases: [
+      {
+        num: 1, title: 'Python & Statistics Foundations', duration: '4–5 weeks',
+        topics: ['Python (NumPy, Pandas, Matplotlib)', 'Descriptive Statistics', 'Probability', 'Hypothesis Testing', 'Normal/Binomial/Poisson Distributions', 'Confidence Intervals, p-values']
+      },
+      {
+        num: 2, title: 'Data Wrangling & EDA', duration: '4 weeks',
+        topics: ['Data Cleaning (missing values, outliers)', 'Feature Engineering', 'Exploratory Data Analysis', 'Seaborn & Plotly Visualizations', 'Correlation Analysis', 'Pivot Tables']
+      },
+      {
+        num: 3, title: 'SQL & Databases', duration: '3–4 weeks',
+        topics: ['SQL Queries (SELECT, JOIN, GROUP BY)', 'Window Functions', 'Subqueries & CTEs', 'SQLite / PostgreSQL', 'Connecting Python to SQL', 'NoSQL basics (MongoDB)']
+      },
+      {
+        num: 4, title: 'Machine Learning for DS', duration: '6–8 weeks',
+        topics: ['Regression & Classification', 'Feature Selection & Engineering', 'Model Evaluation Metrics', 'Cross-Validation & Hyperparameter Tuning', 'Ensemble Methods (XGBoost, LightGBM)', 'Scikit-learn Pipelines']
+      },
+      {
+        num: 5, title: 'Data Visualization & Storytelling', duration: '3–4 weeks',
+        topics: ['Tableau / Power BI basics', 'Dashboard Design Principles', 'Plotly Dash / Streamlit', 'Communicating Insights', 'Business KPIs', 'A/B Testing']
+      },
+      {
+        num: 6, title: 'Big Data & Cloud Tools', duration: '4 weeks',
+        topics: ['Spark (PySpark basics)', 'Hadoop concepts', 'AWS S3, Athena basics', 'Google BigQuery', 'Data Pipelines (Airflow concepts)', 'ETL basics']
+      }
+    ],
+    resources: [
+      { name: 'IBM Data Science (Coursera Specialization)', url: 'https://www.coursera.org/professional-certificates/ibm-data-science' },
+      { name: 'NPTEL – Introduction to Data Analytics', url: 'https://nptel.ac.in/courses/110104089' },
+      { name: 'Kaggle Learn (Free, Hands-on)', url: 'https://www.kaggle.com/learn' },
+      { name: 'Udemy – Data Science Bootcamp (Jose Portilla)', url: 'https://www.udemy.com/course/python-for-data-science-and-machine-learning-bootcamp/' },
+      { name: 'DataCamp (Structured Learning)', url: 'https://www.datacamp.com' },
+      { name: 'Google Data Analytics (Coursera)', url: 'https://www.coursera.org/professional-certificates/google-data-analytics' }
+    ]
+  },
+  {
+    id: 'devops',
+    icon: '⚙️',
+    title: 'DevOps & Cloud',
+    desc: 'Automate software delivery pipelines. Learn Linux, Docker, Kubernetes, CI/CD, and cloud platforms.',
+    accent: '#d4891a',
+    badges: ['Intermediate', '~9 months'],
+    subtitle: 'DevOps Engineering & Cloud Computing',
+    phases: [
+      {
+        num: 1, title: 'Linux & Networking Fundamentals', duration: '4–5 weeks',
+        topics: ['Linux CLI (bash, permissions, processes)', 'Shell Scripting', 'Networking basics (TCP/IP, DNS, HTTP)', 'SSH & SCP', 'Package Managers (apt, yum)', 'Cron Jobs']
+      },
+      {
+        num: 2, title: 'Version Control & Git', duration: '2 weeks',
+        topics: ['Git branching strategies', 'Git rebase vs merge', 'GitHub / GitLab', 'Pull Requests & Code Review', 'Monorepo vs Polyrepo']
+      },
+      {
+        num: 3, title: 'Containers & Docker', duration: '4 weeks',
+        topics: ['Containers vs VMs', 'Dockerfile', 'Docker Compose', 'Docker Volumes & Networks', 'Container Registries (DockerHub, ECR)', 'Multi-stage Builds']
+      },
+      {
+        num: 4, title: 'Kubernetes', duration: '6–8 weeks',
+        topics: ['K8s Architecture (Pods, Nodes, Cluster)', 'Deployments, Services, Ingress', 'ConfigMaps & Secrets', 'Helm Charts', 'kubectl', 'Scaling & Self-healing', 'EKS / GKE basics']
+      },
+      {
+        num: 5, title: 'CI/CD & Infrastructure as Code', duration: '5–6 weeks',
+        topics: ['GitHub Actions / Jenkins / GitLab CI', 'Pipeline Design', 'Terraform (IaC)', 'Ansible (Config Management)', 'Artifact Management (Nexus/JFrog)', 'Blue-Green & Canary Deployments']
+      },
+      {
+        num: 6, title: 'Cloud Platforms & Monitoring', duration: '6 weeks',
+        topics: ['AWS Core (EC2, S3, VPC, IAM, RDS)', 'AWS Lambda & Serverless', 'Monitoring: Prometheus & Grafana', 'Logging: ELK Stack', 'Alerting & SLAs', 'Cost Optimization']
+      }
+    ],
+    resources: [
+      { name: 'KodeKloud (Hands-on DevOps Labs)', url: 'https://kodekloud.com' },
+      { name: 'AWS Cloud Practitioner (Coursera / AWS)', url: 'https://www.coursera.org/learn/aws-cloud-practitioner-essentials' },
+      { name: 'NPTEL – Cloud Computing', url: 'https://nptel.ac.in/courses/106105167' },
+      { name: 'Udemy – DevOps Bootcamp (Nana Janashia)', url: 'https://www.udemy.com/course/devops-docker-complete-guide/' },
+      { name: 'Linux Foundation Kubernetes (edX)', url: 'https://www.edx.org/learn/kubernetes/the-linux-foundation-introduction-to-kubernetes' },
+      { name: 'Docker Official Docs & Labs', url: 'https://docs.docker.com/get-started/' }
+    ]
+  },
+  {
+    id: 'android',
+    icon: '📱',
+    title: 'Android Development',
+    desc: 'Build native Android apps using Kotlin and Jetpack Compose. From UI design to Play Store deployment.',
+    accent: '#0a9e8a',
+    badges: ['Beginner → Intermediate', '~8 months'],
+    subtitle: 'Native Android App Development',
+    phases: [
+      {
+        num: 1, title: 'Kotlin Fundamentals', duration: '4 weeks',
+        topics: ['Kotlin Syntax & Data Types', 'Functions & Lambdas', 'OOP in Kotlin', 'Null Safety', 'Coroutines & Flows', 'Collections & Extension Functions']
+      },
+      {
+        num: 2, title: 'Android Basics', duration: '4–5 weeks',
+        topics: ['Android Studio Setup', 'Activities & Fragments', 'Intents (Explicit, Implicit)', 'Layouts (XML)', 'RecyclerView', 'Permissions & Manifest']
+      },
+      {
+        num: 3, title: 'Jetpack Compose (Modern UI)', duration: '5–6 weeks',
+        topics: ['Composable Functions', 'State & Recomposition', 'Navigation (Compose Nav)', 'Lazy Columns & Grids', 'Theming (Material 3)', 'Animations in Compose']
+      },
+      {
+        num: 4, title: 'App Architecture', duration: '4 weeks',
+        topics: ['MVVM Pattern', 'ViewModel & LiveData', 'Repository Pattern', 'Dependency Injection (Hilt)', 'Room Database (local storage)', 'DataStore']
+      },
+      {
+        num: 5, title: 'Networking & APIs', duration: '3–4 weeks',
+        topics: ['Retrofit & OkHttp', 'REST API Integration', 'Serialization (Gson / Moshi)', 'Coroutines with Retrofit', 'Firebase (Firestore, Auth)', 'Image Loading (Coil)']
+      },
+      {
+        num: 6, title: 'Publishing & Advanced', duration: '3 weeks',
+        topics: ['Google Play Store Publishing', 'App Signing & Release Build', 'ProGuard & R8', 'Firebase Crashlytics', 'Unit & UI Testing (Espresso)', 'Performance Profiling']
+      }
+    ],
+    resources: [
+      { name: 'Android Developers Codelabs (Free, Official)', url: 'https://developer.android.com/codelabs' },
+      { name: 'Udemy – Android Masterclass (Denis Panjuta)', url: 'https://www.udemy.com/course/android-masterclass/' },
+      { name: 'Meta Android Developer (Coursera)', url: 'https://www.coursera.org/professional-certificates/meta-android-developer' },
+      { name: 'NPTEL – Mobile Computing', url: 'https://nptel.ac.in/courses/106105046' },
+      { name: 'Kotlin Official Docs & Koans', url: 'https://kotlinlang.org/docs/koans.html' },
+      { name: 'Google Android Basics in Kotlin (Free)', url: 'https://developer.android.com/courses/android-basics-kotlin/course' }
+    ]
+  },
+  {
+    id: 'cyber',
+    icon: '🔐',
+    title: 'Cyber Security',
+    desc: 'Protect systems and networks. Learn ethical hacking, cryptography, threat analysis, and security tools.',
+    accent: '#e81a4a',
+    badges: ['Beginner → Advanced', '~10 months'],
+    subtitle: 'Cybersecurity & Ethical Hacking',
+    phases: [
+      {
+        num: 1, title: 'Networking & OS Fundamentals', duration: '5–6 weeks',
+        topics: ['OSI & TCP/IP Model', 'DNS, HTTP/S, FTP, SSH protocols', 'Subnetting & IP Addressing', 'Linux CLI for Security', 'Windows Security Basics', 'Virtualization & Lab Setup (VirtualBox)']
+      },
+      {
+        num: 2, title: 'Security Fundamentals', duration: '4 weeks',
+        topics: ['CIA Triad', 'Authentication & Authorization', 'Cryptography (Symmetric, Asymmetric, Hashing)', 'PKI & Certificates (TLS/SSL)', 'Common Vulnerabilities (OWASP Top 10)', 'Threat Modeling']
+      },
+      {
+        num: 3, title: 'Ethical Hacking & Pen Testing', duration: '8 weeks',
+        topics: ['Reconnaissance (OSINT)', 'Scanning (Nmap, Nessus)', 'Enumeration', 'Exploitation (Metasploit)', 'Password Attacks (Hashcat, John)', 'Privilege Escalation', 'Post-Exploitation']
+      },
+      {
+        num: 4, title: 'Web Application Security', duration: '5–6 weeks',
+        topics: ['SQL Injection', 'XSS (Stored, Reflected, DOM)', 'CSRF & SSRF', 'Broken Authentication', 'Burp Suite', 'API Security Testing', 'Secure Coding Practices']
+      },
+      {
+        num: 5, title: 'Network & System Defense', duration: '4–5 weeks',
+        topics: ['Firewalls & IDS/IPS', 'SIEM (Splunk basics)', 'Log Analysis', 'Incident Response', 'Forensics basics (Autopsy)', 'Hardening Linux & Windows', 'Zero Trust Architecture']
+      },
+      {
+        num: 6, title: 'Certifications & CTF Practice', duration: 'Ongoing',
+        topics: ['TryHackMe / HackTheBox Labs', 'CompTIA Security+ prep', 'CEH (Certified Ethical Hacker)', 'OSCP roadmap', 'Bug Bounty (HackerOne, Bugcrowd)', 'CTF Competitions']
+      }
+    ],
+    resources: [
+      { name: 'TryHackMe (Free & Paid Labs)', url: 'https://tryhackme.com' },
+      { name: 'Cybersecurity Specialization (Coursera – IBM)', url: 'https://www.coursera.org/professional-certificates/ibm-cybersecurity-analyst' },
+      { name: 'NPTEL – Ethical Hacking', url: 'https://nptel.ac.in/courses/106105217' },
+      { name: 'Udemy – Complete Ethical Hacking (Nathan House)', url: 'https://www.udemy.com/course/network-security-course/' },
+      { name: 'OWASP Top 10 (Free Official Guide)', url: 'https://owasp.org/www-project-top-ten/' },
+      { name: 'HackTheBox Academy', url: 'https://academy.hackthebox.com' }
+    ]
+  }
+];
+
+// ─── RENDER CARDS ───
+const grid = document.getElementById('cardsGrid');
+courses.forEach(c => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.style.setProperty('--accent', c.accent);
+  card.innerHTML = `
+    <div class="card-icon">${c.icon}</div>
+    <h2>${c.title}</h2>
+    <p>${c.desc}</p>
+    <div class="card-meta">
+      ${c.badges.map(b => `<span class="badge">${b}</span>`).join('')}
+    </div>
+    <div class="card-arrow">→</div>
+  `;
+  card.addEventListener('click', () => openModal(c));
+  grid.appendChild(card);
+});
+
+// ─── MODAL ───
+function openModal(c) {
+  document.getElementById('modalIcon').textContent = c.icon;
+  document.getElementById('modalIcon').style.setProperty('--modal-accent', c.accent);
+  document.getElementById('modalTitle').textContent = c.title;
+  document.getElementById('modalSubtitle').textContent = c.subtitle;
+
+  const body = document.getElementById('modalBody');
+  body.style.setProperty('--modal-accent', c.accent);
+
+  let html = '';
+  c.phases.forEach(p => {
+    html += `
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-num" style="background:${c.accent}">${p.num}</div>
+          <span class="phase-title">${p.title}</span>
+          <span class="phase-duration">${p.duration}</span>
+        </div>
+        <div class="topics-list">
+          ${p.topics.map(t => `<span class="topic-tag">${t}</span>`).join('')}
+        </div>
+      </div>
+    `;
+  });
+
+  html += `
+    <div class="resources-section" style="--modal-accent:${c.accent}">
+      <h3>📚 Recommended Resources</h3>
+      <div class="resource-links">
+        ${c.resources.map(r => `
+          <a class="resource-link" href="${r.url}" target="_blank" rel="noopener" style="--modal-accent:${c.accent}">
+            <span class="resource-dot" style="background:${c.accent}"></span>
+            ${r.name}
+          </a>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  body.innerHTML = html;
+  document.getElementById('overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+</script>
 </body>
 </html>

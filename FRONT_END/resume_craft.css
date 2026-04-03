@@ -21,7 +21,7 @@
 
         /* LEFT SIDEBAR */
         .sidebar {
-            width: 320px;
+            width: 430px;
             background: var(--panel-bg);
             border-right: 1px solid var(--border);
             padding: 20px;
@@ -36,7 +36,7 @@
 
         /* AI Sidebar */
         .ai-sidebar {
-            width: 320px;
+            width: 400px;
             background: var(--panel-bg);
             border-left: 1px solid var(--border);
             display: flex;
