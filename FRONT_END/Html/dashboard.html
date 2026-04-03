@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Craft | Dashboard</title>
-    <link rel="stylesheet" href="./Dashboard.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
 <body>
@@ -13,7 +13,7 @@
     <header>
         <div class="navbar">
             <div>
-                <img id="logo" src="logo.png">
+                <img id="logo" src="../img/logo.png">
             </div>
             <p id="navname">Resume Craft</p>
             <p id="empty" style="margin-left: 43%;"></p>
@@ -34,9 +34,9 @@
         <div class="dashitems">
             <!-- <div id="profilebtn"> My Profile</div> -->
             <div onclick="window.location.href='companies.html';" id="companybtn">Companies</div>
-            <div id="eligibilitybtn">Eligibility check</div>
             <div id="builderbtn">Resume Builder</div>
             <div id="roadmapbtn">ATS Check</div>
+            <div id="eligibilitybtn">Roadmap</div>
         </div>
     </main>
 
@@ -100,7 +100,11 @@
         };
         const resumebtn = document.getElementById("builderbtn")
         resumebtn.onclick = function () {
-            window.location.href = "resume_builder_pro.html";
+            window.location.href = "resume-builder.html";
+        };
+         const eligibilitybtn = document.getElementById("eligibilitybtn")
+        eligibilitybtn.onclick = function () {
+            window.location.href = "roadmap.html";
         };
 
         function scrollToSection(id) {

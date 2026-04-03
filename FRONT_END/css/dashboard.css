@@ -59,7 +59,7 @@ body{
     width:30px;
     border-radius: 50%;
     border: 1px solid white;
-    background-image: url("profile-icon.png");
+    background-image: url("../img/profile-icon.png");
     background-size: cover;
 }
 #navbarprofilebtn:hover{
@@ -83,7 +83,7 @@ body{
 
 /* Main section */
 #welcome{
-    background-image: url("welcome.jpg");
+    background-image: url("../img/welcome.jpg");
     color: white;
     padding: 80px;
     text-align: center;
@@ -166,18 +166,18 @@ body{
 } */
 
 #companybtn{
-    background-image: url("company_image.webp");
+    background-image: url("../img/company_image.webp");
 }
 
 #eligibilitybtn{
-    background-image: url("eligible_image.png");
+    background-image: url("../img/roadmap_image.jpg");
 }
 
 #builderbtn{
-    background-image: url("resume_image.png");
+    background-image: url("../img/resume_image.png");
 }
 #roadmapbtn{
-    background-image: url("roadmap_image.jpg");
+    background-image: url("../img/eligible_image.png");
 }
 
 /* Hover effect */

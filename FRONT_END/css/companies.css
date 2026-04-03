@@ -1,7 +1,7 @@
 h2{
     font-size: 40px;
     text-align: center;
-    color: #f1f6ff; /* light navy text */
+    color: #000000;
 }
 
 /* Page background */
@@ -9,8 +9,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: cursive;
-    background: #0b1e3a; /* deep navy */
-    color: #e6edf7;
+    background: #ffffff;
+    color: #000000;
 }
 
 /* Companies container */
@@ -24,18 +24,26 @@ body {
 /* Company card */
 .company-card {
     height: 280px;
-    background: #13294b; /* navy card */
+    background: #ffffff;
     border-radius: 16px;
     padding: 20px;
     text-align: center;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
+/* Multi-color top borders */
+.company-card:nth-child(6n+1) { border-top: 4px solid #2563eb; }
+.company-card:nth-child(6n+2) { border-top: 4px solid #10b981; }
+.company-card:nth-child(6n+3) { border-top: 4px solid #f59e0b; }
+.company-card:nth-child(6n+4) { border-top: 4px solid #ef4444; }
+.company-card:nth-child(6n+5) { border-top: 4px solid #8b5cf6; }
+.company-card:nth-child(6n+6) { border-top: 4px solid #06b6d4; }
 
 /* Hover effect */
 .company-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
 /* Company logo */
@@ -54,14 +62,14 @@ body {
 .company-card h3 {
     margin: 10px 0;
     font-size: 18px;
-    color: #f8fafc;
+    color: #000000;
 }
 
 /* Text inside card */
 .company-card p {
     margin: 6px 0;
     font-size: 14px;
-    color: #cbd5e1;
+    color: #333333;
 }
 
 /* Apply button */

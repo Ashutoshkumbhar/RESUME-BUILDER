@@ -2,19 +2,28 @@ body {
     margin: 0;
     padding: 0;
     font-family: cursive;
-    background: #0b1e3a; /* Deep navy */
-    color: #e6edf7;
+    background: #ffffff;
+    color: #000000;
 }
 
 .details-container {
     max-width: 600px;
     margin: 80px auto;
-    background: #13294b; /* Fresh navy card */
+    background: #ffffff;
     padding: 30px;
     border-radius: 16px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
     text-align: center;
+    border-top: 4px solid #2563eb; /* default color */
 }
+
+/* Optional color variants */
+.details-container.blue { border-top: 4px solid #2563eb; }
+.details-container.green { border-top: 4px solid #10b981; }
+.details-container.orange { border-top: 4px solid #f59e0b; }
+.details-container.red { border-top: 4px solid #ef4444; }
+.details-container.purple { border-top: 4px solid #8b5cf6; }
+.details-container.cyan { border-top: 4px solid #06b6d4; }
 
 .details-container img {
     width: 90px;
@@ -28,20 +37,20 @@ body {
 
 .details-container h2 {
     margin-bottom: 10px;
-    color: #f1f6ff;
+    color: #000000;
 }
 
 .details-container p {
     margin: 8px 0;
     font-size: 15px;
-    color: #cbd5e1;
+    color: #333333;
 }
 
 .apply-btn {
     margin-top: 20px;
     display: inline-block;
     padding: 12px 25px;
-    background: linear-gradient(135deg, #1e40af, #1d4ed8); /* Navy blue gradient */
+    background: linear-gradient(135deg, #1e40af, #1d4ed8);
     color: white;
     text-decoration: none;
     border-radius: 10px;
