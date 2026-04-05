@@ -3,139 +3,237 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resume builder|Dashboard</title>
+    <title>Resume Craft | Pro Resume Builder</title>
+    <!-- Include Bootstrap for Grid layout -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
     />
-    
-    <style>
-      body {
-        background: linear-gradient(135deg, #757578, #e5ddeb, #757578);
-        
-        font-family: Arial, Helvetica, sans-serif;
-        border-radius: 2px solid black;
-        margin: 0px;
-        padding: 0px;
-        height: 100vh;
-      }
-      #logo{
-        width: 50px;
-        border-radius: 50%;
-      }
-      .hero {
-        height: 400px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-      }
-      .hero-text {
-        background: linear-gradient(135deg, #2014a0, #1e77b7, #4343f1);
-        color: white;
-        font-family: cursive;
-
-        margin-top: 100px;
-        padding: 20px;
-        background-color: #2485b2;
-        border-radius: 25px;
-        height: 260px;
-        box-shadow: 0px 4px 8px rgb(40, 39, 39);
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        align-items: center;
-      }
-      .features {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
-        padding: 40px;
-      }
-      .feature-card {
-        font-family: cursive;
-        font-size: 18px;
-        text-align: center;
-        background-color: rgb(221, 220, 220);
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.504);
-        background: linear-gradient(135deg, #2014a0, #1e77b7, #5656f3);
-        color: white;
-      }
-      .feature-card:hover{
-        transform: scale(1.02);
-      }
-      footer {
-        text-align: center;
-        margin-top: 10px;
-        padding: 20px;
-      }
-      .hero .btn {
-        color: black;
-        margin-top: 30px;
-        font-size: 20px;
-        font-weight: 100;
-        background: linear-gradient(135deg, #f3f3f3, #d8d4d1, #ac9191);
-        border-radius: 0.5rem;
-
-      }
-      .hero .btn:hover{
-        transform: scale(1.02);
-      }
-      nav{
-        border-radius: 10px;
-        background-color:  whitesmoke ;
-        
-      }
-    </style>
+    <!-- Global Theme CSS -->
+    <link rel="stylesheet" href="../css/theme.css" />
+    <!-- Landing Page CSS -->
+    <link rel="stylesheet" href="../css/index.css" />
   </head>
   <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-light px-4"
-      style="height: 70px"
-    >
-      <img src="./logo.png" alt="" id="logo">
-      <a class="navbar-brand fw-bold" href="">Resume-Craft</a>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top px-4">
+      <div class="container">
+        <!-- Brand / Logo -->
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+          <img src="../img/logo.png" alt="Logo" style="width: 40px; border-radius: 8px;">
+          Resume Craft
+        </a>
 
-      <div class="ms-auto">
-        <a href="" class="btn btn-outline-dark me-2">Profile</a>
-        <a href="" class="btn btn-outline-dark me-2">Features</a>
-        <a href="" class="btn btn-outline-dark me-2">Companies</a>
-        <a href="login.html" class="btn btn-outline-primary me-2">Login</a>
+        <!-- Mobile Toggle button -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#features">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#how-it-works">How it Works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="companies.html">Companies</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ATS_checker.html">ATS Check</a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-3">
+            <!-- Theme Switcher -->
+            <div class="theme-switch-wrapper" title="Toggle Dark/Light Mode">
+              <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+            
+            <a href="login.html" class="btn-outline-custom">Log In</a>
+            <a href="register.html" class="btn-primary-custom" style="padding: 10px 24px;">Get Started</a>
+          </div>
+        </div>
       </div>
     </nav>
 
-    <section class="hero">
-      <div class="hero-text">
-        <h1>Build Placement-Ready Resumes</h1>
-        <p>
-          Check company eligibility, create smart resumes, and get placement
-          ready.
-        </p>
-        <a href="register.html" class="btn">Get Started</a>
+    <!-- Hero Section -->
+    <section class="hero text-center text-lg-start">
+      <div class="container position-relative z-1">
+        <div class="row align-items-center">
+          <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-start">
+            <div class="hero-badge">🚀 AI-Powered Resume Builder</div>
+            <h1>Build Placement-Ready Resumes in Minutes</h1>
+            <p>
+              Check company eligibility, create smart resumes tailored for roles, get instant ATS feedback, and prepare for placement effortlessly.
+            </p>
+            <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-3">
+              <a href="resume-builder.html" class="btn-primary-custom" style="font-size: 1.1rem; padding: 16px 36px;">Create Free Resume</a>
+              <a href="#features" class="btn-outline-custom">View Features</a>
+            </div>
+          </div>
+          <div class="col-lg-6 text-center">
+            <!-- Glassmorphic illustrative preview block -->
+            <div style="background: rgba(var(--surface-color), 0.5); backdrop-filter: blur(20px); border: 1px solid var(--border-color); border-radius: 24px; padding: 20px; box-shadow: var(--shadow-xl); transform: perspective(1000px) rotateY(-10deg); transition: transform 0.3s ease;">
+              <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&auto=format&fit=crop&q=80" alt="Resume App Interface" class="img-fluid rounded-4 shadow-sm" style="width: 100%;">
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="features">
-      <div class="feature-card">Company Eligibility</div>
-      <div class="feature-card">Smart Resume Builder</div>
-      <div class="feature-card">ATS Score</div>
-      <div class="feature-card">Placement Roadmap</div>
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Why Choose Resume Craft?</h2>
+          <p>We provide all the tools you need to land your dream job faster.</p>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Feature 1 -->
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card">
+              <div class="feature-icon">📝</div>
+              <h3>Smart Resume Builder</h3>
+              <p>Multiple professional templates, auto-formatting, and instant live preview to craft the perfect CV.</p>
+            </div>
+          </div>
+          <!-- Feature 2 -->
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card">
+              <div class="feature-icon">✨</div>
+              <h3>AI Assistant Integration</h3>
+              <p>Get instant suggestions to improve your wording, fix grammar, and recommend impactful skills.</p>
+            </div>
+          </div>
+          <!-- Feature 3 -->
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card">
+              <div class="feature-icon">📊</div>
+              <h3>ATS Score Checker</h3>
+              <p>Analyze how well your resume matches job descriptions so you pass standard applicant tracking systems.</p>
+            </div>
+          </div>
+          <!-- Feature 4 -->
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card">
+              <div class="feature-icon">🏢</div>
+              <h3>Company Eligibility</h3>
+              <p>Match your profile with top company criteria and find out where you have the highest chances to get hired.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <footer>
-      <p>© 2026 PlaceReady. All rights reserved.</p>
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+      <div class="container">
+        <div class="section-head">
+          <h2>How It Works</h2>
+          <p>Get your professional resume ready in three simple steps</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="step-card">
+              <div class="step-number">1</div>
+              <h4>Pick a Template</h4>
+              <p>Choose from our curated list of professional, ATS-friendly templates.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="step-card">
+              <div class="step-number">2</div>
+              <h4>Fill your Details & Ask AI</h4>
+              <p>Enter your information, or let our AI enhance your job descriptions seamlessly.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="step-card">
+              <div class="step-number">3</div>
+              <h4>Download & Apply</h4>
+              <p>Download a pristine PDF formatted perfectly for printing and email.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h2>Ready to skyrocket your career?</h2>
+            <p>Join thousands of students and professionals who built their success with Resume Craft.</p>
+            <a href="register.html" class="btn-light-custom">Create Account Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Footer -->
+    <footer class="footer-custom">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <a class="navbar-brand d-flex align-items-center gap-2 mb-3" href="#" style="font-size: 1.5rem; font-weight: 800; color: var(--primary-color);">
+              <img src="../img/logo.png" alt="Logo" style="width: 40px; border-radius: 8px;">
+              Resume Craft
+            </a>
+            <p style="color: var(--text-secondary); line-height: 1.6;">
+              Empowering job seekers with AI-driven resume creation, intelligent ATS insights, and smart career pairing.
+            </p>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h5 class="footer-title">Platform</h5>
+            <ul class="footer-nav">
+              <li><a href="resume-builder.html">Resume Builder</a></li>
+              <li><a href="ATS_checker.html">ATS Tracker</a></li>
+              <li><a href="companies.html">Companies</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h5 class="footer-title">Resources</h5>
+            <ul class="footer-nav">
+              <li><a href="#">Career Blog</a></li>
+              <li><a href="#">Interview Prep</a></li>
+              <li><a href="#">Resume Tips</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h5 class="footer-title">Support</h5>
+            <ul class="footer-nav">
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h5 class="footer-title">Connect</h5>
+            <ul class="footer-nav">
+              <li><a href="#">LinkedIn</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Instagram</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="text-center mt-5 pt-4 border-top" style="border-color: var(--border-color) !important;">
+          <p style="color: var(--text-muted);">&copy; 2026 Resume Craft. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
 
+    <!-- Bootstrap JS Bundle -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
     ></script>
+    <!-- Theme Toggle JS -->
+    <script src="../js/theme.js"></script>
   </body>
 </html>
