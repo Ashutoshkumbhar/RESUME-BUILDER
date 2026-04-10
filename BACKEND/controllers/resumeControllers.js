@@ -26,6 +26,19 @@ const loadSavedResumes= async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+//get resumes for a specific user
+const getResumesByUserId = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const data = await resumedata.find({ userId: userId }).sort({ updatedAt: -1 });
+        console.log('User resumes fetched for:', userId);
+        res.status(200).json(data);
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
 //for single Resume data By Id
 const getResumeById = async (req, res) => {
     try {
@@ -91,6 +104,7 @@ module.exports = {
     saveResumeToDb,
     loadSavedResumes,
     getResumeById,
+    getResumesByUserId,
     deleteResume,
     updateResume
 };

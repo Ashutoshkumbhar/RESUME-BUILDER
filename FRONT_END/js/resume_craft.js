@@ -426,8 +426,15 @@ function renderResume() {
 const API_BASE_URL = "http://localhost:3000/api/resume";
 
 function getResumePayload() {
+  const userId = localStorage.getItem('profile-id');
+  if (!userId) {
+    alert("You must be logged in to save resumes.");
+    return null;
+  }
   return {
+    userId: userId,
     fullname: v("inpName"),
+    jobTitle: v("inpTitle"),
     email: v("inpEmail"),
     phone: v("inpPhone"),
     location: v("inpLocation"),
@@ -465,6 +472,7 @@ function getResumePayload() {
 async function saveResumeToDb() {
   try {
     const payload = getResumePayload();
+    if (!payload) return;
     const response = await fetch(API_BASE_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -482,7 +490,13 @@ async function saveResumeToDb() {
 
 async function loadSavedResumes() {
   try {
-    const response = await fetch(API_BASE_URL);
+    const userId = localStorage.getItem('profile-id');
+    if (!userId) {
+      const list = document.getElementById("savedResumesList");
+      if (list) list.innerHTML = "<div>Please login to view saved resumes.</div>";
+      return;
+    }
+    const response = await fetch(`${API_BASE_URL}/user/${userId}`);
     if (!response.ok) {
       throw new Error("Failed to load resumes.");
     }
@@ -497,8 +511,9 @@ async function loadSavedResumes() {
     list.innerHTML = resumes
       .map((r) => {
         const short = (r.fullname || r.email || "Unnamed").slice(0, 25);
+        const titlePart = r.jobTitle ? ` - ${r.jobTitle}` : "";
         return `<div style="margin-bottom:6px; border-bottom:1px solid #ddd; padding-bottom:4px;">
-                    <strong>${short}</strong>
+                    <strong>${short}${titlePart}</strong>
                     <div style="font-size:12px;color:#555">${new Date(r.createdAt || r.updatedAt || Date.now()).toLocaleString()}</div>
                     <button type="button" onclick="fillFormFromResume('${r._id}')" style="margin-top:4px; font-size:12px;">Load</button>
                 </div>`;
@@ -528,6 +543,7 @@ function fillFormFromResume(id) {
   };
 
   setValue("inpName", resume.fullname || "");
+  setValue("inpTitle", resume.jobTitle || "");
   setValue("inpEmail", resume.email || "");
   setValue("inpPhone", resume.phone || "");
   setValue("inpLocation", resume.location || "");
@@ -563,7 +579,51 @@ function fillFormFromResume(id) {
       : "",
   );
 
+  window.currentResumeId = id;
+
   updateResume();
+}
+
+async function updateSavedResume() {
+  if (!window.currentResumeId) {
+    alert("No generated resume selected to update. Please 'Load' a resume first.");
+    return;
+  }
+  try {
+    const payload = getResumePayload();
+    if (!payload) return;
+    const response = await fetch(`${API_BASE_URL}/${window.currentResumeId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) throw new Error("Failed to update resume.");
+    alert("Resume updated successfully!");
+    loadSavedResumes();
+  } catch (err) {
+    console.error("Update Resume Error:", err);
+    alert("Error updating resume.");
+  }
+}
+
+async function deleteSavedResume() {
+  if (!window.currentResumeId) {
+    alert("No generated resume selected to delete. Please 'Load' a resume first.");
+    return;
+  }
+  if (!confirm("Are you sure you want to delete this resume?")) return;
+  try {
+    const response = await fetch(`${API_BASE_URL}/${window.currentResumeId}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) throw new Error("Failed to delete resume.");
+    alert("Resume deleted successfully!");
+    window.currentResumeId = null;
+    loadSavedResumes();
+  } catch (err) {
+    console.error("Delete Resume Error:", err);
+    alert("Error deleting resume.");
+  }
 }
 
 // Initial render

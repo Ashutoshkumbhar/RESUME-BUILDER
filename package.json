@@ -1,5 +1,25 @@
 {
   "dependencies": {
     "bcrypt": "^6.0.0"
-  }
+  },
+  "name": "resume-builder",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">   <img src=\"FRONT_END/img/logo.png\" alt=\"Resume Craft Logo\" width=\"100\" height=\"100\" style=\"border-radius: 20px;\" /> </p>",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ashutoshkumbhar/RESUME-BUILDER.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Ashutoshkumbhar/RESUME-BUILDER/issues"
+  },
+  "homepage": "https://github.com/Ashutoshkumbhar/RESUME-BUILDER#readme"
 }

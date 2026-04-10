@@ -21,7 +21,7 @@
 
         /* LEFT SIDEBAR */
         .sidebar {
-            width: 430px;
+            width: 410px;
             background: var(--panel-bg);
             border-right: 1px solid var(--border);
             padding: 20px;
@@ -354,9 +354,9 @@
 
         @media print {
             @page { size: A4; margin: 0; }
-            body { background: white; display: block; height: auto; overflow: visible; }
+            body { background: white; display: block; height: auto; overflow: visible; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .sidebar, .ai-sidebar { display: none !important; }
             .main { padding: 0; background: none; display: block; overflow: visible; }
-            .resume-preview { box-shadow: none; width: 100%; min-height: auto; }
+            .resume-preview { box-shadow: none; width: 100%; min-height: 297mm; }
             #tpl1 { padding: 20mm; }
         }
