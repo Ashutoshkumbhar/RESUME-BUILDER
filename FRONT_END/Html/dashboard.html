@@ -193,6 +193,7 @@
             © 2026 Resume Craft. All rights reserved.
         </h4>
     </footer>
+    <script src="../js/api_config.js"></script>
     <script>
         // Profile Functionality
         const profileBtn = document.getElementById('navbarprofilebtn');
@@ -271,7 +272,7 @@
             const userId = localStorage.getItem('profile-id');
             if (userId) {
                 try {
-                    const res = await fetch("http://localhost:3000/api/users/updateProfile", {
+                    const res = await fetch(`${API_BASE}/api/users/updateProfile`, {
                         method: "PUT",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({

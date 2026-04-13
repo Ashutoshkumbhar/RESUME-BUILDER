@@ -423,7 +423,7 @@ function renderResume() {
   }
 }
 
-const API_BASE_URL = "http://localhost:3000/api/resume";
+const API_BASE_URL = `${API_BASE}/api/resume`;
 
 function getResumePayload() {
   const userId = localStorage.getItem('profile-id');
