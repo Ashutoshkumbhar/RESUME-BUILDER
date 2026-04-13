@@ -24,7 +24,4 @@ db.on('disconnected',()=>{
     console.log("disConnected from mongodb server");
 });
 
-module.exports = db;
-
-
 module.exports = connectDB;

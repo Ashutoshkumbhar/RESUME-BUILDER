@@ -1,4 +1,4 @@
-const resumedata = require('./../models/resume');
+const resumedata = require('./../models/Resume');
 
 //post method for resume data sending
 const saveResumeToDb = async (req, res) => {

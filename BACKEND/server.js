@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();//app is like blueprint instance for server creation
-const connectDB = require("../BACKEND/config/db");
+const connectDB = require("./config/db");
 const cors = require("cors");
 
 require("dotenv").config();
@@ -13,12 +13,16 @@ app.use(express.json());
 connectDB();
 
 //import resume routes
-const resumeRoutes = require('../BACKEND/routes/resumeRoutes');
+const resumeRoutes = require('./routes/resumeRoutes');
 app.use('/api/resume', resumeRoutes); 
 
 //import user router for auth
-const userRoutes = require("../BACKEND/routes/userRoutes");
+const userRoutes = require("./routes/userRoutes");
 app.use('/api/users',userRoutes);
+
+//import ai routes for AI proxy
+const aiRoutes = require("./routes/aiRoutes");
+app.use('/api/ai', aiRoutes);
 
 app.get('/',(req, res) => {
   res.send('Hello Users Welcome to our Resume Craft')
