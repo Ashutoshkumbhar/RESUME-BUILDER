@@ -1,34 +1,37 @@
 const express = require("express");
-const app = express();//app is like blueprint instance for server creation
+const app = express();
 const connectDB = require("./config/db");
 const cors = require("cors");
 
 require("dotenv").config();
 
-//Middleware
-app.use(cors());
+// Middleware
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true
+}));
 app.use(express.json());
 
-//connect to MongoDB
+// connect to MongoDB
 connectDB();
 
-//import resume routes
+// routes
 const resumeRoutes = require('./routes/resumeRoutes');
-app.use('/api/resume', resumeRoutes); 
+app.use('/api/resume', resumeRoutes);
 
-//import user router for auth
 const userRoutes = require("./routes/userRoutes");
-app.use('/api/users',userRoutes);
+app.use('/api/users', userRoutes);
 
-//import ai routes for AI proxy
 const aiRoutes = require("./routes/aiRoutes");
 app.use('/api/ai', aiRoutes);
 
-app.get('/',(req, res) => {
-  res.send('Hello Users Welcome to our Resume Craft')
-})
+// test route
+app.get('/', (req, res) => {
+  res.send('Hello Users Welcome to our Resume Craft');
+});
 
-const PORT = process.env.PORT ||3000;
+// PORT (Render handles this)
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`)
+  console.log(`Server running on port ${PORT}`);
 });
